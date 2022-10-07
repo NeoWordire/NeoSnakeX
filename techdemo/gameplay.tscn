@@ -1,0 +1,181 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/gdyarn/yarn_runner.gd" type="Script" id=1]
+[ext_resource path="res://addons/gdyarn/yarn_gui.gd" type="Script" id=2]
+[ext_resource path="res://addons/gdyarn/core/variable_storage.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/NewGameBtn.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/StartBattleControl.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Yarn/CompiledMainYarn.tres" type="Resource" id=6]
+[ext_resource path="res://Scripts/StorageDebug.gd" type="Script" id=7]
+[ext_resource path="res://Battle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/imgs/cutie1.png" type="Texture" id=9]
+[ext_resource path="res://Assets/imgs/brick.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Buttontheme.tres" type="Theme" id=11]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Bricks" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Brick6" type="Sprite" parent="Bricks"]
+position = Vector2( 310, 325 )
+texture = ExtResource( 10 )
+
+[node name="Brick5" type="Sprite" parent="Bricks"]
+position = Vector2( 95, 539 )
+texture = ExtResource( 10 )
+
+[node name="Brick7" type="Sprite" parent="Bricks"]
+position = Vector2( 310, 539 )
+texture = ExtResource( 10 )
+
+[node name="Brick8" type="Sprite" parent="Bricks"]
+position = Vector2( 525, 539 )
+texture = ExtResource( 10 )
+
+[node name="Brick9" type="Sprite" parent="Bricks"]
+position = Vector2( 741, 539 )
+texture = ExtResource( 10 )
+
+[node name="Brick" type="Sprite" parent="Bricks"]
+position = Vector2( 108, 110 )
+texture = ExtResource( 10 )
+
+[node name="Brick2" type="Sprite" parent="Bricks"]
+position = Vector2( 323, 110 )
+texture = ExtResource( 10 )
+
+[node name="Brick3" type="Sprite" parent="Bricks"]
+position = Vector2( 538, 110 )
+texture = ExtResource( 10 )
+
+[node name="Brick4" type="Sprite" parent="Bricks"]
+position = Vector2( 753, 110 )
+texture = ExtResource( 10 )
+
+[node name="Brick10" type="Sprite" parent="Bricks"]
+position = Vector2( 95, 325 )
+texture = ExtResource( 10 )
+
+[node name="Brick11" type="Sprite" parent="Bricks"]
+position = Vector2( 525, 325 )
+texture = ExtResource( 10 )
+
+[node name="Brick12" type="Sprite" parent="Bricks"]
+position = Vector2( 741, 325 )
+texture = ExtResource( 10 )
+
+[node name="Cutie1" type="Sprite" parent="."]
+visible = false
+position = Vector2( 493, 193 )
+texture = ExtResource( 9 )
+
+[node name="VariableStorage" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="YarnRunner" type="Node" parent="."]
+script = ExtResource( 1 )
+_autoStart = true
+_variableStorage = NodePath("../VariableStorage")
+_compiledYarnProgram = ExtResource( 6 )
+
+[node name="StorageDebug" type="Label" parent="."]
+margin_bottom = 14.0
+script = ExtResource( 7 )
+
+[node name="DynamicContentRoot" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+
+[node name="BattleScene1" parent="DynamicContentRoot" instance=ExtResource( 8 )]
+visible = false
+
+[node name="DialogueMenuDisplay" type="Control" parent="DynamicContentRoot"]
+margin_left = 15.0
+margin_top = 33.0
+margin_right = 777.0
+margin_bottom = 587.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+_yarnRunner = NodePath("../../YarnRunner")
+_text = NodePath("RichTextLabel")
+_namePlate = NodePath("name")
+_options = [ NodePath("option1"), NodePath("option2"), NodePath("option3"), NodePath("option4") ]
+_textSpeed = 35
+
+[node name="TextBoxClickandBg" type="Button" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 5.0
+margin_top = 307.0
+margin_right = 749.0
+margin_bottom = 544.0
+theme = ExtResource( 11 )
+
+[node name="name" type="Label" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 9.0
+margin_top = 294.0
+margin_right = 174.0
+margin_bottom = 325.0
+rect_pivot_offset = Vector2( -402, 37 )
+text = "
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 55.0
+margin_top = 350.0
+margin_right = 697.0
+margin_bottom = 503.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BottomRightArrow" type="Button" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 715.0
+margin_top = 512.0
+margin_right = 735.0
+margin_bottom = 532.0
+text = "V"
+script = ExtResource( 4 )
+
+[node name="option1" type="Button" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 31.0
+margin_top = 39.0
+margin_right = 200.0
+margin_bottom = 88.0
+theme = ExtResource( 11 )
+text = "option1"
+
+[node name="option2" type="Button" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 30.0
+margin_top = 102.0
+margin_right = 199.0
+margin_bottom = 151.0
+theme = ExtResource( 11 )
+text = "option2"
+
+[node name="option3" type="Button" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 28.0
+margin_top = 165.0
+margin_right = 197.0
+margin_bottom = 214.0
+theme = ExtResource( 11 )
+text = "option3"
+
+[node name="option4" type="Button" parent="DynamicContentRoot/DialogueMenuDisplay"]
+margin_left = 30.0
+margin_top = 228.0
+margin_right = 199.0
+margin_bottom = 277.0
+theme = ExtResource( 11 )
+text = "option4"
+
+[connection signal="command_emitted" from="YarnRunner" to="DynamicContentRoot" method="_on_YarnRunner_command_emitted"]
+[connection signal="dialogue_started" from="YarnRunner" to="DynamicContentRoot" method="_on_YarnRunner_dialogue_started"]
+[connection signal="line_emitted" from="YarnRunner" to="DynamicContentRoot" method="_on_YarnRunner_line_emitted"]
+[connection signal="line_started" from="DynamicContentRoot/DialogueMenuDisplay" to="DynamicContentRoot" method="_on_MenuDisplay_line_started"]
+[connection signal="text_changed" from="DynamicContentRoot/DialogueMenuDisplay" to="DynamicContentRoot" method="_on_MenuDisplay_text_changed"]
+[connection signal="pressed" from="DynamicContentRoot/DialogueMenuDisplay/TextBoxClickandBg" to="DynamicContentRoot/DialogueMenuDisplay" method="finish_line"]
+[connection signal="pressed" from="DynamicContentRoot/DialogueMenuDisplay/BottomRightArrow" to="DynamicContentRoot/DialogueMenuDisplay" method="finish_line"]

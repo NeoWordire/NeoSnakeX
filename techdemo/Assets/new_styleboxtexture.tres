@@ -1,0 +1,15 @@
+[gd_resource type="StyleBoxTexture" load_steps=3 format=2]
+
+[sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/buttonLong_black2.png-c69f521b4def9043118729e7208d3b80.stex"
+
+[resource]
+content_margin_left = 1.0
+content_margin_right = 1.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+texture = SubResource( 2 )
+normal_map = SubResource( 1 )

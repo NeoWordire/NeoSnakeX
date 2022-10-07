@@ -1,0 +1,89 @@
+title: Start
+tags:
+colorID: 3
+position: -30,-722
+---
+<<set $battleswon = 0>>
+Welcome to Neo Snake X Shadow Edition #line:815d66c4
+
+A "tech demo" where you can battle snakes and talk to cuties! #line:78eb330c
+
+[[Choices]] #line:c777cd2f
+==== #line:7a523eaf 
+title: GiveUp #line:755b5836 
+tags: #line:a9033b02 
+colorID: 3 #line:c3ac252a 
+position: 304,-117 #line:a9a2c938 
+--- #line:bff69067 
+Game OVER, you won {$battleswon} battles #line:4bffbfdf
+===
+title: Cutietalk
+tags:
+colorID: 4
+position: -30,-722
+---
+Cutie1: Hey, I think you can do it. #line:7b5d1a79
+-> Hey. #line:289f391
+-> heyyyy #line:63de1719
+-> hey :) #line:77d18b28
+//<<if (battleswons < 10)>>
+
+//<<else>>
+
+
+<<if $battleswon > 4>>
+	Cutie1: WTF go get a life. #line:bd5be1a3
+	<<wait 1>>
+	good end time #line:71ff5871
+	<<wait 1>>
+	<<goodending>>
+<<else>>
+	Cutie1: go win {(5 - $battleswon)} more battles. #line:d94bb21a
+	<<wait .1>>
+<<endif>>
+[[Choices]] #line:da91e3ad
+===
+title: Battle
+tags:
+colorID: 0
+position: 10,275
+---
+<<battletime>>
+[[BattleResult]] #line:cceee9af
+===
+title: BattleResult
+tags:
+colorID: 0
+position: 10,275
+---
+// the next few variables will be used in pluralisation testing
+// the number of apples I have
+<<set $battleswon = ($battleswon + 1)>>
+<<set $place = 1>>
+// expexted result - "I participated in a battle and cam in 5th place."
+I participated in a [color=#ff00ff]Battle[/color] and [wave]came in [/wave] {$place}[ordinal {$place} one="st" two="nd" few="rd" other="th"] place. #line:2693a5e6
+[[Choices]] #line:94caf23f
+===
+title: Choices
+tags:
+colorID: 0
+position: -36,-420
+---
+What Do you want to do? #line:bdf02524
+-> battle #line:9a369474
+  [[Battle]] #line:e0ed85c2
+-> talk to cuties #line:f3b47cb1
+  [[Cutietalk]] #line:31909df
+-> Get Upgrades #line:d86f4dcf
+  [[Shop]] #line:1dafe28f
+-> give up #line:796e69bd
+  [[GiveUp]] #line:d9bda968
+===
+title: Shop
+tags:
+colorID: 3
+position: -16,-130
+---
+too poor sadge #line:d4360498
+[[Choices]] #line:9c4f21f6
+===

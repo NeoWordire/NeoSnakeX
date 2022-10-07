@@ -1,0 +1,13 @@
+[remap]
+
+importer="gdyarn.yarnFile"
+type="Resource"
+path="res://.import/inline_expressions.yarn-015b9e5838e92aeba55568c35f20bac4.tres"
+
+[deps]
+
+source_file="res://Assets/Yarn/inline_expressions.yarn"
+dest_files=[ "res://.import/inline_expressions.yarn-015b9e5838e92aeba55568c35f20bac4.tres" ]
+
+[params]
+

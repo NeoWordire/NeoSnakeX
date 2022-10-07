@@ -1,0 +1,13 @@
+[remap]
+
+importer="gdyarn.yarnFile"
+type="Resource"
+path="res://.import/NeoSnake.yarn-0e8df4b2b1a22ac90d8ee9b838249ba8.tres"
+
+[deps]
+
+source_file="res://Assets/Yarn/NeoSnake.yarn"
+dest_files=[ "res://.import/NeoSnake.yarn-0e8df4b2b1a22ac90d8ee9b838249ba8.tres" ]
+
+[params]
+

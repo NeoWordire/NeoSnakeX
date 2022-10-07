@@ -1,0 +1,705 @@
+{
+"program_name": "",
+"program_nodes": [ {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L1"
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 15,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:815d66c4"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:78eb330c"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Choices"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:7a523eaf"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:755b5836"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:a9033b02"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:c3ac252a"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:a9a2c938"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:bff69067"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:4bffbfdf"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L1": 0
+},
+"node_name": "Start",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L2"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:7b5d1a79"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:289f391"
+}, {
+"operand_type": 1,
+"operand_value": "L4option_1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:63de1719"
+}, {
+"operand_type": 1,
+"operand_value": "L5option_2"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:77d18b28"
+}, {
+"operand_type": 1,
+"operand_value": "L6option_3"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 6,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 2,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L4option_1"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L5option_2"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L6option_3"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 4.0
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 2.0
+} ]
+}, {
+"instruction_op": 13,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "GreaterThan"
+} ]
+}, {
+"instruction_op": 11,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L8skip_clause"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:bd5be1a3"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait 1"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:71ff5871"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait 1"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "goodending"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L7endif"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L8skip_clause"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 5.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 2.0
+} ]
+}, {
+"instruction_op": 13,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Minus"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:d94bb21a"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait .1"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L7endif"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L7endif"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Choices"
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L2": 0,
+"L3group_end": 13,
+"L4option_1": 7,
+"L5option_2": 9,
+"L6option_3": 11,
+"L7endif": 35,
+"L8skip_clause": 26
+},
+"node_name": "Cutietalk",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L10"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "battletime"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "BattleResult"
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L10": 0
+},
+"node_name": "Battle",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L11"
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 2.0
+} ]
+}, {
+"instruction_op": 13,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Add"
+} ]
+}, {
+"instruction_op": 15,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 15,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$place"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$place"
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$place"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:2693a5e6"
+}, {
+"operand_type": 3,
+"operand_value": 2.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Choices"
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L11": 0
+},
+"node_name": "BattleResult",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L12"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:bdf02524"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:9a369474"
+}, {
+"operand_type": 1,
+"operand_value": "L14option_1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:f3b47cb1"
+}, {
+"operand_type": 1,
+"operand_value": "L15option_2"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:d86f4dcf"
+}, {
+"operand_type": 1,
+"operand_value": "L16option_3"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:796e69bd"
+}, {
+"operand_type": 1,
+"operand_value": "L17option_4"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 6,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 2,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L14option_1"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Battle"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L13group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L15option_2"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Cutietalk"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L13group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L16option_3"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Shop"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L13group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L17option_4"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "GiveUp"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L13group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L13group_end"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L12": 0,
+"L13group_end": 20,
+"L14option_1": 8,
+"L15option_2": 11,
+"L16option_3": 14,
+"L17option_4": 17
+},
+"node_name": "Choices",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L18"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:d4360498"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Choices"
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L18": 0
+},
+"node_name": "Shop",
+"node_source_id": "",
+"node_tags": [  ]
+} ]
+}
