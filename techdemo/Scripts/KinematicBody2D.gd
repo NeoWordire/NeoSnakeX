@@ -1,8 +1,13 @@
 extends KinematicBody2D
 
 export (int) var speed = 200
+export (bool) var battleactive = false;
 var count = 0
+
 var velocity = Vector2()
+var start = self.position
+func reset():
+	position = start
 
 func get_input():
 	velocity = Vector2()
@@ -17,7 +22,10 @@ func get_input():
 	velocity = velocity.normalized() * speed
 
 func _physics_process(delta):
+	if !battleactive:
+		return;
 	get_input()
 	var collision = move_and_collide(velocity*delta)
-	if collision && collision.collider.name == "StaticBody2D":
-	  get_parent().get_child(5).visible = true
+	if collision && collision.collider.name == "Goal":
+	  get_parent().get_node("EndbattleButton").visible = true
+	  battleactive = false;

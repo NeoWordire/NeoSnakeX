@@ -1,21 +1,21 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/gdyarn/yarn_runner.gd" type="Script" id=1]
 [ext_resource path="res://addons/gdyarn/yarn_gui.gd" type="Script" id=2]
 [ext_resource path="res://addons/gdyarn/core/variable_storage.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/NewGameBtn.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/StartBattleControl.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/DynamicContentRoot.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Yarn/CompiledMainYarn.tres" type="Resource" id=6]
 [ext_resource path="res://Scripts/StorageDebug.gd" type="Script" id=7]
 [ext_resource path="res://Battle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/imgs/cutie1.png" type="Texture" id=9]
 [ext_resource path="res://Assets/imgs/brick.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Buttontheme.tres" type="Theme" id=11]
+[ext_resource path="res://Assets/imgs/store.png" type="Texture" id=12]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Bricks" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -67,6 +67,13 @@ texture = ExtResource( 10 )
 position = Vector2( 741, 325 )
 texture = ExtResource( 10 )
 
+[node name="StorageDebug" type="Label" parent="."]
+margin_bottom = 14.0
+script = ExtResource( 7 )
+
+[node name="NPC" type="Sprite" parent="."]
+position = Vector2( 518, 184 )
+
 [node name="Cutie1" type="Sprite" parent="."]
 visible = false
 position = Vector2( 493, 193 )
@@ -81,14 +88,14 @@ _autoStart = true
 _variableStorage = NodePath("../VariableStorage")
 _compiledYarnProgram = ExtResource( 6 )
 
-[node name="StorageDebug" type="Label" parent="."]
-margin_bottom = 14.0
-script = ExtResource( 7 )
-
 [node name="DynamicContentRoot" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
+CharacterSprites = {
+"Cutie1": ExtResource( 9 ),
+"ShopKeep": ExtResource( 12 )
+}
 
 [node name="BattleScene1" parent="DynamicContentRoot" instance=ExtResource( 8 )]
 visible = false
@@ -115,19 +122,19 @@ margin_bottom = 544.0
 theme = ExtResource( 11 )
 
 [node name="name" type="Label" parent="DynamicContentRoot/DialogueMenuDisplay"]
-margin_left = 9.0
-margin_top = 294.0
-margin_right = 174.0
-margin_bottom = 325.0
+margin_left = 11.0
+margin_top = 325.0
+margin_right = 176.0
+margin_bottom = 356.0
 rect_pivot_offset = Vector2( -402, 37 )
 text = "
 "
 
 [node name="RichTextLabel" type="RichTextLabel" parent="DynamicContentRoot/DialogueMenuDisplay"]
 margin_left = 55.0
-margin_top = 350.0
+margin_top = 360.0
 margin_right = 697.0
-margin_bottom = 503.0
+margin_bottom = 513.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -1,24 +1,23 @@
 id	text	file	node	lineNumber	implicit	tags
 line:815d66c4	Welcome to Neo Snake X Shadow Edition 	NeoSnake.yarn	Start	1	False	
 line:78eb330c	A "tech demo" where you can battle snakes and talk to cuties! 	NeoSnake.yarn	Start	3	False	
-line:7a523eaf	==== 	NeoSnake.yarn	Start	6	False	
-line:755b5836	title: GiveUp 	NeoSnake.yarn	Start	7	False	
-line:a9033b02	tags: 	NeoSnake.yarn	Start	8	False	
-line:c3ac252a	colorID: 3 	NeoSnake.yarn	Start	9	False	
-line:a9a2c938	position: 304,-117 	NeoSnake.yarn	Start	10	False	
-line:bff69067	--- 	NeoSnake.yarn	Start	11	False	
-line:4bffbfdf	Game OVER, you won {0} battles 	NeoSnake.yarn	Start	12	False	
 line:7b5d1a79	Cutie1: Hey, I think you can do it. 	NeoSnake.yarn	Cutietalk	0	False	
 line:289f391	Hey. 	NeoSnake.yarn	Cutietalk	1	False	
 line:63de1719	heyyyy 	NeoSnake.yarn	Cutietalk	2	False	
 line:77d18b28	hey :) 	NeoSnake.yarn	Cutietalk	3	False	
-line:bd5be1a3	Cutie1: WTF go get a life. 	NeoSnake.yarn	Cutietalk	10	False	
-line:71ff5871	good end time 	NeoSnake.yarn	Cutietalk	12	False	
-line:d94bb21a	Cutie1: go win {0} more battles. 	NeoSnake.yarn	Cutietalk	16	False	
+line:bd5be1a3	Cutie1: WTF go get a life. 	NeoSnake.yarn	Cutietalk	6	False	
+line:71ff5871	good end time 	NeoSnake.yarn	Cutietalk	8	False	
+line:d94bb21a	Cutie1: go win {0} more battles. 	NeoSnake.yarn	Cutietalk	12	False	
 line:2693a5e6	I participated in a [color=#ff00ff]Battle[/color] and [wave]came in [/wave]{0}[ordinal  "{1}"  one="st" two="nd" few="rd" other="th"] place. 	NeoSnake.yarn	BattleResult	5	False	
 line:bdf02524	What Do you want to do? 	NeoSnake.yarn	Choices	0	False	
 line:9a369474	battle 	NeoSnake.yarn	Choices	1	False	
 line:f3b47cb1	talk to cuties 	NeoSnake.yarn	Choices	3	False	
 line:d86f4dcf	Get Upgrades 	NeoSnake.yarn	Choices	5	False	
 line:796e69bd	give up 	NeoSnake.yarn	Choices	7	False	
-line:d4360498	too poor sadge 	NeoSnake.yarn	Shop	0	False	
+line:d4360498	ShopKeep: too poor sadge 	NeoSnake.yarn	Shop	0	False	
+line:b2296120	ShopKeep:JK what are you buying 	NeoSnake.yarn	Shop	1	False	
+line:50350256	Nothing 	NeoSnake.yarn	Shop	2	False	
+line:6f416d5f	Nothing 	NeoSnake.yarn	Shop	3	False	
+line:bcf71777	Nothing 	NeoSnake.yarn	Shop	4	False	
+line:14c0b41d	Nothing 	NeoSnake.yarn	Shop	5	False	
+line:3f01585a	Game over... you won {0} until you gave up 	NeoSnake.yarn	GiveUp	0	False	

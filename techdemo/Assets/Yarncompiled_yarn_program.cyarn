@@ -47,75 +47,6 @@
 "operand_value": "Choices"
 } ]
 }, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:7a523eaf"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:755b5836"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:a9033b02"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:c3ac252a"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:a9a2c938"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:bff69067"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 14,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "$battleswon"
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:4bffbfdf"
-}, {
-"operand_type": 3,
-"operand_value": 1.0
-} ]
-}, {
 "instruction_op": 16,
 "instruction_operands": [  ]
 } ],
@@ -686,6 +617,126 @@
 "operand_value": 0.0
 } ]
 }, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:b2296120"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:50350256"
+}, {
+"operand_type": 1,
+"operand_value": "L20option_1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:6f416d5f"
+}, {
+"operand_type": 1,
+"operand_value": "L21option_2"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:bcf71777"
+}, {
+"operand_type": 1,
+"operand_value": "L22option_3"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:14c0b41d"
+}, {
+"operand_type": 1,
+"operand_value": "L23option_4"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 6,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 2,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L20option_1"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L19group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L21option_2"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L19group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L22option_3"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L19group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L23option_4"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L19group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L19group_end"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
 "instruction_op": 17,
 "instruction_operands": [ {
 "operand_type": 1,
@@ -696,9 +747,46 @@
 "instruction_operands": [  ]
 } ],
 "node_labels": {
-"L18": 0
+"L18": 0,
+"L19group_end": 17,
+"L20option_1": 9,
+"L21option_2": 11,
+"L22option_3": 13,
+"L23option_4": 15
 },
 "node_name": "Shop",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L24"
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$battleswon"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:3f01585a"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L24": 0
+},
+"node_name": "GiveUp",
 "node_source_id": "",
 "node_tags": [  ]
 } ]

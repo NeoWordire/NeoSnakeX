@@ -7,7 +7,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Title" type="Sprite" parent="."]
-position = Vector2( 399, 300.75 )
+position = Vector2( 408, 300 )
 scale = Vector2( 1.40845, 1.36788 )
 texture = ExtResource( 1 )
 
