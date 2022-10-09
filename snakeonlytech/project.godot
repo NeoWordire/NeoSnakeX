@@ -14,35 +14,19 @@ config/name="snakealone"
 run/main_scene="res://snajebattlev2.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
-
 [display]
 
 window/size/width=240
 window/size/height=160
 window/vsync/use_vsync=false
 
-[editor]
-
-version_control_autoload_on_startup=true
-version_control_plugin_name="GitAPI"
-
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gdnative]
 
 singletons=[  ]
-
-[global]
-
-git=true
 
 [gui]
 

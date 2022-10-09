@@ -4,7 +4,7 @@ extends CanvasLayer
 # Declare member variables here. Examples:
 export (int) var width = 240
 export (int) var height = 160
-export (float) var moves_per_second = 5  #Times per second to move?
+export (int) var moves_per_second = 5  #Times per second to move?
 export (Texture) var playerbodytex
 export (Texture) var playerheadtexNOTUSED
 export (int) var tilesize = 8

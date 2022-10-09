@@ -10,8 +10,6 @@ position = Vector2( 40, 40 )
 
 [node name="SnakeBattle" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )
-width = 224
-height = 144
 playerbodytex = ExtResource( 3 )
 playerheadtexNOTUSED = ExtResource( 2 )
 foodtex = ExtResource( 4 )
