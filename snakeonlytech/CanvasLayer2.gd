@@ -6,7 +6,7 @@ export (int) var width = 240
 export (int) var height = 160
 export (int) var moves_per_second = 5  #Times per second to move?
 export (Texture) var playerbodytex
-export (Texture) var playerheadtexNOTUSED
+export (Texture) var playerheadtex
 export (int) var tilesize = 8
 var playerstartpos = Vector2(tilesize,floor(height/2/tilesize)*tilesize - tilesize)
 export (Texture) var foodtex
@@ -68,6 +68,7 @@ func reset():
 		Vector2(tilesize,0)
 	])
 	grow(playerstartpos, EAST)
+	playersprites[0].set_texture(playerheadtex)
 	foodpoly.set_texture(foodtex)
 	add_child(foodpoly)
 	move_food()
@@ -118,10 +119,10 @@ func grow(tailpos,rot):
 		poly.rotation = deg2rad(180)
 		poly.position.x = tailpos.x + tilesize
 		poly.position.y = tailpos.y + tilesize
-		poly.position = tailpos
 	
 	playersprites.append(poly)
 	playertruecords.append(tailpos)
+	playertilerot.append(rot)
 	colmap[tailpos.y*height/tilesize + tailpos.x] = 1
 	add_child(poly)
 	snakelen += 1
@@ -141,6 +142,7 @@ func game_over():
 	node.visible = true
 
 func move_head(newdir):
+	playertilerot[0] = newdir
 	if (newdir == NORTH):
 		playertruecords[0].y -= 1 * tilesize
 		playersprites[0].position.x = playertruecords[0].x
@@ -189,9 +191,19 @@ func _process(delta):
 	colmap[(foodpoly.position.y * height /tilesize) + (foodpoly.position.x/tilesize)] = 2
 	
 	var oldtailcord = playertruecords[-1]
+	var oldplayertilerot = playertilerot[-1]
 	
+		#Follow Head
+	for i in snakelen-1:
+		var inverse = snakelen - i - 1
+		playertruecords[inverse] = playertruecords[inverse-1] 
+		playersprites[inverse].position = playersprites[inverse - 1].position
+		playersprites[inverse].rotation = playersprites[inverse - 1].rotation
+		playertilerot[inverse] = playertilerot[inverse - 1]
 	#Move Head,
 	move_head(dir)
+	if (snakelen< snakecap):
+		grow(oldtailcord, oldplayertilerot)
 	if (playertruecords[0].x < 0 ||  playertruecords[0].x > width - tilesize ||
 			playertruecords[0].y < 0 || playertruecords[0].y > height - tilesize):
 		print("WALLDED")
@@ -203,14 +215,6 @@ func _process(delta):
 		print("FOOD")
 		move_food()
 		snakecap += FoodSegments
-	if (snakelen< snakecap):
-		grow(oldtailcord, dir)
-	#Follow Head
-	for i in snakelen-1:
-		var inverse = snakelen - i - 1
-		playertruecords[inverse] = playertruecords[inverse-1] 
-		playersprites[inverse].position = playersprites[inverse - 1].position
-		playersprites[inverse].rotation = playersprites[inverse - 1].rotation
 	OS.delay_msec((1000/moves_per_second)-delta*1000)
 	
 func get_input():
@@ -233,8 +237,7 @@ func get_input():
 			dir = SOUTH
 		elif (inputmask & (~oldinputmask)) == BIT4 && dir != SOUTH:
 			dir = NORTH
-		else :
-			oldinputmask = 0
+		else : #released a key, fall back to priority...
 			if Input.is_action_pressed("ui_right") &&  dir != WEST:
 				dir = EAST
 			if Input.is_action_pressed("ui_left") &&  dir != EAST:
