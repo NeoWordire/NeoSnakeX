@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://CanvasLayer2.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://snakebox.png" type="Texture" id=3]
+[ext_resource path="res://apple.png" type="Texture" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SnakeBattle" type="CanvasLayer" parent="."]
+script = ExtResource( 1 )
+control_speed = 0.05
+playerbodytex = ExtResource( 3 )
+playerheadtexNOTUSED = ExtResource( 2 )
+foodtex = ExtResource( 4 )
+
+[node name="GameOver" type="Button" parent="SnakeBattle"]
+margin_left = 72.0
+margin_top = 96.0
+margin_right = 168.0
+margin_bottom = 120.0
+text = "GAME OVER"
+
+[connection signal="pressed" from="SnakeBattle/GameOver" to="SnakeBattle" method="_on_GameOver_pressed"]
