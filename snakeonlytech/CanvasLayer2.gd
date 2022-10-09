@@ -4,11 +4,11 @@ extends CanvasLayer
 # Declare member variables here. Examples:
 export (int) var width = 240
 export (int) var height = 160
-export (float) var control_speed = 0.2 #
+export (float) var moves_per_second = 5  #Times per second to move?
 export (Texture) var playerbodytex
 export (Texture) var playerheadtexNOTUSED
 export (int) var tilesize = 8
-export (Vector2) var playerstartpos = Vector2(tilesize,floor(height/2/tilesize)*tilesize - tilesize)
+var playerstartpos = Vector2(tilesize,floor(height/2/tilesize)*tilesize - tilesize)
 export (Texture) var foodtex
 
 enum {NORTH, EAST, SOUTH, WEST, NODIR}
@@ -129,13 +129,18 @@ func move_head(newdir):
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	time += delta
+	#time += delta
+	#if time < control_speed:
+	#	return;
+	#print(delta*100000)
+	
+	#print("sleep ", (1000/control_speed)-delta*1000, " plus delta =", delta*1000)
+	OS.delay_msec((1000/moves_per_second)-delta*1000)
 	get_input();
-	if time < control_speed:
-		return;
+	
 	if (dir == NODIR):
 		dir = EAST
-		return
+	#print(time)
 	time = 0
 	if gameover:
 		return

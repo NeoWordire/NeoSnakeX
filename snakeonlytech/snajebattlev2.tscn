@@ -9,7 +9,6 @@
 
 [node name="SnakeBattle" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )
-control_speed = 0.05
 playerbodytex = ExtResource( 3 )
 playerheadtexNOTUSED = ExtResource( 2 )
 foodtex = ExtResource( 4 )
