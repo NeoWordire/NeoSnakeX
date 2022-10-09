@@ -10,6 +10,7 @@ export (Texture) var playerheadtexNOTUSED
 export (int) var tilesize = 8
 var playerstartpos = Vector2(tilesize,floor(height/2/tilesize)*tilesize - tilesize)
 export (Texture) var foodtex
+export (int) var FoodSegments = 5
 
 enum {NORTH, EAST, SOUTH, WEST, NODIR}
 
@@ -158,7 +159,7 @@ func _process(delta):
 	elif colmap[playertruecords[0].y*height/tilesize + playertruecords[0].x/tilesize] == 2:
 		print("FOOD")
 		move_food()
-		snakecap += 10
+		snakecap += FoodSegments
 	
 	if (snakelen< snakecap):
 		grow(oldtailcord, dir)
