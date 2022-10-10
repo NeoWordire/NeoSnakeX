@@ -88,36 +88,17 @@ func grow(tailpos,rot):
 		Vector2(tilesize,0)
 	])
 	poly.set_texture(playerbodytex)
-#	if playersnake.size() == 0 :
-	#poly.position = tailpos
-	if (rot == NORTH):
-		poly.position.x = tailpos.x
-		poly.position.y = tailpos.y + tilesize
-		poly.rotation = deg2rad(270)
-	if (rot == EAST):
-		poly.rotation = deg2rad(0)
-		poly.position.x = tailpos.x
-		poly.position.y = tailpos.y
-	if (rot == SOUTH):
-		poly.position.x = tailpos.x + tilesize
-		poly.position.y = tailpos.y
-		poly.rotation = deg2rad(90)
-	if rot == WEST:
-		poly.rotation = deg2rad(180)
-		poly.position.x = tailpos.x + tilesize
-		poly.position.y = tailpos.y + tilesize
-	
 	playersprites.append(poly)
 	playertruecords.append(tailpos)
 	playertilerot.append(rot)
 	colmap[pos2index(tailpos)] = 1
+	tile_update_from_true(snakelen)
 	add_child(poly)
 	snakelen += 1
 	
 func pos2index(pos):
 	return pos.y*height/tilesize + pos.x
 	 
-	
 func move_food():
 	foodpoly.position.x = rng.randi_range(0,width/tilesize - tilesize)*tilesize
 	foodpoly.position.y = rng.randi_range(0,height/tilesize- tilesize)*tilesize
@@ -128,10 +109,10 @@ func game_over():
 	print("GAMEOVER")
 	gameover = true
 	var node = get_node("GameOver")
-	remove_child(node)
-	add_child(node)
 	remove_child(playersprites[0])
 	add_child(playersprites[0])
+	remove_child(node)
+	add_child(node)
 	node.visible = true
 
 func move_head(newdir):
@@ -168,7 +149,6 @@ func _process(delta):
 	#time += delta
 	#if time < control_speed:
 	#	return;
-	#print(delta*100000)
 
 	#print("sleep ", (1000/control_speed)-delta*1000, " plus delta =", delta*1000)
 	#time += delta
@@ -176,7 +156,6 @@ func _process(delta):
 #		return;
 	if gameover:
 		return
-	#print(delta*100000)
 	
 	time = 0
 	get_input();
@@ -205,6 +184,7 @@ func _process(delta):
 		
 	#Move Head,
 	move_head(dir)
+	tile_update_from_true(0)
 	if (snakelen< snakecap):
 		grow(oldtailcord, oldplayertilerot)
 	if (playertruecords[0].x < 0 ||  playertruecords[0].x > width - tilesize ||
@@ -220,7 +200,6 @@ func _process(delta):
 		print("FOOD")
 		move_food()
 		snakecap += FoodSegments
-	tile_update_from_true(0)
 	OS.delay_msec((1000/moves_per_second)-delta*1000)
 	
 func get_input():
