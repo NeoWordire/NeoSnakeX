@@ -110,14 +110,18 @@ func grow(tailpos,rot):
 	playersprites.append(poly)
 	playertruecords.append(tailpos)
 	playertilerot.append(rot)
-	colmap[tailpos.y*height/tilesize + tailpos.x] = 1
+	colmap[pos2index(tailpos)] = 1
 	add_child(poly)
 	snakelen += 1
+	
+func pos2index(pos):
+	return pos.y*height/tilesize + pos.x
+	 
 	
 func move_food():
 	foodpoly.position.x = rng.randi_range(0,width/tilesize - tilesize)*tilesize
 	foodpoly.position.y = rng.randi_range(0,height/tilesize- tilesize)*tilesize
-	if colmap[(foodpoly.position.y * height/tilesize) + (foodpoly.position.x/tilesize)] != 0:
+	if colmap[pos2index(foodpoly.position)] != 0:
 		move_food();
 #
 func game_over():
@@ -126,6 +130,8 @@ func game_over():
 	var node = get_node("GameOver")
 	remove_child(node)
 	add_child(node)
+	remove_child(playersprites[0])
+	add_child(playersprites[0])
 	node.visible = true
 
 func move_head(newdir):
@@ -179,8 +185,8 @@ func _process(delta):
 	# HACK, REPLACE with clean update code, rough hack to make colmap accurate
 	colmap = tempzero.duplicate()
 	for i in playertruecords.size():
-		colmap[playertruecords[i].y*height/tilesize + playertruecords[i].x/tilesize] = 1
-	colmap[(foodpoly.position.y * height /tilesize) + (foodpoly.position.x/tilesize)] = 2
+		colmap[pos2index(playertruecords[i])] = 1
+	colmap[pos2index(foodpoly.position)] = 2
 	
 	var oldtailcord = playertruecords[-1]
 	var oldplayertilerot = playertilerot[-1]
@@ -195,24 +201,26 @@ func _process(delta):
 		playertruecords[inverse] = playertruecords[inverse-1] 
 		playertilerot[inverse] = playertilerot[inverse - 1]
 		tile_update_from_true(inverse)
-
 		temp = playertilerot[inverse-1]
+		
 	#Move Head,
 	move_head(dir)
-	tile_update_from_true(0)
 	if (snakelen< snakecap):
 		grow(oldtailcord, oldplayertilerot)
 	if (playertruecords[0].x < 0 ||  playertruecords[0].x > width - tilesize ||
 			playertruecords[0].y < 0 || playertruecords[0].y > height - tilesize):
 		print("WALLDED")
 		game_over()
-	elif colmap[playertruecords[0].y*height/tilesize + playertruecords[0].x/tilesize] == 1:
+		return
+	elif colmap[pos2index(playertruecords[0])] == 1:
 		print("DED")
 		game_over()
-	elif colmap[playertruecords[0].y*height/tilesize + playertruecords[0].x/tilesize] == 2:
+		return
+	elif colmap[pos2index(playertruecords[0])] == 2:
 		print("FOOD")
 		move_food()
 		snakecap += FoodSegments
+	tile_update_from_true(0)
 	OS.delay_msec((1000/moves_per_second)-delta*1000)
 	
 func get_input():
