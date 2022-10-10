@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="snakealone"
-run/main_scene="res://snajebattlev2.tscn"
+run/main_scene="res://snakebattlev2.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -80,4 +80,4 @@ quality/spatial_partitioning/use_bvh=false
 quality/lightmapping/use_bicubic_sampling=false
 quality/subsurface_scattering/weight_samples=false
 quality/depth/hdr=false
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Assets/default_env.tres"

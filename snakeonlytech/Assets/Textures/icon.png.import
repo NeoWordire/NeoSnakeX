@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/apple.png-53a5ba701c353857fc5b432b6c413138.stex"
+path="res://.import/icon.png-0cf7469049d75cced2eecd2e14a56e37.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://apple.png"
-dest_files=[ "res://.import/apple.png-53a5ba701c353857fc5b432b6c413138.stex" ]
+source_file="res://Assets/Textures/icon.png"
+dest_files=[ "res://.import/icon.png-0cf7469049d75cced2eecd2e14a56e37.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

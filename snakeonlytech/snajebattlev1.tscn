@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://CanvasLayer.gd" type="Script" id=1]
-[ext_resource path="res://apple.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Textures/apple.png" type="Texture" id=3]
 
 [node name="Node2D" type="Node2D"]
 

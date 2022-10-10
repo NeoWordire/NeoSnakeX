@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_head.png-035e74873b63490cc5bfbdbd5a8eda0f.stex"
+path="res://.import/snake_box.png-c732c474a5e44921cf1bbd0daf4f61df.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy_head.png"
-dest_files=[ "res://.import/enemy_head.png-035e74873b63490cc5bfbdbd5a8eda0f.stex" ]
+source_file="res://Assets/Textures/snake_box.png"
+dest_files=[ "res://.import/snake_box.png-c732c474a5e44921cf1bbd0daf4f61df.stex" ]
 
 [params]
 

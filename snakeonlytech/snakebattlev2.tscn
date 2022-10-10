@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://CanvasLayer2.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://snakebox.png" type="Texture" id=3]
-[ext_resource path="res://apple.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/CanvasLayer2.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Textures/snake_head.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Textures/apple.png" type="Texture" id=4]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/snakebox.png-68512a203726081b3812dd63aba4888f.stex"
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 40, 40 )
@@ -11,7 +13,7 @@ position = Vector2( 40, 40 )
 [node name="SnakeBattle" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )
 moves_per_second = 7
-playerbodytex = ExtResource( 3 )
+playerbodytex = SubResource( 1 )
 playerheadtex = ExtResource( 2 )
 foodtex = ExtResource( 4 )
 
