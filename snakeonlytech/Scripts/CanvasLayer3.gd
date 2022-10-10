@@ -11,6 +11,7 @@ export (Texture) var enemybodytex
 export (Texture) var enemyheadtex
 export (int) var numplayers = 2
 export (int) var tilesize = 8
+export (int) var borderintiles = 1 
 var startpos = [
 		Vector2(tilesize,floor(height/2/tilesize)*tilesize - tilesize), 
 		Vector2(width - tilesize *2,floor(height/2/tilesize)*tilesize - tilesize)
@@ -127,8 +128,8 @@ func pos2index(pos):
 	return ((pos.y/tilesize)*(width/tilesize)) + (pos.x/tilesize)
 	 
 func move_food():
-	foodpoly.position.x = rng.randi_range(0,width/tilesize - tilesize)*tilesize
-	foodpoly.position.y = rng.randi_range(0,height/tilesize- tilesize)*tilesize
+	foodpoly.position.x = rng.randi_range(borderintiles * tilesize,width/tilesize - borderintiles * tilesize)*tilesize
+	foodpoly.position.y = rng.randi_range(borderintiles * tilesize,height/tilesize- borderintiles *tilesize)*tilesize
 	if colmap[pos2index(foodpoly.position)] != 0:
 		move_food();
 #
@@ -179,7 +180,7 @@ func body_follow_head(i):
 		var inverse = snakes[i]["snakelen"] - s - 1
 		snakes[i]["truecords"][inverse] = snakes[i]["truecords"][inverse-1] 
 		snakes[i]["tilerot"][inverse] = snakes[i]["tilerot"][inverse - 1]
-		tile_update_from_true(i, inverse)
+		#tile_update_from_true(i, inverse)
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -206,6 +207,8 @@ func _process(delta):
 	colmap[pos2index(foodpoly.position)] = 2
 	
 	for x in numplayers:
+		if x == 1:
+			snakes[1]["dir"] = (snakes[0]["dir"]+2) %4
 		snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
 		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
 		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
@@ -213,30 +216,30 @@ func _process(delta):
 		#Follow Head
 		body_follow_head(x)
 		#Move Head,
-		if x == 1:
-			snakes[1]["dir"] = (snakes[0]["dir"]+2) %4
 			
 		move_head(x, snakes[x]["dir"] )
-#	move_head(1, snakes[1]["dir"] )
-		tile_update_from_true(x, 0)
+		
 		if (snakes[x]["snakelen"]< snakes[x]["snakecap"]):
 			grow(x, oldtailcord, oldsnakesrot)
 			pass
-		if (snakes[x]["truecords"][0].x < 0 ||  snakes[x]["truecords"][0].x > width - tilesize ||
-				snakes[x]["truecords"][0].y < 0 || snakes[x]["truecords"][0].y > height - tilesize):
+		if (snakes[x]["truecords"][0].x < borderintiles * tilesize ||  snakes[x]["truecords"][0].x > width - borderintiles * tilesize ||
+				snakes[x]["truecords"][0].y < borderintiles * tilesize || snakes[x]["truecords"][0].y > height - borderintiles * tilesize):
 			print("WALLDED")
 			game_over()
 			return
 		elif colmap[pos2index(snakes[x]["truecords"][0])] == 1:
 			print("DED")
-			print("POSINDEX", pos2index(snakes[x]["truecords"][0]))
 			game_over()
 			return
 		elif colmap[pos2index(snakes[x]["truecords"][0])] == 2:
 			print("FOOD")
 			move_food()
 			snakes[x]["snakecap"] += FoodSegments
-	OS.delay_msec((1000/moves_per_second)-delta*1000)
+	for x in numplayers:
+		for s in snakes[x]["truecords"].size():
+			tile_update_from_true(x, s)
+	if ((1000/moves_per_second)-delta*1000 > 0):
+		OS.delay_msec((1000/moves_per_second)-delta*1000)
 	
 func get_input(i):
 	# velocity = Vector2()

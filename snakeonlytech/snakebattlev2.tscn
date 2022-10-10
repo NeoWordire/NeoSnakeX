@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/CanvasLayer3.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/snake_head.png" type="Texture" id=2]
@@ -6,9 +6,9 @@
 [ext_resource path="res://Assets/Textures/apple.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Textures/enemy_head.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/arena.png" type="Texture" id=7]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( 40, 40 )
 
 [node name="SnakeBattle" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )
@@ -17,7 +17,6 @@ playerbodytex = ExtResource( 3 )
 playerheadtex = ExtResource( 2 )
 enemybodytex = ExtResource( 5 )
 enemyheadtex = ExtResource( 6 )
-numplayers = 1
 foodtex = ExtResource( 4 )
 
 [node name="GameOver" type="Button" parent="SnakeBattle"]
@@ -26,5 +25,10 @@ margin_top = 96.0
 margin_right = 168.0
 margin_bottom = 120.0
 text = "GAME OVER"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 240.0
+margin_bottom = 160.0
+texture = ExtResource( 7 )
 
 [connection signal="pressed" from="SnakeBattle/GameOver" to="SnakeBattle" method="_on_GameOver_pressed"]
