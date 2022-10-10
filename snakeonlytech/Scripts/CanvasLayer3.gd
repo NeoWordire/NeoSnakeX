@@ -124,7 +124,7 @@ func grow(i,tailpos,rot):
 	snakes[i]["snakelen"] += 1
 	
 func pos2index(pos):
-	return ((pos.y/tilesize)*(height/tilesize)) + (pos.x/tilesize)
+	return ((pos.y/tilesize)*(width/tilesize)) + (pos.x/tilesize)
 	 
 func move_food():
 	foodpoly.position.x = rng.randi_range(0,width/tilesize - tilesize)*tilesize
@@ -197,7 +197,6 @@ func _process(delta):
 	
 	time = 0
 	get_input(0);
-	snakes[0]["tilerot"][0] = snakes[0]["dir"]  #rotate old head to current dir
 	
 	# HACK, REPLACE with clean update code, rough hack to make colmap accurate
 	colmap = tempzero.duplicate()
@@ -207,6 +206,7 @@ func _process(delta):
 	colmap[pos2index(foodpoly.position)] = 2
 	
 	for x in numplayers:
+		snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
 		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
 		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
 
