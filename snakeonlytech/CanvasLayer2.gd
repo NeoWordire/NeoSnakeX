@@ -28,9 +28,11 @@ var time = 0
 var playersprites = []
 var playertruecords = []
 var playertilerot = []
+
 #var playercolarea = []
 var snakelen = 0
 var snakecap = 5
+
 var colmap = []
 var gameover = false
 var foodpoly = Polygon2D.new()
@@ -75,21 +77,6 @@ func reset():
 
 func _ready():
 	reset()
-	#optional make player under root Node2D
-	#var node = Node2D.new()
-	#node.name = "Player"
-	#add_child(node)
-#	foodpoly.polygon = PoolVector2Array([
-#		Vector2(0,0),
-#		Vector2(0,tilesize),
-#		Vector2(tilesize,tilesize),
-#		Vector2(tilesize,0)
-#	])
-#	grow(playerstartpos, EAST)
-#	foodpoly.set_texture(foodtex)
-#	add_child(foodpoly)
-#	move_food()
-	#pass # Replace with function body.
 
 #call grow after moving but with old tail pos
 func grow(tailpos,rot):
@@ -145,25 +132,31 @@ func move_head(newdir):
 	playertilerot[0] = newdir
 	if (newdir == NORTH):
 		playertruecords[0].y -= 1 * tilesize
-		playersprites[0].position.x = playertruecords[0].x
-		playersprites[0].position.y = playertruecords[0].y + tilesize
-		playersprites[0].rotation = deg2rad(270)
 	if (newdir == EAST):
 		playertruecords[0].x += 1 * tilesize
-		playersprites[0].position.x = playertruecords[0].x
-		playersprites[0].position.y = playertruecords[0].y
-		playersprites[0].rotation = deg2rad(0)
 	if (newdir == SOUTH):
 		playertruecords[0].y += 1 * tilesize
-		playersprites[0].position.x = playertruecords[0].x + tilesize
-		playersprites[0].position.y = playertruecords[0].y
-		playersprites[0].rotation = deg2rad(90)
 	if (newdir == WEST):
 		playertruecords[0].x -= 1 * tilesize
-		playersprites[0].position.x = playertruecords[0].x + tilesize
-		playersprites[0].position.y = playertruecords[0].y + tilesize
-		playersprites[0].rotation = deg2rad(180)
-		
+
+func tile_update_from_true(index):
+	if (playertilerot[index] == NORTH):
+		playersprites[index].position.x = playertruecords[index].x
+		playersprites[index].position.y = playertruecords[index].y + tilesize
+		playersprites[index].rotation = deg2rad(270)
+	if (playertilerot[index] == EAST):
+		playersprites[index].position.x = playertruecords[index].x
+		playersprites[index].position.y = playertruecords[index].y
+		playersprites[index].rotation = deg2rad(0)
+	if (playertilerot[index] == SOUTH):
+		playersprites[index].position.x = playertruecords[index].x + tilesize
+		playersprites[index].position.y = playertruecords[index].y
+		playersprites[index].rotation = deg2rad(90)
+	if (playertilerot[index] == WEST):
+		playersprites[index].position.x = playertruecords[index].x + tilesize
+		playersprites[index].position.y = playertruecords[index].y + tilesize
+		playersprites[index].rotation = deg2rad(180)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#time += delta
@@ -181,8 +174,7 @@ func _process(delta):
 	
 	time = 0
 	get_input();
-	
-	#print(time)
+	playertilerot[0] = dir #rotate old head to current dir
 	
 	# HACK, REPLACE with clean update code, rough hack to make colmap accurate
 	colmap = tempzero.duplicate()
@@ -193,15 +185,21 @@ func _process(delta):
 	var oldtailcord = playertruecords[-1]
 	var oldplayertilerot = playertilerot[-1]
 	
-		#Follow Head
+	#Follow Head
+	var temp
+	if (snakelen > 1):
+		temp = oldplayertilerot
+		
 	for i in snakelen-1:
 		var inverse = snakelen - i - 1
 		playertruecords[inverse] = playertruecords[inverse-1] 
-		playersprites[inverse].position = playersprites[inverse - 1].position
-		playersprites[inverse].rotation = playersprites[inverse - 1].rotation
 		playertilerot[inverse] = playertilerot[inverse - 1]
+		tile_update_from_true(inverse)
+
+		temp = playertilerot[inverse-1]
 	#Move Head,
 	move_head(dir)
+	tile_update_from_true(0)
 	if (snakelen< snakecap):
 		grow(oldtailcord, oldplayertilerot)
 	if (playertruecords[0].x < 0 ||  playertruecords[0].x > width - tilesize ||
