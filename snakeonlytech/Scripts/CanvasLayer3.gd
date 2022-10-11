@@ -79,7 +79,11 @@ func reset():
 		snakes[x]["tilerot"] = []
 		snakes[x]["dir"] = EAST
 		snakes[x]["oldinputmask"] = 0
-		grow(x, startpos[x], EAST)
+		if x == 0:
+			grow(x, startpos[x], EAST)
+		else:
+			grow(x, startpos[x], WEST)
+			snakes[x]["dir"]  = WEST
 		
 	gameover = false
 	foodpoly = Polygon2D.new()
@@ -98,7 +102,6 @@ func reset():
 	foodpoly.set_texture(foodtex)
 	add_child(foodpoly)
 	move_food()
-	print(snakes)
 
 func _ready():
 	reset()
@@ -124,6 +127,17 @@ func grow(i,tailpos,rot):
 	add_child(poly)
 	snakes[i]["snakelen"] += 1
 	
+func posdir2pos(pos, newdir):
+	if (newdir == NORTH):
+		pos.y -= 1 * tilesize
+	if (newdir == EAST):
+		pos.x += 1 * tilesize
+	if (newdir == SOUTH):
+		pos.y += 1 * tilesize
+	if (newdir == WEST):
+		pos.x -= 1 * tilesize
+	return pos
+
 func pos2index(pos):
 	return ((pos.y/tilesize)*(width/tilesize)) + (pos.x/tilesize)
 	 
@@ -208,22 +222,24 @@ func _process(delta):
 	
 	for x in numplayers:
 		if x == 1:
-			snakes[1]["dir"] = (snakes[0]["dir"]+2) %4
-		snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
+			#snakes[1]["dir"] = (snakes[0]["dir"]+2) %4
+			ai_get_input(x)
+			
+		#snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
 		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
 		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
-
+		
 		#Follow Head
+
 		body_follow_head(x)
 		#Move Head,
-			
 		move_head(x, snakes[x]["dir"] )
 		
 		if (snakes[x]["snakelen"]< snakes[x]["snakecap"]):
 			grow(x, oldtailcord, oldsnakesrot)
 			pass
-		if (snakes[x]["truecords"][0].x < borderintiles * tilesize ||  snakes[x]["truecords"][0].x > width - borderintiles * tilesize ||
-				snakes[x]["truecords"][0].y < borderintiles * tilesize || snakes[x]["truecords"][0].y > height - borderintiles * tilesize):
+		if (snakes[x]["truecords"][0].x < borderintiles * tilesize ||  snakes[x]["truecords"][0].x > width - (borderintiles+1) * tilesize ||
+				snakes[x]["truecords"][0].y < borderintiles * tilesize || snakes[x]["truecords"][0].y > height - (borderintiles+1) * tilesize):
 			print("WALLDED")
 			game_over()
 			return
@@ -240,7 +256,72 @@ func _process(delta):
 			tile_update_from_true(x, s)
 	if ((1000/moves_per_second)-delta*1000 > 0):
 		OS.delay_msec((1000/moves_per_second)-delta*1000)
+	else:
+		print("lagged:", (1000/moves_per_second)-delta*1000)
+
+func flood(map, pos, depth):
+	if (depth > 25):
+		return 1
+	var ans = 0
+	for i in 4:
+		var test1 = posdir2pos(pos, i)
+		if (test1.x > (borderintiles - 1)*tilesize &&
+			test1.y > (borderintiles - 1) *tilesize &&
+			test1.x < width - borderintiles*tilesize &&
+			test1.y < height - borderintiles*tilesize &&
+			map[pos2index(test1)] == 0):
+				map[pos2index(test1)] = 1
+				ans += flood(map, test1, depth + 1) + 1
+	return ans;
+
+
+func ai_get_input(i):
+	var currentdir = snakes[i]["dir"]
+	var goalpos = foodpoly.position
+	if (goalpos.x > snakes[i]["truecords"][0].x):
+		if (currentdir == WEST):
+			snakes[i]["dir"] = SOUTH
+		else:
+			snakes[i]["dir"] = EAST
+	if (goalpos.x < snakes[i]["truecords"][0].x):
+		if (currentdir == EAST):
+			snakes[i]["dir"] = SOUTH
+		else:
+			snakes[i]["dir"] = WEST
+	if (goalpos.y > snakes[i]["truecords"][0].y):
+		if (currentdir == NORTH):
+			snakes[i]["dir"] = WEST
+		else:
+			snakes[i]["dir"] = SOUTH
+	if (goalpos.y < snakes[i]["truecords"][0].y):
+		if (currentdir == SOUTH):
+			snakes[i]["dir"] = WEST
+		else:
+			snakes[i]["dir"] = NORTH
+	var maxcnt = 0
+	var maxdir
+	for x in 4:
+		var test = posdir2pos(snakes[i]["truecords"][0], snakes[i]["dir"])
+		if (colmap[pos2index(test)] != 1 &&
+				test.x > (borderintiles - 1)*tilesize &&
+				test.y > (borderintiles - 1) *tilesize &&
+				test.x < width - borderintiles*tilesize &&
+				test.y < height - borderintiles*tilesize
+				):
+			var aiflood = colmap.duplicate()
+			var safe = false
+			var count = flood(aiflood,test, 0)
 	
+			#print ("count ", count)
+			if count >30:
+				break
+		snakes[i]["dir"] = (snakes[i]["dir"] + 1) % 4
+
+
+	
+	
+		
+
 func get_input(i):
 	# velocity = Vector2()
 	var inputmask = 0
