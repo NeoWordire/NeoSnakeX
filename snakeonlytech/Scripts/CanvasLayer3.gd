@@ -157,7 +157,7 @@ func body_follow_head(i):
 func flood(map, pos, depth):
 	if map[pos2index(pos)] == 1:
 		return 0
-	if depth == 15:
+	if depth == 30:
 		return 1
 	var ans = 0
 	for i in 4:
