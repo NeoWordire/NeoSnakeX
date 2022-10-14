@@ -42,6 +42,8 @@ var newSnakeObj = {
 	oldinputmask = 0
 }
 
+	
+var paused = true
 var snakes = []
 var tempzero = []
 
@@ -49,7 +51,7 @@ var tempzero = []
 #var playercolarea = []
 #var snakes[0]["snakelen"] = 0
 #var snakes[0]["snakecap"] = 5
-
+var countdown = 6
 var colmap = []
 var gameover = false
 var foodpoly = Polygon2D.new()
@@ -58,10 +60,19 @@ var foodpoly = Polygon2D.new()
 func reset():
 	rng.randomize()
 	get_node("GameOver").visible = false
-	for child in get_children():
-		if child.name != "GameOver":
-			child.queue_free()
-
+	for snake in snakes:
+		for x in snake["snakelen"]:
+			snake["sprites"][x].queue_free()
+			
+	#	for child in get_children():
+			
+		#	if child.name != "GameOver":
+			#	child.queue_free()
+	foodpoly.queue_free()
+	countdown = 3
+	paused = true
+	get_node("StartCount").visible = true
+	get_node("StartCount").text = str(countdown)
 	colmap = []
 	for w in width/8:
 		for h in height/8:
@@ -151,7 +162,7 @@ func game_over():
 	print("GAMEOVER")
 	gameover = true
 	var node = get_node("GameOver")
-	remove_child(snakes[0]["sprites"][0])
+	remove_child(snakes[0]["sprites"][0]) # hack to put head on top
 	add_child(snakes[0]["sprites"][0])
 	remove_child(node)
 	add_child(node)
@@ -199,19 +210,31 @@ func body_follow_head(i):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#time += delta
+	time += delta
 	#if time < control_speed:
 	#	return;
-
+	if (time > 1.0 && countdown > 0):
+		time -= 1.0
+		countdown -= 1
+		get_node("StartCount").text = str(countdown)
+		get_node("StartCount").raise()
+		if countdown <= 0:
+			paused = false
+			get_node("StartCount").visible = false
 	#print("sleep ", (1000/control_speed)-delta*1000, " plus delta =", delta*1000)
 	#time += delta
 	#if time < 1.0/moves_per_second:
 #		return;
 	if gameover:
+		OS.delay_msec(10)
+		return
+	
+	if paused:
+		OS.delay_msec(10)
 		return
 	
 	time = 0
-	get_input(0);
+	#########get_input(0);
 	
 	# HACK, REPLACE with clean update code, rough hack to make colmap accurate
 	colmap = tempzero.duplicate()
@@ -221,11 +244,11 @@ func _process(delta):
 	colmap[pos2index(foodpoly.position)] = 2
 	
 	for x in numplayers:
-		if x == 1:
+		##if x == 1:
 			#snakes[1]["dir"] = (snakes[0]["dir"]+2) %4
-			ai_get_input(x)
+		ai_get_input(x)
 			
-		#snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
+		snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
 		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
 		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
 		
@@ -262,6 +285,8 @@ func _process(delta):
 func flood(map, pos, depth):
 	if (depth > 25):
 		return 1
+	if map[pos2index(pos)] == 1:
+		return 1
 	var ans = 0
 	for i in 4:
 		var test1 = posdir2pos(pos, i)
@@ -270,8 +295,8 @@ func flood(map, pos, depth):
 			test1.x < width - borderintiles*tilesize &&
 			test1.y < height - borderintiles*tilesize &&
 			map[pos2index(test1)] == 0):
-				map[pos2index(test1)] = 1
 				ans += flood(map, test1, depth + 1) + 1
+	map[pos2index(pos)] = 1
 	return ans;
 
 
@@ -312,8 +337,8 @@ func ai_get_input(i):
 			var safe = false
 			var count = flood(aiflood,test, 0)
 	
-			#print ("count ", count)
-			if count >30:
+			print ("count ", count)
+			if count > 30:
 				break
 		snakes[i]["dir"] = (snakes[i]["dir"] + 1) % 4
 
@@ -356,4 +381,5 @@ func get_input(i):
 
 func _on_GameOver_pressed():
 	reset()
+	get_node("GameOver").visible = false
 	pass # Replace with function body.

@@ -92,9 +92,15 @@ playerbodytex = ExtResource( 3 )
 playerheadtex = ExtResource( 2 )
 enemybodytex = ExtResource( 5 )
 enemyheadtex = ExtResource( 6 )
-numplayers = 1
 foodtex = ExtResource( 4 )
 FoodSegments = 1
+
+[node name="StartCount" type="Label" parent="SnakeBattle"]
+margin_left = 116.0
+margin_top = 74.0
+margin_right = 150.0
+margin_bottom = 123.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [node name="GameOver" type="Button" parent="SnakeBattle"]
 margin_left = 72.0
