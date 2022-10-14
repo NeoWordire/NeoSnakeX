@@ -238,7 +238,8 @@ func ai_get_input(i):
 			bestrank = legalfoodrank[x]
 			bestans = legalmoves[x]
 	if rng.randi_range(0,100) > 99:
-		snakes[i]["reqdir"] = legalmoves[rng.randi_range(0,legalmoves.size()-1)]
+		if(legalmoves.size() != 0):
+			snakes[i]["reqdir"] = legalmoves[rng.randi_range(0,legalmoves.size()-1)]
 	else:
 		snakes[i]["reqdir"] = bestans;
 
@@ -391,16 +392,22 @@ func _physics_process(delta):
 			snakes[x]["snakecap"] += FoodSegments
 	if updatefood:
 		move_food()
+	update = true
+
+var update = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if gameover:
 		return
+	if player1Ctrl == 0:
+		get_input(0)
+	if !update:
+		return
 	for x in numplayers:
 		for s in snakes[x]["truecords"].size():
 			tile_update_from_true(x, s)
-		if x == 0 && player1Ctrl == 0:
-			get_input(x)
+	update = false
 
 func _on_GameOver_pressed():
 	reset()
