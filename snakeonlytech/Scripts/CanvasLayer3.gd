@@ -2,28 +2,30 @@ extends CanvasLayer
 
 
 # Declare member variables here. Examples:
-export (int) var width = 240
-export (int) var height = 160
+var width = 240
+var height = 160
 export (int) var moves_per_second = 5  #Times per second to move?
 export (Texture) var playerbodytex
 export (Texture) var playerheadtex
 export (Texture) var enemybodytex
 export (Texture) var enemyheadtex
 export (int) var numplayers = 2
-export (int) var tilesize = 8
-export (int) var borderintiles = 1 
+var tilesize = 8
+var borderintiles = 1 
+export (int, "player","ai") var player1Ctrl
 var startpos = [
 		Vector2(tilesize,floor(height/2/tilesize)*tilesize - tilesize), 
 		Vector2(width - tilesize *2,floor(height/2/tilesize)*tilesize - tilesize)
 	]
 export (Texture) var foodtex
 export (int) var FoodSegments = 5
+export (int) var CountDownStart = 3
 
 enum {NORTH, EAST, SOUTH, WEST, NODIR}
-const BIT1 = 1
-const BIT2 = 1 << 1
-const BIT3 = 1 << 2
-const BIT4 = 1 << 3
+const NORTHBIT = 1
+const EASTBIT = 1 << 1
+const SOUTHBIT = 1 << 2
+const WESTBIT = 1 << 3
 
 # var a = 2
 # var b = "text"
@@ -38,84 +40,26 @@ var newSnakeObj = {
 	tilerot = [], 
 	snakelen = 0, 
 	snakecap = 5,
-	dir = NODIR,
-	oldinputmask = 0
+	truedir = NODIR,
+	reqdir = NODIR,
+	inputqueue = []
 }
 
 	
 var paused = true
+var cntpaused = true
 var snakes = []
-var tempzero = []
+var emptyboard = []
 
 
 #var playercolarea = []
 #var snakes[0]["snakelen"] = 0
 #var snakes[0]["snakecap"] = 5
-var countdown = 6
+var countdown = CountDownStart
 var colmap = []
 var gameover = false
 var foodpoly = Polygon2D.new()
 
-## Called when the node enters the scene tree for the first time.
-func reset():
-	rng.randomize()
-	get_node("GameOver").visible = false
-	for snake in snakes:
-		for x in snake["snakelen"]:
-			snake["sprites"][x].queue_free()
-			
-	#	for child in get_children():
-			
-		#	if child.name != "GameOver":
-			#	child.queue_free()
-	foodpoly.queue_free()
-	countdown = 3
-	paused = true
-	get_node("StartCount").visible = true
-	get_node("StartCount").text = str(countdown)
-	colmap = []
-	for w in width/8:
-		for h in height/8:
-			colmap.append(0);
-	tempzero = colmap.duplicate()
-	snakes = []
-	for x in numplayers:	
-		var player = newSnakeObj.duplicate()
-		snakes.append(player)
-		snakes[x]["snakelen"] = 0
-		snakes[x]["snakecap"] = 5
-
-		snakes[x]["sprites"] = []
-		snakes[x]["truecords"] = []
-		snakes[x]["tilerot"] = []
-		snakes[x]["dir"] = EAST
-		snakes[x]["oldinputmask"] = 0
-		if x == 0:
-			grow(x, startpos[x], EAST)
-		else:
-			grow(x, startpos[x], WEST)
-			snakes[x]["dir"]  = WEST
-		
-	gameover = false
-	foodpoly = Polygon2D.new()
-	time = 0
-	foodpoly.polygon = PoolVector2Array([
-		Vector2(0,0),
-		Vector2(0,tilesize),
-		Vector2(tilesize,tilesize),
-		Vector2(tilesize,0)
-	])
-	
-	snakes[0]["sprites"][0].set_texture(playerheadtex)
-	if (numplayers == 2):
-		snakes[1]["sprites"][0].set_texture(enemyheadtex)
-	
-	foodpoly.set_texture(foodtex)
-	add_child(foodpoly)
-	move_food()
-
-func _ready():
-	reset()
 
 #call grow after moving but with old tail pos
 func grow(i,tailpos,rot):
@@ -137,7 +81,18 @@ func grow(i,tailpos,rot):
 	tile_update_from_true(i, snakes[i]["snakelen"])
 	add_child(poly)
 	snakes[i]["snakelen"] += 1
-	
+
+func game_over():
+	print("GAMEOVER")
+	gameover = true
+	var node = get_node("GameOver")
+	remove_child(snakes[0]["sprites"][0]) # hack to put head on top
+	add_child(snakes[0]["sprites"][0])
+	remove_child(node)
+	add_child(node)
+	node.visible = true
+
+
 func posdir2pos(pos, newdir):
 	if (newdir == NORTH):
 		pos.y -= 1 * tilesize
@@ -157,16 +112,7 @@ func move_food():
 	foodpoly.position.y = rng.randi_range(borderintiles * tilesize,height/tilesize- borderintiles *tilesize)*tilesize
 	if colmap[pos2index(foodpoly.position)] != 0:
 		move_food();
-#
-func game_over():
-	print("GAMEOVER")
-	gameover = true
-	var node = get_node("GameOver")
-	remove_child(snakes[0]["sprites"][0]) # hack to put head on top
-	add_child(snakes[0]["sprites"][0])
-	remove_child(node)
-	add_child(node)
-	node.visible = true
+	colmap[pos2index(foodpoly.position)] = 2
 
 #call tile_update_from_true after
 func move_head(i, newdir):
@@ -208,56 +154,226 @@ func body_follow_head(i):
 		#tile_update_from_true(i, inverse)
 		
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	time += delta
-	#if time < control_speed:
-	#	return;
-	if (time > 1.0 && countdown > 0):
-		time -= 1.0
-		countdown -= 1
-		get_node("StartCount").text = str(countdown)
-		get_node("StartCount").raise()
-		if countdown <= 0:
-			paused = false
-			get_node("StartCount").visible = false
-	#print("sleep ", (1000/control_speed)-delta*1000, " plus delta =", delta*1000)
-	#time += delta
-	#if time < 1.0/moves_per_second:
-#		return;
-	if gameover:
-		OS.delay_msec(10)
-		return
+func flood(map, pos, depth):
+	if map[pos2index(pos)] == 1:
+		return 0
+	var ans = 0
+	for i in 4:
+		map[pos2index(pos)] = 1
+		var test1 = posdir2pos(pos, i)
+		if (map[pos2index(test1)] != 1):
+			ans += flood(map, test1, depth + 1) + 1 
+	return ans;
+
+func get_input(x):
+	# velocity = Vector2()
+	var oldinputmask = 0;
+	# iterate over inputqueue and collect all bits 
+	for i in snakes[x]["inputqueue"].size():
+		oldinputmask |= 1 << snakes[x]["inputqueue"][i]
 	
-	if paused:
-		OS.delay_msec(10)
-		return
+	if Input.is_action_pressed("ui_right"):
+		if oldinputmask & EASTBIT == 0:
+			snakes[x]["inputqueue"].append(EAST)
+	else:
+		snakes[x]["inputqueue"].erase(EAST)
+	if Input.is_action_pressed("ui_left"):
+		if oldinputmask & WESTBIT == 0:
+			snakes[x]["inputqueue"].append(WEST)
+	else:
+		snakes[x]["inputqueue"].erase(WEST)
+	if Input.is_action_pressed("ui_up"):
+		if oldinputmask & NORTHBIT == 0:
+			snakes[x]["inputqueue"].append(NORTH)
+	else:
+		snakes[x]["inputqueue"].erase(NORTH)
+	if Input.is_action_pressed("ui_down"):
+		if oldinputmask & SOUTHBIT == 0:
+			snakes[x]["inputqueue"].append(SOUTH)
+	else:
+		snakes[x]["inputqueue"].erase(SOUTH)
+	if (snakes[x]["inputqueue"].size()!= 0):
+		if ((snakes[x]["truedir"] + 2)%4 != snakes[x]["inputqueue"][-1]):
+			snakes[x]["reqdir"] = snakes[x]["inputqueue"][-1]
+
+func ai_get_input(i):
+	var currentdir = snakes[i]["truedir"]
+	var goalpos = foodpoly.position
+	var legalmoves = []
+	var legalfoodrank = []
+	var legalfloodrank = []
+	var counts = []
+	for x in 4:
+		var testpos = posdir2pos(snakes[i]["truecords"][0], x)
+		if colmap[pos2index(testpos)] != 1:
+			legalmoves.append(x)
+			#legalrank.append(150-abs(testpos.distance_to(Vector2(width/2,height/2))))
+			#Vector2(0,0)
+			#legalfoodrank.append(Vector2(0,0).distance_to(Vector2(width,height))
+	#				- (testpos.distance_to(foodpoly.position)))
+			var value = (Vector2(0,0).distance_to(Vector2(width,height)) - testpos.distance_to(foodpoly.position))/2
+			var newmap = colmap.duplicate()
+			counts.append(flood(newmap, testpos, 0))
+			#if count2 < 30:
+			#	value = 0
+			if currentdir == x:
+				if !(foodpoly.position.x == snakes[i]["truecords"][0].x || foodpoly.position.y == snakes[i]["truecords"][0].y):
+					value = value * 1.2
+			legalfoodrank.append(value)
 	
+	for x in legalmoves.size():
+		if counts[x] < 10:
+			legalfoodrank[x] = 0
+		if counts[x] < 20:
+			legalfoodrank[x] = legalfoodrank[x]*.0001
+		if counts[x] < 40:
+			legalfoodrank[x] = legalfoodrank[x]*.001
+		if counts[x] < 80:
+			legalfoodrank[x] = legalfoodrank[x]*.1
+	
+	var bestrank = -1
+	var bestans = NODIR
+	for x in legalmoves.size():
+		if legalfoodrank[x]> bestrank:
+			bestrank = legalfoodrank[x]
+			bestans = legalmoves[x]
+	if rng.randi_range(0,100) > 99:
+		snakes[i]["reqdir"] = legalmoves[rng.randi_range(0,legalmoves.size()-1)]
+	else:
+		snakes[i]["reqdir"] = bestans;
+
+## Called when the node enters the scene tree for the first time.
+func reset():
+	rng.randomize()
+	get_node("GameOver").visible = false
+	for snake in snakes:
+		for x in snake["snakelen"]:
+			snake["sprites"][x].queue_free()
+	foodpoly.queue_free()
+	countdown = CountDownStart
+	paused = false
+	cntpaused = true
+	get_node("StartCount").visible = true
+	get_node("StartCount").text = str(countdown)
+	colmap = []
+	for h in height/8.0:
+		for w in width/8.0:
+			if h == height/8-1 || h ==0:
+				colmap.append(1);
+			elif w == width/8-1 || w ==0:
+				colmap.append(1);
+			else :
+				colmap.append(0);
+	emptyboard = colmap.duplicate()
+	snakes = []
+	for x in numplayers:	
+		var player = newSnakeObj.duplicate()
+		snakes.append(player)
+		snakes[x]["snakelen"] = 0
+		snakes[x]["snakecap"] = 5
+
+		snakes[x]["sprites"] = []
+		snakes[x]["truecords"] = []
+		snakes[x]["tilerot"] = []
+		snakes[x]["truedir"] = EAST
+		snakes[x]["oldinputmask"] = []
+		if x == 0:
+			snakes[x]["truedir"]  = EAST
+			snakes[x]["reqdir"]  = EAST
+		else:
+			snakes[x]["truedir"]  = WEST
+			snakes[x]["reqdir"]  = WEST
+		
+		grow(x, startpos[x], snakes[x]["truedir"])
+		body_follow_head(x)
+		move_head(x, snakes[x]["truedir"])
+		tile_update_from_true(x, 0)
+		grow(x, startpos[x], snakes[x]["truedir"])
+		tile_update_from_true(x, 0)
+		body_follow_head(x)
+		move_head(x, snakes[x]["truedir"])
+		grow(x, startpos[x], snakes[x]["truedir"])
+		tile_update_from_true(x, 0)
+		body_follow_head(x)
+		move_head(x, snakes[x]["truedir"])
+		grow(x, startpos[x], snakes[x]["truedir"])
+		tile_update_from_true(x, 0)
+		body_follow_head(x)
+		move_head(x, snakes[x]["truedir"])
+		grow(x, startpos[x], snakes[x]["truedir"])
+		tile_update_from_true(x, 4)
+		tile_update_from_true(x, 3)
+		tile_update_from_true(x, 2)
+		tile_update_from_true(x, 1)
+		tile_update_from_true(x, 0)
+	gameover = false
+	foodpoly = Polygon2D.new()
 	time = 0
-	#########get_input(0);
+	foodpoly.polygon = PoolVector2Array([
+		Vector2(0,0),
+		Vector2(0,tilesize),
+		Vector2(tilesize,tilesize),
+		Vector2(tilesize,0)
+	])
 	
-	# HACK, REPLACE with clean update code, rough hack to make colmap accurate
-	colmap = tempzero.duplicate()
-	for x in numplayers:
-		for s in snakes[x]["truecords"].size():
-			colmap[pos2index(snakes[x]["truecords"][s])] = 1
-	colmap[pos2index(foodpoly.position)] = 2
+	snakes[0]["sprites"][0].set_texture(playerheadtex)
 	
+	if (numplayers == 2):
+		snakes[1]["sprites"][0].set_texture(enemyheadtex)
+	
+	foodpoly.set_texture(foodtex)
+	add_child(foodpoly)
+	move_food()
+
+func _ready():
+	reset()
+
+func _physics_process(delta):
+	time += delta
+	if (cntpaused):
+		if(countdown <= 0):
+				get_node("StartCount").visible = false
+				cntpaused = false
+				return
+		get_node("StartCount").raise()		
+		if (time > 1.0):
+			time -= 1.0
+			countdown -= 1
+			if (countdown > 0):
+				get_node("StartCount").text = str(countdown)
+		else:
+			return
+	if (time * moves_per_second <= 0.9):
+		return; #slow inputs to moves per second
+	time = 0
+	if gameover:
+#		OS.delay_msec(1)
+		return
+	if paused:
+		return
+		
+	var updatefood = false;
 	for x in numplayers:
-		##if x == 1:
-			#snakes[1]["dir"] = (snakes[0]["dir"]+2) %4
-		ai_get_input(x)
-			
-		snakes[x]["tilerot"][0] = snakes[x]["dir"]  #rotate old head to current dir
+		colmap = emptyboard.duplicate()
+		for x1 in numplayers:
+			for s in snakes[x1]["truecords"].size():
+				colmap[pos2index(snakes[x1]["truecords"][s])] = 1
+				colmap[pos2index(foodpoly.position)] = 2
+		if x == 0 && player1Ctrl == 0:
+			get_input(x) #called in proccess as well
+		else:
+			ai_get_input(x) #only called here
+		snakes[x]["truedir"] = snakes[x]["reqdir"]
+		snakes[x]["tilerot"][0] = snakes[x]["truedir"]  #rotate old head to current dir
 		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
 		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
-		
+
 		#Follow Head
 
 		body_follow_head(x)
 		#Move Head,
-		move_head(x, snakes[x]["dir"] )
-		
+		move_head(x, snakes[x]["truedir"] )
+
 		if (snakes[x]["snakelen"]< snakes[x]["snakecap"]):
 			grow(x, oldtailcord, oldsnakesrot)
 			pass
@@ -271,113 +387,20 @@ func _process(delta):
 			game_over()
 			return
 		elif colmap[pos2index(snakes[x]["truecords"][0])] == 2:
-			print("FOOD")
-			move_food()
+			updatefood = true
 			snakes[x]["snakecap"] += FoodSegments
+	if updatefood:
+		move_food()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if gameover:
+		return
 	for x in numplayers:
 		for s in snakes[x]["truecords"].size():
 			tile_update_from_true(x, s)
-	if ((1000/moves_per_second)-delta*1000 > 0):
-		OS.delay_msec((1000/moves_per_second)-delta*1000)
-	else:
-		print("lagged:", (1000/moves_per_second)-delta*1000)
-
-func flood(map, pos, depth):
-	if (depth > 25):
-		return 1
-	if map[pos2index(pos)] == 1:
-		return 1
-	var ans = 0
-	for i in 4:
-		var test1 = posdir2pos(pos, i)
-		if (test1.x > (borderintiles - 1)*tilesize &&
-			test1.y > (borderintiles - 1) *tilesize &&
-			test1.x < width - borderintiles*tilesize &&
-			test1.y < height - borderintiles*tilesize &&
-			map[pos2index(test1)] == 0):
-				ans += flood(map, test1, depth + 1) + 1
-	map[pos2index(pos)] = 1
-	return ans;
-
-
-func ai_get_input(i):
-	var currentdir = snakes[i]["dir"]
-	var goalpos = foodpoly.position
-	if (goalpos.x > snakes[i]["truecords"][0].x):
-		if (currentdir == WEST):
-			snakes[i]["dir"] = SOUTH
-		else:
-			snakes[i]["dir"] = EAST
-	if (goalpos.x < snakes[i]["truecords"][0].x):
-		if (currentdir == EAST):
-			snakes[i]["dir"] = SOUTH
-		else:
-			snakes[i]["dir"] = WEST
-	if (goalpos.y > snakes[i]["truecords"][0].y):
-		if (currentdir == NORTH):
-			snakes[i]["dir"] = WEST
-		else:
-			snakes[i]["dir"] = SOUTH
-	if (goalpos.y < snakes[i]["truecords"][0].y):
-		if (currentdir == SOUTH):
-			snakes[i]["dir"] = WEST
-		else:
-			snakes[i]["dir"] = NORTH
-	var maxcnt = 0
-	var maxdir
-	for x in 4:
-		var test = posdir2pos(snakes[i]["truecords"][0], snakes[i]["dir"])
-		if (colmap[pos2index(test)] != 1 &&
-				test.x > (borderintiles - 1)*tilesize &&
-				test.y > (borderintiles - 1) *tilesize &&
-				test.x < width - borderintiles*tilesize &&
-				test.y < height - borderintiles*tilesize
-				):
-			var aiflood = colmap.duplicate()
-			var safe = false
-			var count = flood(aiflood,test, 0)
-	
-			print ("count ", count)
-			if count > 30:
-				break
-		snakes[i]["dir"] = (snakes[i]["dir"] + 1) % 4
-
-
-	
-	
-		
-
-func get_input(i):
-	# velocity = Vector2()
-	var inputmask = 0
-	var oldinputmask = snakes[i]["oldinputmask"] 
-	if Input.is_action_pressed("ui_right"):
-		inputmask |= BIT1
-	if Input.is_action_pressed("ui_left"):
-		inputmask |= BIT2
-	if Input.is_action_pressed("ui_down"):
-		inputmask |= BIT3
-	if Input.is_action_pressed("ui_up"):
-		inputmask |= BIT4
-	if inputmask != oldinputmask:
-		if (inputmask & (~oldinputmask)) == BIT1 && snakes[i]["dir"]  != WEST:
-			snakes[i]["dir"]  = EAST
-		elif (inputmask & (~oldinputmask)) == BIT2 && snakes[i]["dir"]  != EAST:
-			snakes[i]["dir"]  = WEST
-		elif (inputmask & (~oldinputmask)) == BIT3 && snakes[i]["dir"]  != NORTH:
-			snakes[i]["dir"]  = SOUTH
-		elif (inputmask & (~oldinputmask)) == BIT4 && snakes[i]["dir"]  != SOUTH:
-			snakes[i]["dir"]  = NORTH
-		else : #released a key, fall back to priority...
-			if Input.is_action_pressed("ui_right") &&  snakes[i]["dir"]  != WEST:
-				snakes[i]["dir"]  = EAST
-			if Input.is_action_pressed("ui_left") &&  snakes[i]["dir"]  != EAST:
-				snakes[i]["dir"]  = WEST
-			if Input.is_action_pressed("ui_up") &&  snakes[i]["dir"]  != SOUTH:
-				snakes[i]["dir"]  = NORTH
-			if Input.is_action_pressed("ui_down") &&  snakes[i]["dir"]  != NORTH:
-				snakes[i]["dir"]  = SOUTH
-	snakes[i]["oldinputmask"] = inputmask
+		if x == 0 && player1Ctrl == 0:
+			get_input(x)
 
 func _on_GameOver_pressed():
 	reset()
