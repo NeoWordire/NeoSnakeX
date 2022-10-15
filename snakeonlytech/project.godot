@@ -8,11 +8,37 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Polygon2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Scripts/Bullet.gd"
+}, {
+"base": "Node2D",
+"class": "Snake",
+"language": "GDScript",
+"path": "res://Scripts/Snake.gd"
+}, {
+"base": "Node2D",
+"class": "snakehelper",
+"language": "GDScript",
+"path": "res://Scripts/SnakeUtil.gd"
+} ]
+_global_script_class_icons={
+"Bullet": "res://Assets/Textures/icon.png",
+"Snake": "res://Assets/Textures/icon.png",
+"snakehelper": "res://Assets/Textures/icon.png"
+}
+
 [application]
 
 config/name="snakealone"
 run/main_scene="res://snakebattlev2.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalSnakeVar="*res://Scripts/GlobalSnakeVar.gd"
 
 [display]
 
