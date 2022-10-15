@@ -92,7 +92,6 @@ playerbodytex = ExtResource( 3 )
 playerheadtex = ExtResource( 2 )
 enemybodytex = ExtResource( 5 )
 enemyheadtex = ExtResource( 6 )
-player1Ctrl = 1
 foodtex = ExtResource( 4 )
 FoodSegments = 1
 CountDownStart = 1
