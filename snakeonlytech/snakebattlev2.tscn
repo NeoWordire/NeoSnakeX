@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://MainSnake.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/CanvasLayer3.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Textures/snake_head.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Textures/snake_box.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Textures/snake_head.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/apple.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/enemy_head.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Textures/arena.png" type="Texture" id=7]
 [ext_resource path="res://Assets/fence.tres" type="Texture" id=8]
 [ext_resource path="res://Assets/Textures/fence_corner.png" type="Texture" id=9]
@@ -84,10 +87,14 @@
 
 [node name="SnakeBattle" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )
-moves_per_second = 10
-bullet_moves_per_second = 30
+moves_per_second = 8
 playerbodytex = ExtResource( 3 )
-playerheadtex = ExtResource( 4 )
+playerheadtex = ExtResource( 2 )
+enemybodytex = ExtResource( 5 )
+enemyheadtex = ExtResource( 6 )
+foodtex = ExtResource( 4 )
+FoodSegments = 1
+CountDownStart = 1
 
 [node name="StartCount" type="Label" parent="SnakeBattle"]
 margin_left = 116.0
