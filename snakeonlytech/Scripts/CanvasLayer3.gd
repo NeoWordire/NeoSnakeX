@@ -32,8 +32,9 @@ const WESTBIT = 1 << 3
 # var b = "text"
 
 var rng = RandomNumberGenerator.new()
-var time = 0
-
+var snakeupdatetimer = 0
+export (int) var bullet_moves_per_second = 10
+var bulletupdatetimer = 0
 # snake items, each element is segment, head always 0, tail always snakelen-1
 var newSnakeObj = {
 	sprites = [],
@@ -65,6 +66,9 @@ var colmap = []
 var gameover = false
 var foodpoly = Polygon2D.new()
 
+var draw_snake_flag = false
+var draw_bullet_flag = false
+
 
 #call grow after moving but with old tail pos
 func grow(i,tailpos,rot):
@@ -83,7 +87,7 @@ func grow(i,tailpos,rot):
 	snakes[i]["truecords"].append(tailpos)
 	snakes[i]["tilerot"].append(rot)
 	#colmap[pos2index(tailpos)] = 1
-	tile_update_from_true(i, snakes[i]["snakelen"])
+	tile_draw_snake_flag_from_true(i, snakes[i]["snakelen"])
 	add_child(poly)
 	#colmap[pos2index(snakes[i]["truecords"][-1])] = 1
 	snakes[i]["snakelen"] += 1
@@ -126,7 +130,7 @@ func move_food():
 		colmap[pos2index(oldpos)] = 0
 	colmap[pos2index(foodpoly.position)] = 2
 
-#call tile_update_from_true after
+#call tile_draw_snake_flag_from_true after
 func move_head(i, newdir):
 	#colmap[pos2index(snakes[i]["truecords"][0])] = 0
 	snakes[i]["tilerot"][0] = newdir
@@ -140,7 +144,7 @@ func move_head(i, newdir):
 		snakes[i]["truecords"][0].x -= 1 * tilesize
 	colmap[pos2index(snakes[i]["truecords"][0])] = 1
 
-func tile_update_from_true(i,segment):
+func tile_draw_snake_flag_from_true(i,segment):
 	if (snakes[i]["tilerot"][segment] == NORTH):
 		snakes[i]["sprites"][segment].position.x = snakes[i]["truecords"][segment].x
 		snakes[i]["sprites"][segment].position.y = snakes[i]["truecords"][segment].y + tilesize
@@ -160,6 +164,7 @@ func tile_update_from_true(i,segment):
 
 func body_follow_head(i):
 	if snakes[i]["snakelen"] <= 1:
+		colmap[pos2index(snakes[i]["truecords"][0])] = 0
 		return
 	colmap[pos2index(snakes[i]["truecords"][-1])] = 0
 	for s in snakes[i]["snakelen"]-1:
@@ -168,7 +173,7 @@ func body_follow_head(i):
 		snakes[i]["truecords"][inverse] = snakes[i]["truecords"][inverse-1] 
 		snakes[i]["tilerot"][inverse] = snakes[i]["tilerot"][inverse - 1]
 		colmap[pos2index(snakes[i]["truecords"][inverse])] = 1
-		#tile_update_from_true(i, inverse)
+		#tile_draw_snake_flag_from_true(i, inverse)
 
 func debug_colmap():
 	for n in get_parent().get_node("Debug").get_children():
@@ -178,7 +183,6 @@ func debug_colmap():
 		for w in width/tilesize:
 			var pos = Vector2(w*tilesize,h*tilesize)
 			var debugpoly = Polygon2D.new()
-			time = 0
 			debugpoly.polygon = PoolVector2Array([
 				Vector2(0,0),
 				Vector2(0,tilesize),
@@ -347,30 +351,32 @@ func reset():
 		snakes[x]["bulletrot"] = []
 		
 		grow(x, startpos[x], snakes[x]["truedir"])
-		body_follow_head(x)
-		move_head(x, snakes[x]["truedir"])
-		tile_update_from_true(x, 0)
-		grow(x, startpos[x], snakes[x]["truedir"])
-		tile_update_from_true(x, 0)
-		body_follow_head(x)
-		move_head(x, snakes[x]["truedir"])
-		grow(x, startpos[x], snakes[x]["truedir"])
-		tile_update_from_true(x, 0)
-		body_follow_head(x)
-		move_head(x, snakes[x]["truedir"])
-		grow(x, startpos[x], snakes[x]["truedir"])
-		tile_update_from_true(x, 0)
-		body_follow_head(x)
-		move_head(x, snakes[x]["truedir"])
-		grow(x, startpos[x], snakes[x]["truedir"])
-		tile_update_from_true(x, 4)
-		tile_update_from_true(x, 3)
-		tile_update_from_true(x, 2)
-		tile_update_from_true(x, 1)
-		tile_update_from_true(x, 0)
+		for i in snakes[x]["snakecap"]:
+			body_follow_head(x)
+			move_head(x, snakes[x]["truedir"])
+			grow(x, startpos[x], snakes[x]["truedir"])
+#		tile_draw_snake_flag_from_true(x, 0)
+#		body_follow_head(x)
+#		move_head(x, snakes[x]["truedir"])
+#		grow(x, startpos[x], snakes[x]["truedir"])
+#		tile_draw_snake_flag_from_true(x, 0)
+#		body_follow_head(x)
+#		move_head(x, snakes[x]["truedir"])
+#		grow(x, startpos[x], snakes[x]["truedir"])
+#		tile_draw_snake_flag_from_true(x, 0)
+#		body_follow_head(x)
+#		move_head(x, snakes[x]["truedir"])
+#		grow(x, startpos[x], snakes[x]["truedir"])
+		for i in snakes[x]["snakecap"]:
+			tile_draw_snake_flag_from_true(x, i)
+#		tile_draw_snake_flag_from_true(x, 4)
+#		tile_draw_snake_flag_from_true(x, 3)
+#		tile_draw_snake_flag_from_true(x, 2)
+#		tile_draw_snake_flag_from_true(x, 1)
+#		tile_draw_snake_flag_from_true(x, 0)
 	gameover = false
 	foodpoly = Polygon2D.new()
-	time = 0
+	snakeupdatetimer = 0
 	foodpoly.polygon = PoolVector2Array([
 		Vector2(0,0),
 		Vector2(0,tilesize),
@@ -390,69 +396,12 @@ func reset():
 func _ready():
 	reset()
 
-func _physics_process(delta):
-	time += delta
-	
-	if (cntpaused):
-		if(countdown <= 0):
-				get_node("StartCount").visible = false
-				cntpaused = false
-				return
-		get_node("StartCount").raise()		
-		if (time > 1.0):
-			time -= 1.0
-			countdown -= 1
-			if (countdown > 0):
-				get_node("StartCount").text = str(countdown)
-		else:
-			return
-	if (time * moves_per_second <= 0.9):
-		return; #slow inputs to moves per second
-	#debug_colmap()
-	time = 0
-	if gameover:
-#		OS.delay_msec(1)
-		return
-	if paused:
-		return
-		
-	var updatefood = false;
+func step_bullet_simulation():
 	for x in numplayers:
-		#colmap = emptyboard.duplicate()
-		#for x1 in numplayers:
-		#	for s in snakes[x1]["truecords"].size():
-		#		colmap[pos2index(snakes[x1]["truecords"][s])] = 1
-		#		colmap[pos2index(foodpoly.position)] = 2
 		for s in snakes[x]["bulletsprite"].size():
 			snakes[x]["bulletpos"][s] = posdir2pos(snakes[x]["bulletpos"][s],snakes[x]["bulletrot"][s])
-			snakes[x]["bulletsprite"][s].position.x = snakes[x]["bulletpos"][s].x + tilesize/4
-			snakes[x]["bulletsprite"][s].position.y = snakes[x]["bulletpos"][s].y + tilesize/4
-		if x == 0 && player1Ctrl == 0:
-			get_input(x) #called in proccess as well
-		else:
-			ai_get_input(x) #only called here
-		snakes[x]["truedir"] = snakes[x]["reqdir"]
-		snakes[x]["tilerot"][0] = snakes[x]["truedir"]  #rotate old head to current dir
-		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
-		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
-
-		if (snakes[x]["snakelen"]< snakes[x]["snakecap"]):
-			grow(x, oldtailcord, oldsnakesrot)
-			pass
-
-		var checkpos = posdir2pos(snakes[x]["truecords"][0], snakes[x]["truedir"])
-		if (colmap[pos2index(checkpos)] == 1):
-			print("DED")
-			game_over()
-			return
-		elif colmap[pos2index(checkpos)] == 2:
-			updatefood = true
-			snakes[x]["snakecap"] += FoodSegments
-		body_follow_head(x)
-		move_head(x, snakes[x]["truedir"] )
-		if (snakes[x]["inputshoot"]):
-			shoot(x)
-	for x in numplayers:
+			#snakes[x]["bulletsprite"][s].position.x = snakes[x]["bulletpos"][s].x + tilesize/4
+			#snakes[x]["bulletsprite"][s].position.y = snakes[x]["bulletpos"][s].y + tilesize/4
 		var dellist = []
 		for s in snakes[x]["bulletsprite"].size():
 			var index = pos2index(snakes[x]["bulletpos"][s])
@@ -474,16 +423,81 @@ func _physics_process(delta):
 			snakes[x]["bulletrot"].erase(snakes[x]["bulletrot"][s])
 			dellist.erase(s)
 			pass
-	if updatefood:
+	draw_bullet_flag = true
+	
+func step_snake_simulation():
+	var move_food_flag = false;
+	for x in numplayers:
+		#colmap = emptyboard.duplicate()
+		#for x1 in numplayers:
+		#	for s in snakes[x1]["truecords"].size():
+		#		colmap[pos2index(snakes[x1]["truecords"][s])] = 1
+		#		colmap[pos2index(foodpoly.position)] = 2
+		if x == 0 && player1Ctrl == 0:
+			get_input(x) #called in proccess as well
+		else:
+			ai_get_input(x) #only called here
+		snakes[x]["truedir"] = snakes[x]["reqdir"]
+		snakes[x]["tilerot"][0] = snakes[x]["truedir"]  #rotate old head to current dir
+		var oldtailcord = snakes[x]["truecords"][snakes[x]["snakelen"]-1]
+		var oldsnakesrot = snakes[x]["tilerot"][snakes[x]["snakelen"]-1]
+
+		if (snakes[x]["snakelen"]< snakes[x]["snakecap"]):
+			grow(x, oldtailcord, oldsnakesrot)
+			pass
+
+		var checkpos = posdir2pos(snakes[x]["truecords"][0], snakes[x]["truedir"])
+		if (colmap[pos2index(checkpos)] == 1):
+			print("DED")
+			game_over()
+			return
+		elif colmap[pos2index(checkpos)] == 2:
+			move_food_flag = true
+			snakes[x]["snakecap"] += FoodSegments
+		body_follow_head(x)
+		move_head(x, snakes[x]["truedir"] )
+		if (snakes[x]["inputshoot"]):
+			shoot(x) #move into the bullet step?
+	if move_food_flag:
 		move_food()
-	if debugging:
-		debug_colmap()
 	#if Input.is_action_pressed("ui_page_down"):
 	#	var pos1 = snakes[0]["truecords"][1]
 	#	got_shot(pos1)
-	update = true
+	draw_snake_flag = true
 
-var update = false
+func _physics_process(delta):
+	snakeupdatetimer += delta
+	bulletupdatetimer += delta
+	
+	if (cntpaused):
+		if(countdown <= 0):
+				get_node("StartCount").visible = false
+				cntpaused = false
+				return
+		get_node("StartCount").raise()		
+		if (snakeupdatetimer > 1.0):
+			snakeupdatetimer -= 1.0
+			countdown -= 1
+			if (countdown > 0):
+				get_node("StartCount").text = str(countdown)
+		else:
+			return
+	if debugging:
+		debug_colmap()
+	if gameover:
+#		OS.delay_msec(1)
+		return
+	if paused:
+		return
+	if (snakeupdatetimer * moves_per_second >= 0.9):
+		snakeupdatetimer = 0
+		step_snake_simulation()
+	if (bulletupdatetimer * bullet_moves_per_second >= 0.9):
+		print(bulletupdatetimer)
+		bulletupdatetimer = 0
+		step_bullet_simulation()
+	#
+	#debug_colmap()
 
 func shoot(x):
 	var bulletpoly = Polygon2D.new() 
@@ -492,11 +506,12 @@ func shoot(x):
 		Vector2(0,tilesize/2),
 		Vector2(tilesize/2,tilesize/2),
 		Vector2(tilesize/2,0)])
-	bulletpoly.position = posdir2pos(snakes[x]["truecords"][0], snakes[x]["tilerot"][0])
+#	bulletpoly.position = posdir2pos(snakes[x]["truecords"][0], snakes[x]["tilerot"][0])
 	add_child(bulletpoly)
 	bulletpoly.color = Color (0,0,0,1)
 	snakes[x]["bulletsprite"].append(bulletpoly)
-	snakes[x]["bulletpos"].append(bulletpoly.position)
+#	snakes[x]["bulletpos"].append(bulletpoly.position)
+	snakes[x]["bulletpos"].append(posdir2pos(snakes[x]["truecords"][0], snakes[x]["tilerot"][0]))
 	snakes[x]["bulletrot"].append(snakes[x]["tilerot"][0])
 	snakes[x]["bulletsprite"][-1].raise()
 
@@ -524,8 +539,10 @@ func got_shot(pos):
 			snakes[x]["snakecap"] = snakes[x]["snakecap"] - 1
 			dellist.erase(index)
 
+var tempbulletinterp = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#print(tempbulletinterp)
 	#if Input.is_action_pressed("ui_accept"):
 	if gameover:
 		return
@@ -535,12 +552,24 @@ func _process(delta):
 		debugging = true
 	if Input.is_action_pressed("ui_accept"):
 		paused = !paused
-	if !update:
-		return
+	#if !draw_snake_flag:
+	#	return
 	for x in numplayers:
-		for s in snakes[x]["truecords"].size():
-			tile_update_from_true(x, s)
-	update = false
+		if draw_snake_flag:
+			for s in snakes[x]["truecords"].size():
+				tile_draw_snake_flag_from_true(x, s)
+		for s in snakes[x]["bulletsprite"].size():
+			var prev = snakes[x]["bulletpos"][s]
+			prev.x = prev.x + tilesize/4
+			prev.y = prev.y + tilesize/4
+			var next = posdir2pos(snakes[x]["bulletpos"][s],snakes[x]["bulletrot"][s])
+			next.x = next.x + tilesize/4
+			next.y = next.y + tilesize/4
+			snakes[x]["bulletsprite"][s].position = prev.linear_interpolate(next, tempbulletinterp)
+				#snakes[x]["bulletsprite"][s].position.x = snakes[x]["bulletpos"][s].x + tilesize/4
+				#snakes[x]["bulletsprite"][s].position.y = snakes[x]["bulletpos"][s].y + tilesize/4
+	draw_bullet_flag = false
+	draw_snake_flag = false
 	
 	
 func _on_GameOver_pressed():
