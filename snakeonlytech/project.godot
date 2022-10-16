@@ -36,6 +36,10 @@ config/name="snakealone"
 run/main_scene="res://snakebattlev3.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSnakeVar="*res://Scripts/GlobalSnakeVar.gd"
+
 [display]
 
 window/size/width=240
