@@ -14,26 +14,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Bullet.gd"
 }, {
+"base": "Polygon2D",
+"class": "Food",
+"language": "GDScript",
+"path": "res://Scripts/Food.gd"
+}, {
 "base": "Node2D",
 "class": "Snake",
 "language": "GDScript",
 "path": "res://Scripts/Snake.gd"
-}, {
-"base": "Node2D",
-"class": "snakehelper",
-"language": "GDScript",
-"path": "res://Scripts/SnakeUtil.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "res://Assets/Textures/icon.png",
-"Snake": "res://Assets/Textures/icon.png",
-"snakehelper": "res://Assets/Textures/icon.png"
+"Food": "res://Assets/Textures/icon.png",
+"Snake": "res://Assets/Textures/icon.png"
 }
 
 [application]
 
 config/name="snakealone"
-run/main_scene="res://snakebattlev2.tscn"
+run/main_scene="res://snakebattlev3.tscn"
 config/icon="res://icon.png"
 
 [autoload]

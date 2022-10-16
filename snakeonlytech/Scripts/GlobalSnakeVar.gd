@@ -1,20 +1,47 @@
 extends Node
 
-var width = 240
-var height = 160
-var tilesize = 8
-var borderintiles = 1
+const width = 240
+const height = 160
+const tilesize = 8
+const borderintiles = 1
 
 var snakeupdatetimer = 0
 var bulletupdatetimer = 0
+var paused = false;
+var debug = false;
+
 var colmap = []
 
-enum {NORTH, EAST, SOUTH, WEST, NODIR}
+var bullets = []
+var snakes = []
 
+var rng = RandomNumberGenerator.new()
+#foodpoly.position.x = rng.randi_range(borderintiles*2, width/tilesize - 2*borderintiles)*tilesize
+
+var foodpoly
+
+enum {NORTH, EAST, SOUTH, WEST, NODIR}
+enum DIRS {NORTH, EAST, SOUTH, WEST, NODIR}
 const NORTHBIT = 1
 const EASTBIT = 1 << 1
 const SOUTHBIT = 1 << 2
 const WESTBIT = 1 << 3
+
+var g_playerbodytex
+var g_playerheadtex
+var g_enemybodytex
+var g_enemyheadtex
+var g_bullet_moves_per_second
+var g_snake_moves_per_second
+var g_numplayers
+var g_shoot_cooldown
+var g_FoodSegments
+var g_CountDownStart
+var g_debugging
+var g_startpos
+var g_startrot
+var g_player1Ctrl
+var g_foodsegments
 
 func posdir2pos(pos, newdir):
 	if (newdir == NORTH):
@@ -33,6 +60,7 @@ func pos2index(pos):
 	return ((pos.y/tilesize)*(width/tilesize)) + (pos.x/tilesize)
 
 func initColMap():
+	colmap = []
 	for h in height/8.0:
 		for w in width/8.0:
 			if h == height/8-1 || h ==0:
