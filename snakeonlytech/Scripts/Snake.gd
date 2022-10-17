@@ -168,7 +168,7 @@ func get_input():
 		if ((truedir + 2)%4 != inputqueue[-1]):
 			reqdir = inputqueue[-1]
 	inputshoot = false
-	if Input.is_key_pressed(KEY_CONTROL):
+	if Input.is_key_pressed(KEY_CONTROL) ||  Input.is_action_pressed("ui_accept"):
 		inputshoot = true
 
 func get_input_ai():
