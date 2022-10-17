@@ -1,6 +1,8 @@
 extends Sprite
 class_name Food, "res://Assets/Textures/apple.png"
 
+var truepos : Vector2
+
 func ready_():
 	pass
 	
@@ -16,7 +18,6 @@ func ready_():
 	
 func move_food():
 	print("move food")
-	var truepos : Vector2
 	truepos.x = GlobalSnakeVar.g_rng.randi_range(GlobalSnakeVar.borderintiles*2, GlobalSnakeVar.width/GlobalSnakeVar.tilesize - 2*GlobalSnakeVar.borderintiles)*GlobalSnakeVar.tilesize
 	truepos.y = GlobalSnakeVar.g_rng.randi_range(GlobalSnakeVar.borderintiles*2, GlobalSnakeVar.height/GlobalSnakeVar.tilesize- 2*GlobalSnakeVar.borderintiles)*GlobalSnakeVar.tilesize
 	if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truepos)] != 0:
