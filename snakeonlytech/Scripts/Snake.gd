@@ -160,7 +160,7 @@ func get_input():
 
 func get_input_ai():
 	var currentdir = truedir
-	var goalpos = GlobalSnakeVar.foodpoly.position
+	var goalpos = GlobalSnakeVar.foodpoly.truepos
 	var legalmoves = []
 	var legalfoodrank = []
 	var legalfloodrank = []
@@ -183,7 +183,7 @@ func get_input_ai():
 			#if count2 < 30:
 			#	value = 0
 			if currentdir == x:
-				if !(GlobalSnakeVar.foodpoly.position.x == truecords[0].x || GlobalSnakeVar.foodpoly.position.y == truecords[0].y):
+				if !(GlobalSnakeVar.foodpoly.truepos.x == truecords[0].x || GlobalSnakeVar.foodpoly.truepos.y == truecords[0].y):
 					value = value * 1.2
 			legalfoodrank.append(value)
 	
