@@ -203,12 +203,12 @@ func get_input_ai():
 		if legalfoodrank[x]> bestrank:
 			bestrank = legalfoodrank[x]
 			bestans = legalmoves[x]
-	if GlobalSnakeVar.rng.randi_range(0,100) > 99:
+	if GlobalSnakeVar.g_rng.randi_range(0,100) > 99:
 		if(legalmoves.size() != 0):
-			reqdir = legalmoves[GlobalSnakeVar.rng.randi_range(0,legalmoves.size()-1)]
+			reqdir = legalmoves[GlobalSnakeVar.g_rng.randi_range(0,legalmoves.size()-1)]
 	else:
 		reqdir = bestans;
-	if GlobalSnakeVar.rng.randi_range(0,100) > 90:
+	if GlobalSnakeVar.g_rng.randi_range(0,100) > 90:
 		inputshoot = true
 	else :
 		inputshoot = false

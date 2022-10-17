@@ -50,6 +50,7 @@ func _ready():
 	GlobalSnakeVar.g_shoot_cooldown = ShootCooldown
 	GlobalSnakeVar.debug = debugging
 	GlobalSnakeVar.g_foodsegments = FoodSegments
+	GlobalSnakeVar.g_rng.randomize()
 	reset()
 	pass # Replace with function body.
 
@@ -79,12 +80,12 @@ func reset():
 		snake.connect("snake_died", self, "snake_died_func")
 		add_child(snake)
 		GlobalSnakeVar.snakes.append(snake)
-	remove_child(GlobalSnakeVar.foodpoly)
+	#remove_child(GlobalSnakeVar.foodpoly)
 	#GlobalSnakeVar.foodpoly.queue_free()
-	var food = Food.new();
-	food.setup()
+	var food = get_node("Food");
+	#food.setup()
 	food.move_food()
-	add_child(food)
+	#add_child(food)
 	GlobalSnakeVar.foodpoly = food
 	
 func _process(delta):

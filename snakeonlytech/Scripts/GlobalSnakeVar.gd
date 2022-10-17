@@ -15,7 +15,7 @@ var colmap = []
 var bullets = []
 var snakes = []
 
-var rng = RandomNumberGenerator.new()
+var g_rng = RandomNumberGenerator.new()
 #foodpoly.position.x = rng.randi_range(borderintiles*2, width/tilesize - 2*borderintiles)*tilesize
 
 var foodpoly

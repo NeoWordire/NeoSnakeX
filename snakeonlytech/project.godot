@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Bullet.gd"
 }, {
-"base": "Polygon2D",
+"base": "Sprite",
 "class": "Food",
 "language": "GDScript",
 "path": "res://Scripts/Food.gd"
@@ -26,7 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "res://Assets/Textures/icon.png",
-"Food": "res://Assets/Textures/icon.png",
+"Food": "res://Assets/Textures/apple.png",
 "Snake": "res://Assets/Textures/icon.png"
 }
 
