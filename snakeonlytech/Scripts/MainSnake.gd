@@ -6,47 +6,47 @@ const Food = preload("res://Scripts/Food.gd")
 # var a = 2
 # var b = "text"
 
-export (int) var numplayers = 2
+#export (int) var numplayers = 2
 
 export (int) var bullet_mps = 20
 export (int) var snake_mps = 12
-export (StreamTexture) var playerbodytex
-export (StreamTexture) var playerheadtex
-export (StreamTexture) var enemybodytex
-export (StreamTexture) var enemyheadtex
-export (StreamTexture) var foodtex
+#export (StreamTexture) var playerbodytex
+#export (StreamTexture) var playerheadtex
+#export (StreamTexture) var enemybodytex
+#export (StreamTexture) var enemyheadtex
+#export (StreamTexture) var foodtex
 export (int) var FoodSegments = 1
 #export (int) var CountDownStart = 3
 export (bool) var debugging = false
 export (float) var ShootCooldown = 0.5
 
-export (int, "player","ai") var player1Ctrl
-export var startpos = [
-		Vector2(GlobalSnakeVar.tilesize,
-				floor(GlobalSnakeVar.height/2/GlobalSnakeVar.tilesize)*
-						GlobalSnakeVar.tilesize - GlobalSnakeVar.tilesize), 
-		Vector2(GlobalSnakeVar.width - GlobalSnakeVar.tilesize *2,
-				floor(GlobalSnakeVar.height/2/GlobalSnakeVar.tilesize)*
-						GlobalSnakeVar.tilesize - GlobalSnakeVar.tilesize)
-	]
-export (Array, GlobalSnakeVar.DIRS) var startrot = [GlobalSnakeVar.DIRS.EAST, GlobalSnakeVar.DIRS.EAST]
+#export (int, "player","ai") var player1Ctrl
+#export var startpos = [
+#		Vector2(GlobalSnakeVar.tilesize,
+#				floor(GlobalSnakeVar.height/2/GlobalSnakeVar.tilesize)*
+#						GlobalSnakeVar.tilesize - GlobalSnakeVar.tilesize), 
+#		Vector2(GlobalSnakeVar.width - GlobalSnakeVar.tilesize *2,
+#				floor(GlobalSnakeVar.height/2/GlobalSnakeVar.tilesize)*
+#						GlobalSnakeVar.tilesize - GlobalSnakeVar.tilesize)
+#	]
+#export (Array, GlobalSnakeVar.DIRS) var startrot = [GlobalSnakeVar.DIRS.EAST, GlobalSnakeVar.DIRS.EAST]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GlobalSnakeVar.g_playerbodytex = playerbodytex
-	GlobalSnakeVar.g_playerheadtex = playerheadtex
-	GlobalSnakeVar.g_enemybodytex = enemybodytex
-	GlobalSnakeVar.g_enemyheadtex = enemyheadtex
+#	GlobalSnakeVar.g_playerbodytex = playerbodytex
+#	GlobalSnakeVar.g_playerheadtex = playerheadtex
+#	GlobalSnakeVar.g_enemybodytex = enemybodytex
+#	GlobalSnakeVar.g_enemyheadtex = enemyheadtex
 	GlobalSnakeVar.g_bullet_moves_per_second = bullet_mps
 	GlobalSnakeVar.g_snake_moves_per_second = snake_mps
-	GlobalSnakeVar.g_numplayers = numplayers
+	#GlobalSnakeVar.g_numplayers = numplayers
 	GlobalSnakeVar.g_FoodSegments = FoodSegments
 	#GlobalSnakeVar.g_CountDownStart = CountDownStart
 	GlobalSnakeVar.g_debugging = debugging
-	GlobalSnakeVar.g_startpos = startpos
-	GlobalSnakeVar.g_startrot = startrot
-	GlobalSnakeVar.g_player1Ctrl = player1Ctrl
+#	GlobalSnakeVar.g_startpos = startpos
+	#GlobalSnakeVar.g_startrot = startrot
+	#GlobalSnakeVar.g_player1Ctrl = player1Ctrl
 	GlobalSnakeVar.g_shoot_cooldown = ShootCooldown
 	GlobalSnakeVar.debug = debugging
 	GlobalSnakeVar.g_foodsegments = FoodSegments
@@ -65,21 +65,32 @@ func reset():
 		s.queue_free()
 	GlobalSnakeVar.snakes = []
 	GlobalSnakeVar.initColMap()
-	for i in GlobalSnakeVar.g_numplayers:
-		var snake = Snake.new()
-		var headtex
-		var bodytex
-		if i == 0:
-			headtex = playerheadtex
-			bodytex = playerbodytex
-		else:
-			headtex = enemyheadtex
-			bodytex = enemybodytex
-		snake.setup(i)
-		#snake.sprites[0].texture = playerbodytex
-		snake.connect("snake_died", self, "snake_died_func")
-		add_child(snake)
-		GlobalSnakeVar.snakes.append(snake)
+	var player = 0
+	for node in get_children():
+		print(node.get_class())
+		if node.get_class() == "Snake":
+			node.setup(player)
+			player += 1
+			node.connect("snake_died", self, "snake_died_func")
+			add_child(node)
+			GlobalSnakeVar.snakes.append(node)
+	GlobalSnakeVar.g_numplayers = player
+	print(GlobalSnakeVar.snakes.size())
+#	for i in GlobalSnakeVar.g_numplayers:
+#		var snake = Snake.new()
+#		var headtex
+#		var bodytex
+#		if i == 0:
+#			headtex = playerheadtex
+#			bodytex = playerbodytex
+#		else:
+#			headtex = enemyheadtex
+#			bodytex = enemybodytex
+#		snake.setup(i)
+#		#snake.sprites[0].texture = playerbodytex
+#		snake.connect("snake_died", self, "snake_died_func")
+#		add_child(snake)
+#		GlobalSnakeVar.snakes.append(snake)
 	#remove_child(GlobalSnakeVar.foodpoly)
 	#GlobalSnakeVar.foodpoly.queue_free()
 	var food = get_node("Food");

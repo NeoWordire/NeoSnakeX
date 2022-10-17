@@ -4,7 +4,6 @@ class_name Food, "res://Assets/Textures/apple.png"
 var truepos : Vector2
 
 export (float) var respawntime = 2;
-export (float) var initialSpawnTime = 1;
 var respawntimer = Timer.new();
 
 func _ready():

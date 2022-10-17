@@ -1,5 +1,5 @@
 extends Node2D
-class_name Snake, "res://Assets/Textures/icon.png"
+class_name Snake, "res://Assets/Textures/snake_head.png"
 const Bullet = preload("res://Scripts/Bullet.gd")
 
 signal snake_died(player)
@@ -16,27 +16,33 @@ var reqdir = GlobalSnakeVar.NODIR
 var inputqueue = []
 var inputshoot = false
 
+export (int, "player","ai") var HumanOrCPU
+
+export (Texture) var bodytex
+export (Texture) var headtex
+
+export (Vector2) var startpos
+export (GlobalSnakeVar.DIRS) var startRotation = GlobalSnakeVar.DIRS.EAST
 #var bulletsprite = [],
 #var bulletpos = [],
 #var bulletrot = [],
 var futureheadpos : Vector2
 var _player
-var _notai
+#var _notai
 
 #var tex : ImageTexture
 
 var bulletcooldown = Timer.new()
 var canfire = true;
 
+func get_class(): return "Snake"
+
 func fire_cooled_off():
 	canfire = true;
 
 func setup(player):
 	_player = player
-	if player == 0:
-		_notai = !GlobalSnakeVar.g_player1Ctrl
-	else:
-		_notai = false
+
 	connect("ate_food", self, "ate_food_snake")
 	#connect("ate_food", GlobalSnakeVar.foodpoly, "move_food")
 	for bullet in GlobalSnakeVar.bullets:
@@ -57,15 +63,12 @@ func setup(player):
 		Vector2(GlobalSnakeVar.tilesize,0)])
 	position = Vector2(0,0)
 	####poly.position = GlobalSnakeVar.g_startpos[player]
-	if _player == 1:
-		poly.texture = GlobalSnakeVar.g_enemyheadtex
-	else:
-		poly.texture = GlobalSnakeVar.g_playerheadtex
-	#poly.texture = tex
-	truecords.append(GlobalSnakeVar.g_startpos[player])
+	poly.texture = headtex
+	truecords.append(startpos)
+	#truecords.append(GlobalSnakeVar.g_startpos[player])
 	
-	reqdir = GlobalSnakeVar.g_startrot[player]
-	truedir = GlobalSnakeVar.g_startrot[player]
+	reqdir = startRotation
+	truedir = startRotation
 	tilerot.append(truedir)
 	
 	sprites.append(poly)
@@ -80,7 +83,7 @@ func _ready():
 	pass
 
 func step_simulation():
-	if(_notai):
+	if(HumanOrCPU == 0):
 		get_input()
 	else :
 		get_input_ai()
@@ -106,7 +109,7 @@ func play_movement():
 	return died
 
 func _process(delta):
-	if (_notai):
+	if (HumanOrCPU==0):
 		get_input()
 
 func _physics_process(delta):
@@ -255,10 +258,9 @@ func grow(tailpos, rot):
 		Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
 		Vector2(GlobalSnakeVar.tilesize,0)
 	])
-	if _player == 1:
-		poly.texture = GlobalSnakeVar.g_enemybodytex
-	else:
-		poly.texture = GlobalSnakeVar.g_playerbodytex
+
+	poly.texture = bodytex
+
 	poly.position = Vector2(-100,-100)
 	#poly.color = Color(0, 1, 0, 1)
 	sprites.append(poly)

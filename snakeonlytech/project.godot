@@ -27,7 +27,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "res://Assets/Textures/icon.png",
 "Food": "res://Assets/Textures/apple.png",
-"Snake": "res://Assets/Textures/icon.png"
+"Snake": "res://Assets/Textures/snake_head.png"
 }
 
 [application]

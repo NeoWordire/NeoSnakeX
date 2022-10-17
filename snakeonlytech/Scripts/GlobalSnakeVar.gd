@@ -38,9 +38,9 @@ var g_shoot_cooldown
 var g_FoodSegments
 var g_CountDownStart
 var g_debugging
-var g_startpos
-var g_startrot
-var g_player1Ctrl
+#var g_startpos
+#var g_startrot
+#var g_player1Ctrl
 var g_foodsegments
 
 func posdir2pos(pos, newdir):
