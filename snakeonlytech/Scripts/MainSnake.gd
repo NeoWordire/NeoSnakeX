@@ -18,7 +18,7 @@ export (int) var snake_mps = 12
 export (int) var FoodSegments = 1
 #export (int) var CountDownStart = 3
 export (bool) var debugging = false
-export (float) var ShootCooldown = 0.5
+export (float) var ShootCooldown = 0.5 
 
 #export (int, "player","ai") var player1Ctrl
 #export var startpos = [
@@ -110,7 +110,10 @@ func _process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+var bulletlastrun = 0
+var counterlastsnake = 0
 func _physics_process(delta):
+	counterlastsnake += 1
 	GlobalSnakeVar.snakeupdatetimer += delta
 	GlobalSnakeVar.bulletupdatetimer += delta
 	if GlobalSnakeVar.paused:
@@ -123,7 +126,8 @@ func _physics_process(delta):
 				return
 			snake.update_display()
 				#GlobalSnakeVar.paused = true
-
+		GlobalSnakeVar.g_counterlastsnake = counterlastsnake
+		counterlastsnake = 0
 		if GlobalSnakeVar.debug:
 			GlobalSnakeVar.debug_colmap()
 		#print("snaketime")
@@ -131,6 +135,10 @@ func _physics_process(delta):
 	if (GlobalSnakeVar.bulletupdatetimer * GlobalSnakeVar.g_bullet_moves_per_second >= 1.0):
 		for bullet in GlobalSnakeVar.bullets:
 			bullet.step_simulation()
+		if !GlobalSnakeVar.bullets.empty():
+			var time = OS.get_ticks_usec()
+			GlobalSnakeVar.g_time_between_bullet = time - bulletlastrun
+			bulletlastrun = time
 		GlobalSnakeVar.bulletupdatetimer = 0
 
 func _on_GameOver_pressed():

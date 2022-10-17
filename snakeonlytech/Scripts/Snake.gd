@@ -87,7 +87,12 @@ func setup(player):
 func _ready():
 	pass
 
+var lastrun = 0
+
 func step_simulation():
+	var time = OS.get_ticks_usec()
+	GlobalSnakeVar.g_time_between_snake = time - lastrun
+	lastrun = time
 	if(HumanOrCPU == 0):
 		get_input()
 	else :

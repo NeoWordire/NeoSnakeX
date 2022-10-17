@@ -47,6 +47,7 @@ func update_display():
 	var lerppos = temporg.linear_interpolate(tempnew, lerptime)
 	position = lerppos
  
+
 func step_simulation():
 	#print("true", truepos)
 	pastpos = truepos

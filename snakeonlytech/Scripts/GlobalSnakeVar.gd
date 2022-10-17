@@ -43,6 +43,11 @@ var g_debugging
 #var g_player1Ctrl
 var g_foodsegments
 
+var g_time_between_snake = 0
+var g_time_between_bullet = 0
+var g_time_between_input = 0
+var g_counterlastsnake = 0
+
 func posdir2pos(pos, newdir):
 	if (newdir == NORTH):
 		pos.y -= 1 * tilesize
