@@ -303,7 +303,7 @@ func got_shot(x):
 func flood(map, pos, depth):
 	if map[GlobalSnakeVar.pos2index(pos)] == 1:
 		return 0
-	if depth == 5:
+	if depth == 25:
 		return 1
 	var ans = 0
 	for i in 4:
