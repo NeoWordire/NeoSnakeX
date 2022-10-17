@@ -60,21 +60,25 @@ func reset():
 	#cntpaused = true
 	#get_node("StartCount").visible = true
 	#get_node("StartCount").text = str(countdown)
-	for s in GlobalSnakeVar.snakes:
-		remove_child(s)
-		s.queue_free()
-	GlobalSnakeVar.snakes = []
+	#for s in GlobalSnakeVar.snakes:
+	#	remove_child(s)
+	#	s.queue_free()
+	#GlobalSnakeVar.snakes = []
 	GlobalSnakeVar.initColMap()
-	var player = 0
-	for node in get_children():
-		print(node.get_class())
-		if node.get_class() == "Snake":
-			node.setup(player)
-			player += 1
-			node.connect("snake_died", self, "snake_died_func")
-			add_child(node)
-			GlobalSnakeVar.snakes.append(node)
-	GlobalSnakeVar.g_numplayers = player
+	if (GlobalSnakeVar.snakes.empty()):
+		var player = 0
+		for node in get_children():
+			print(node.get_class())
+			if node.get_class() == "Snake":
+				node.setup(player)
+				player += 1
+				node.connect("snake_died", self, "snake_died_func")
+			#add_child(node)
+				GlobalSnakeVar.snakes.append(node)
+		GlobalSnakeVar.g_numplayers = player
+	else:
+		for snake in GlobalSnakeVar.snakes:
+			snake.setup(snake._player)
 	print(GlobalSnakeVar.snakes.size())
 #	for i in GlobalSnakeVar.g_numplayers:
 #		var snake = Snake.new()

@@ -9,7 +9,6 @@ signal ate_food()
 var sprites = []
 var truecords = [] 
 var tilerot = []
-var snakelen = 0 
 var snakecap = 5
 var truedir = GlobalSnakeVar.NODIR
 var reqdir = GlobalSnakeVar.NODIR
@@ -49,7 +48,13 @@ func setup(player):
 		remove_child(bullet)
 		bullet.queue_free()
 	GlobalSnakeVar.bullets = []
-	
+	for sprite in sprites:
+		remove_child(sprite)
+		sprite.queue_free()
+	sprites = [];
+	truecords = []
+	tilerot = []
+	snakecap = 5
 	bulletcooldown.connect("timeout",self,"fire_cooled_off")
 	add_child(bulletcooldown)
 	bulletcooldown.one_shot = true

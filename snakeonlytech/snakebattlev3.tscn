@@ -148,7 +148,6 @@ autoplay = true
 
 [node name="Player" type="Node2D" parent="SnakeBattle"]
 script = ExtResource( 15 )
-HumanOrCPU = 1
 bodytex = ExtResource( 7 )
 headtex = ExtResource( 9 )
 startpos = Vector2( 16, 72 )
