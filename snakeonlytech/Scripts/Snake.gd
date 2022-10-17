@@ -332,5 +332,5 @@ func tile_draw_snake_flag_from_true(segment):
 		sprites[segment].rotation = deg2rad(180)
 
 func ate_food_snake():
-	GlobalSnakeVar.foodpoly.move_food()
+	GlobalSnakeVar.foodpoly.ate_food()
 	snakecap += GlobalSnakeVar.g_foodsegments

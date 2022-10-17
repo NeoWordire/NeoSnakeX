@@ -84,7 +84,7 @@ func reset():
 	#GlobalSnakeVar.foodpoly.queue_free()
 	var food = get_node("Food");
 	#food.setup()
-	food.move_food()
+	food.ate_food()
 	#add_child(food)
 	GlobalSnakeVar.foodpoly = food
 	
