@@ -1,4 +1,4 @@
-extends Polygon2D
+extends KinematicBody2D
 class_name Bullet, "res://Assets/Textures/icon.png"
 
 signal bullet_moved(bullet,pos)
@@ -10,41 +10,38 @@ var pastpos : Vector2
 var bullet_interp_per_second
 
 func setup(pos, dir):
-	position = pos
-	truepos = pos
-	emit_signal("bullet_moved", truepos)
 	pastpos = pos
-	polygon = PoolVector2Array([
-		Vector2(0,0),
-		Vector2(0,4),
-		Vector2(4,4),
-		Vector2(4,0)])
+	position = pos
+	
+	truepos = GlobalSnakeVar.posdir2pos(pos,dir%4) 
+	#emit_signal("bullet_moved", truepos)
+	#pastpos =#	polygon = PoolVector2Array([
+#		Vector2(0,0),
+#		Vector2(0,4),
+#		Vector2(4,4),
+#		Vector2(4,0)])
+#	var area2d = Area2D
+#	var collisionpoly = RectangleShape2D
 	truedir = dir
 ##			bulletpoly.position = posdir2pos(snakes[x]["truecords"][0], snakes[x]["tilerot"][0])
-	color = Color (0,0,0,1)	
+	#color = Color (0,0,0,1)	
 	#nextpos = GlobalSnakeVar.posdir2pos(truepos, truedir)
 
 func _ready():
 	pass
 
-var lerptime = 0.0
+var lerptime = 0.1
 var updatetime = 999
 func update_display():
 	if GlobalSnakeVar.paused:
 		lerptime = 0
 		return
-	var temporg = pastpos
-	temporg.x += 2
-	temporg.y += 2
-	var tempnew = truepos
-	tempnew.x += 2
-	tempnew.y += 2
 
 	#if (lerptime >= 1.0):
 	#	lerptime -= 1.0
 	#print("TEST", lerptime*bullet_interp_per_second)
 	#print(lerppos)
-	var lerppos = temporg.linear_interpolate(tempnew, lerptime)
+	var lerppos = pastpos.linear_interpolate(truepos, lerptime)
 	position = lerppos
  
 
@@ -56,7 +53,7 @@ func step_simulation():
 		#self.disconnect("bullet_moved", get_parent(), "check_bullet")
 		remove_bullet()
 		return
-	emit_signal("bullet_moved", self, truepos)
+	#emit_signal("bullet_moved", self, truepos)
 	#print(lerptime)
 	lerptime = 0.0
 	#nextpos = GlobalSnakeVar.posdir2pos(truepos, truedir)
@@ -69,8 +66,8 @@ func remove_bullet():
 	queue_free()
 
 func _physics_process(delta):
-	if lerptime <= 1.0:
-		lerptime += delta * GlobalSnakeVar.g_bullet_moves_per_second - GlobalSnakeVar.g_bullet_moves_per_second/60
+	#if lerptime <= 1.0:
+	lerptime += delta * ( 120.0 / (120 * GlobalSnakeVar.g_bullet_moves_per_second))
 	update_display()
 	pass
 	

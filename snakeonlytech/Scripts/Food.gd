@@ -1,4 +1,4 @@
-extends Sprite
+extends Area2D
 class_name Food, "res://Assets/Textures/apple.png"
 
 var truepos : Vector2
@@ -24,10 +24,7 @@ func respawn():
 		return
 
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truepos)] = 2
-	var offsetpos = truepos
-	offsetpos.x += 4
-	offsetpos.y += 4
-	position = offsetpos
+	position = truepos
 	pass
 	
 func ate_food():

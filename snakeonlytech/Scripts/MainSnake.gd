@@ -135,10 +135,10 @@ func _physics_process(delta):
 	if (GlobalSnakeVar.bulletupdatetimer * GlobalSnakeVar.g_bullet_moves_per_second >= 1.0):
 		for bullet in GlobalSnakeVar.bullets:
 			bullet.step_simulation()
-		if !GlobalSnakeVar.bullets.empty():
-			var time = OS.get_ticks_usec()
-			GlobalSnakeVar.g_time_between_bullet = time - bulletlastrun
-			bulletlastrun = time
+		#if !GlobalSnakeVar.bullets.empty():
+		var time = OS.get_ticks_usec()
+		GlobalSnakeVar.g_time_between_bullet = time - bulletlastrun
+		bulletlastrun = time
 		GlobalSnakeVar.bulletupdatetimer = 0
 
 func _on_GameOver_pressed():

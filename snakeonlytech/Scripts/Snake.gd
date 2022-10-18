@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 class_name Snake, "res://Assets/Textures/snake_head.png"
 const Bullet = preload("res://Scripts/Bullet.gd")
 
@@ -60,12 +60,13 @@ func setup(player):
 	bulletcooldown.one_shot = true
 	
 	#build head specially
-	var poly = Polygon2D.new()
-	poly.polygon = PoolVector2Array([
-		Vector2(0,0),
-		Vector2(0,GlobalSnakeVar.tilesize),
-		Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
-		Vector2(GlobalSnakeVar.tilesize,0)])
+	var poly = Sprite.new()
+#	poly.polygon = PoolVector2Array([
+#		Vector2(0,0),
+#		Vector2(0,GlobalSnakeVar.tilesize),
+#		Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
+#		Vector2(GlobalSnakeVar.tilesize,0)])
+	#poly.centered = false
 	position = Vector2(0,0)
 	####poly.position = GlobalSnakeVar.g_startpos[player]
 	poly.texture = headtex
@@ -250,25 +251,27 @@ func body_follow_head():
 		#tile_draw_snake_flag_from_true(i, inverse)
 
 func shoot(pos, dir):
-	var bullet = Bullet.new()
+	#var bullet = Bullet.new()
+	var bullet_packed = load("res://Assets/Bullet.tscn")
+	var bullet = bullet_packed.instance()
 	bullet.setup(pos, dir)
 	if (GlobalSnakeVar.g_numplayers == 2):
 		bullet.connect("bullet_moved", GlobalSnakeVar.snakes[(_player + 1)%2], "check_bullet")
-	get_parent().get_parent().add_child(bullet)
+	add_child(bullet)
 	GlobalSnakeVar.bullets.append(bullet)
 	canfire = false
 	bulletcooldown.wait_time = GlobalSnakeVar.g_shoot_cooldown
 	bulletcooldown.start()
 
 func grow(tailpos, rot):
-	var poly = Polygon2D.new()
-	poly.polygon = PoolVector2Array([
-		Vector2(0,0),
-		Vector2(0,GlobalSnakeVar.tilesize),
-		Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
-		Vector2(GlobalSnakeVar.tilesize,0)
-	])
-
+	var poly = Sprite.new()
+	#poly.polygon = PoolVector2Array([
+	#	Vector2(0,0),
+	#	Vector2(0,GlobalSnakeVar.tilesize),
+	#	Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
+	#	Vector2(GlobalSnakeVar.tilesize,0)
+	#])
+	#poly.centered = false
 	poly.texture = bodytex
 
 	poly.position = Vector2(-100,-100)
@@ -326,21 +329,15 @@ func flood(map, pos, depth):
 	return ans;
 	
 func tile_draw_snake_flag_from_true(segment):
+	sprites[segment].position.x = truecords[segment].x + GlobalSnakeVar.tilesize/2
+	sprites[segment].position.y = truecords[segment].y + GlobalSnakeVar.tilesize/2
 	if (tilerot[segment] == GlobalSnakeVar.NORTH):
-		sprites[segment].position.x = truecords[segment].x
-		sprites[segment].position.y = truecords[segment].y + GlobalSnakeVar.tilesize
 		sprites[segment].rotation = deg2rad(270)
 	if (tilerot[segment] == GlobalSnakeVar.EAST):
-		sprites[segment].position.x = truecords[segment].x
-		sprites[segment].position.y = truecords[segment].y
-		sprites[segment].rotation = deg2rad(0)
+		sprites[segment].rotation = 0
 	if (tilerot[segment] == GlobalSnakeVar.SOUTH):
-		sprites[segment].position.x = truecords[segment].x + GlobalSnakeVar.tilesize
-		sprites[segment].position.y = truecords[segment].y
 		sprites[segment].rotation = deg2rad(90)
 	if (tilerot[segment] == GlobalSnakeVar.WEST):
-		sprites[segment].position.x = truecords[segment].x + GlobalSnakeVar.tilesize
-		sprites[segment].position.y = truecords[segment].y + GlobalSnakeVar.tilesize
 		sprites[segment].rotation = deg2rad(180)
 
 func ate_food_snake():
