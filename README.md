@@ -1,2 +1,8 @@
 # NeoSnakeX -Shadow Edition-
-Work in progress
+Work in progress.
+
+LICENSES:
+Code in GDScript and is Licensed under APACHE 2.0, see LICENSE under each /Scripts folder
+
+All non code assests covered under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+No Commerical Use, No Derivatives, Unmodified Sharing allows must retain attribution. (see full text of license above for more info)
