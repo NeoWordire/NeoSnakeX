@@ -7,7 +7,6 @@ export (float) var respawntime = 2;
 var respawntimer = Timer.new();
 
 func _ready():
-	#respawntimer.connect("timeout",self,"fire_cooled_off")
 	respawntimer.one_shot = true
 	add_child(respawntimer)
 	respawntimer.connect("timeout",self,"respawn")
@@ -29,6 +28,7 @@ func respawn():
 	
 func ate_food():
 	print("move food")
+	SoundPlayer.play_sound(SoundPlayer.SFXFOODPICKUP)
 	respawntimer.wait_time = respawntime
 	respawntimer.start()
 	position = Vector2(-99, -99)

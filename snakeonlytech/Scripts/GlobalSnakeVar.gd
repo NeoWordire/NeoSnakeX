@@ -16,7 +16,6 @@ var bullets = []
 var snakes = []
 
 var g_rng = RandomNumberGenerator.new()
-#foodpoly.position.x = rng.randi_range(borderintiles*2, width/tilesize - 2*borderintiles)*tilesize
 
 var foodpoly
 
@@ -75,28 +74,32 @@ func initColMap():
 			else :
 				colmap.append(0);
 
+var debugcolmapnodes = []
 
 func debug_colmap():
 	var dbgnode = get_tree().root.get_node("Node2D").get_node("Debug")
-	for n in dbgnode.get_children():
-		dbgnode.remove_child(n)
-		n.queue_free()
-	for h in height/tilesize:
-		for w in width/tilesize:
-			var pos = Vector2(w*tilesize,h*tilesize)
-			var debugpoly = Polygon2D.new()
-			debugpoly.polygon = PoolVector2Array([
-				Vector2(0,0),
-				Vector2(0,tilesize),
-				Vector2(tilesize,tilesize),
-				Vector2(tilesize,0)])
-			debugpoly.position = pos
-			if (colmap[pos2index(pos)] == 2):
-				debugpoly.color = Color(1,0,1,1)
-			if (colmap[pos2index(pos)] == 1):
-				debugpoly.color = Color(1,1,1,1)
-			if (colmap[pos2index(pos)] == 0):
-				debugpoly.color = Color(0,1,1,1)
-			dbgnode.add_child(debugpoly)
+	if (debugcolmapnodes.size() != 0):
+		for node in debugcolmapnodes:
+			if (colmap[pos2index(node.position)] == 2):
+				node.color = Color(1,0,1,1)
+			if (colmap[pos2index(node.position)] == 1):
+				node.color = Color(1,1,1,1)
+			if (colmap[pos2index(node.position)] == 0):
+				node.color = Color(0,1,1,1)
+			#dbgnode.remove_child(n)
+			#n.queue_free()
+	else:
+		for h in height/tilesize:
+			for w in width/tilesize:
+				var pos = Vector2(w*tilesize,h*tilesize)
+				var debugpoly = Polygon2D.new()
+				debugpoly.polygon = PoolVector2Array([
+					Vector2(0,0),
+					Vector2(0,tilesize),
+					Vector2(tilesize,tilesize),
+					Vector2(tilesize,0)])
+				debugpoly.position = pos
+				debugcolmapnodes.append(debugpoly)
+				dbgnode.add_child(debugpoly)
 
 

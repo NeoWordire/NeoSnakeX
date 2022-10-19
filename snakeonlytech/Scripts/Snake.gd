@@ -1,5 +1,6 @@
 extends Area2D
 class_name Snake, "res://Assets/Textures/snake_head.png"
+func get_class(): return "Snake"
 const Bullet = preload("res://Scripts/Bullet.gd")
 
 signal snake_died(player)
@@ -23,28 +24,26 @@ export (Texture) var headtex
 
 export (Vector2) var startpos
 export (GlobalSnakeVar.DIRS) var startRotation = GlobalSnakeVar.DIRS.EAST
-#var bulletsprite = [],
-#var bulletpos = [],
-#var bulletrot = [],
 var futureheadpos : Vector2
 var _player
-#var _notai
-
-#var tex : ImageTexture
 
 var bulletcooldown = Timer.new()
 var canfire = true;
 
-func get_class(): return "Snake"
 
 func fire_cooled_off():
 	canfire = true;
+
+func update_ray():
+	get_node("ray").position = colshapes[0].position
+	var castscalar = GlobalSnakeVar.posdir2pos(Vector2(0,0), reqdir)
+	castscalar *= max(GlobalSnakeVar.width,GlobalSnakeVar.height)/GlobalSnakeVar.tilesize
+	get_node("ray").cast_to = castscalar
 
 func setup(player):
 	_player = player
 
 	connect("ate_food", self, "ate_food_snake")
-	#connect("ate_food", GlobalSnakeVar.foodpoly, "move_food")
 	for bullet in GlobalSnakeVar.bullets:
 		remove_child(bullet)
 		bullet.queue_free()
@@ -66,24 +65,18 @@ func setup(player):
 	
 	#build head specially
 	var poly = Sprite.new()
-	var colrect = CollisionShape2D.new()
-	colrect.shape = CircleShape2D.new()
-	colrect.shape.set_radius(1)
-	#colrect.shape.set_extents(Vector2(GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2))
-#	colrect.set_transform(Transform2D(
-#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
-#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
-#		Vector2( 0, 0 )
-#	))
-	colrect.position.x = startpos.x + GlobalSnakeVar.tilesize/2
-	colrect.position.y = startpos.y + GlobalSnakeVar.tilesize/2
-	colshapes.append(colrect)
-	add_child(colrect)
-	#position = Vector2(0,0)
-	####poly.position = GlobalSnakeVar.g_startpos[player]
+	var hitbox = CollisionShape2D.new()
+	hitbox.shape = CircleShape2D.new()
+	hitbox.shape.set_radius(1)
+
+	hitbox.position.x = startpos.x + GlobalSnakeVar.tilesize/2
+	hitbox.position.y = startpos.y + GlobalSnakeVar.tilesize/2
+	colshapes.append(hitbox)
+	add_child(hitbox)
+
+	update_ray()
 	poly.texture = headtex
 	truecords.append(startpos)
-	#truecords.append(GlobalSnakeVar.g_startpos[player])
 	
 	reqdir = startRotation
 	truedir = startRotation
@@ -95,7 +88,6 @@ func setup(player):
 	for i in snakecap:
 		play_movement()
 	return 
-##			bulletpoly.position = posdir2pos(snakes[x]["truecords"][0], snakes[x]["tilerot"][0])
 
 func _ready():
 	position = Vector2(0,0)
@@ -141,12 +133,7 @@ func _process(delta):
 		get_input()
 
 func _physics_process(delta):
-	#update_display()
-	#
-	#updatetime += delta
-	#if (updatetime*GlobalSnakeVar.moves_per_second >= 1.0):
-	#	updatedpos(GlobalSnakeVar.EAST)
-	#	updatetime = 0
+	#no op since driven by MainSnake _physics_process?
 	pass
 
 var lerptime = 0
@@ -156,7 +143,6 @@ func update_display():
 		tile_draw_snake_flag_from_true(s)
 
 func get_input():
-	# velocity = Vector2()
 	var oldinputmask = 0;
 	# iterate over inputqueue and collect all bits 
 	for i in inputqueue:
@@ -200,10 +186,6 @@ func get_input_ai():
 		var testpos = GlobalSnakeVar.posdir2pos(truecords[0], x)
 		if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(testpos)] != 1:
 			legalmoves.append(x)
-			#legalrank.append(1 50-abs(testpos.distance_to(Vector2(width/2,height/2))))
-			#Vector2(0,0)
-			#legalfoodrank.append(Vector2(0,0).distance_to(Vector2(width,height))
-	#				- (testpos.distance_to(foodpoly.position)))
 			var value = (Vector2(0,0).distance_to(Vector2(GlobalSnakeVar.width,GlobalSnakeVar.height)) - testpos.distance_to(goalpos))/2
 			var newmap = GlobalSnakeVar.colmap.duplicate()
 			if GlobalSnakeVar.g_numplayers == 2:
@@ -239,10 +221,14 @@ func get_input_ai():
 			reqdir = legalmoves[GlobalSnakeVar.g_rng.randi_range(0,legalmoves.size()-1)]
 	else:
 		reqdir = bestans;
-	if GlobalSnakeVar.g_rng.randi_range(0,100) > 90:
+	inputshoot = false
+	update_ray()
+	get_node("ray").enabled = true
+	var hitnode = get_node("ray").get_collision_point()
+	if (get_node("ray").is_colliding()):
+		#print("hitnode = ", hitnode)
+		#var result = space_state.intersect_ray()
 		inputshoot = true
-	else :
-		inputshoot = false
 
 func move_head():
 	var goingto = GlobalSnakeVar.posdir2pos(truecords[0], truedir)
@@ -266,48 +252,30 @@ func body_follow_head():
 		truecords[inverse] = truecords[inverse-1] 
 		tilerot[inverse] = tilerot[inverse - 1]
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[inverse])] = 1
-		#tile_draw_snake_flag_from_true(i, inverse)
 
 func shoot(pos, dir):
-	#var bullet = Bullet.new()
 	var bullet_packed = load("res://Assets/Bullet.tscn")
 	var bullet = bullet_packed.instance()
 	bullet.setup(pos, dir, _player)
-	#if (GlobalSnakeVar.g_numplayers == 2):
-		#bullet.connect("bullet_moved", GlobalSnakeVar.snakes[(_player + 1)%2], "check_bullet")
-	get_parent().add_child(bullet)
+	add_child(bullet)
 	GlobalSnakeVar.bullets.append(bullet)
 	canfire = false
 	bulletcooldown.wait_time = GlobalSnakeVar.g_shoot_cooldown
 	bulletcooldown.start()
+	SoundPlayer.play_sound(SoundPlayer.SFXSHOOT)
 
 func grow(tailpos, rot):
 	var poly = Sprite.new()
-	#poly.polygon = PoolVector2Array([
-	#	Vector2(0,0),
-	#	Vector2(0,GlobalSnakeVar.tilesize),
-	#	Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
-	#	Vector2(GlobalSnakeVar.tilesize,0)
-	#])
-	#poly.centered = false
 	poly.texture = bodytex
-	#poly.scale.x = .5
-	#poly.scale.y = .5
 
-	#poly.position = Vector2(-100,-100)
-	#poly.color = Color(0, 1, 0, 1)
-	var colrect = CollisionShape2D.new()
-	colrect.shape = CircleShape2D.new()
-	#colrect.shape.set_extents(Vector2(GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2))
-	colrect.shape.set_radius(1)
-	colrect.position.x = tailpos.x + GlobalSnakeVar.tilesize/2
-	colrect.position.y = tailpos.y + GlobalSnakeVar.tilesize/2
-#	colrect.set_transform(Transform2D(
-#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
-#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
-#		Vector2( 0, 0 )
-#		))
-	colshapes.append(colrect)
+	var hitbox = CollisionShape2D.new()
+	hitbox.shape = CircleShape2D.new()
+	#hitbox.shape.set_extents(Vector2(GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2))
+	hitbox.shape.set_radius(1)
+	hitbox.position.x = tailpos.x + GlobalSnakeVar.tilesize/2
+	hitbox.position.y = tailpos.y + GlobalSnakeVar.tilesize/2
+
+	colshapes.append(hitbox)
 	sprites.append(poly)
 	truecords.append(tailpos)
 
@@ -315,37 +283,31 @@ func grow(tailpos, rot):
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(tailpos)] = 1
 	#tile_draw_snake_flag_from_true(i, snakes[i]["snakelen"])
 	add_child(poly)
-	add_child(colrect)
+	add_child(hitbox)
 	#colmap[pos2index(snakes[i]["truecords"][-1])] = 1
 	#snakes[i]["snakelen"] += 1
 	
 func check_bullet(truepos, pastpos):	
-	var xcleanup = []
 	for x in truecords.size():
-		#print("compar pos ", truepos, pastpos, " to ", truecords[x])
-		#print("does pos ", pos, "match true cord[",x,"] = ", truecords[x])
 		if (truecords[x] == pastpos || truecords[x] == truepos):
-			#print("SIGNAL shot segment ", x)
-			#got_shot(x)
-			#emit_signal("snake_died", _player)
-			xcleanup.append(x)
-			break #retool
-	if xcleanup.empty():
-		breakpoint
-	while (!xcleanup.empty()):
-		var x = xcleanup[-1]
-		got_shot(x)
-		xcleanup.erase(x)
-	pass
+			got_shot(x)
+			return #retool
+	#debug XXX remove before ship
+	breakpoint
 
 func got_shot(x):
-	print(_player," was shot at", x)
 	#if sprites.size() == 1:
 	#	emit_signal("snake_died", _player)
 	if x == 0:
-		
+		print(_player," was shot in head do nothing")
+		return
+	if sprites.size() <= 2:
+		print("Too small to be shot")
 		return
 	#	x += 1
+	SoundPlayer.play_sound(SoundPlayer.SFXHURT)
+	SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
+	print(_player," was shot at segment ", x)
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[x])] = 0
 	tilerot.erase(tilerot[x])
 	remove_child(sprites[x])
