@@ -300,12 +300,13 @@ func got_shot(x):
 	#	emit_signal("snake_died", _player)
 	if x == 0:
 		print(_player," was shot in head do nothing")
+		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
 		return
 	if sprites.size() <= 2:
 		print("Too small to be shot")
+		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
 		return
 	#	x += 1
-	SoundPlayer.play_sound(SoundPlayer.SFXHURT)
 	SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
 	print(_player," was shot at segment ", x)
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[x])] = 0
