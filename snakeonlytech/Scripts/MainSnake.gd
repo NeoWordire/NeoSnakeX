@@ -34,6 +34,7 @@ export (float) var ShootCooldown = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_node("BGM").stream_paused = true
 #	GlobalSnakeVar.g_playerbodytex = playerbodytex
 #	GlobalSnakeVar.g_playerheadtex = playerheadtex
 #	GlobalSnakeVar.g_enemybodytex = enemybodytex
@@ -143,14 +144,21 @@ func _physics_process(delta):
 
 func _on_GameOver_pressed():
 	reset()
-	get_node("GameOver").visible = false
 	pass # Replace with function body.
 
 #bullet.connect("bullet_moved", self, "check_bullet")
 
-func snake_died_func(player):
+
+func _on_Player_snake_died(player):
 	print("player = ", player, "has DIED")
 	get_node("GameOver").visible = true
 	get_node("GameOver").raise()
 	GlobalSnakeVar.paused = true
-	pass
+
+
+func _on_Enemy_snake_died(player):
+	print("player = ", player, "has DIED")
+	get_node("GameOver").visible = true
+	get_node("GameOver").raise()
+	GlobalSnakeVar.paused = true
+	pass # Replace with function body.

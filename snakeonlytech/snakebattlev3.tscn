@@ -119,10 +119,10 @@
 
 [node name="SnakeBattle" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
-bullet_mps = 12
-snake_mps = 8
 
 [node name="Player" parent="SnakeBattle" instance=ExtResource( 15 )]
+position = Vector2( 49, 39 )
+HumanOrCPU = 1
 bodytex = ExtResource( 7 )
 headtex = ExtResource( 9 )
 startpos = Vector2( 16, 72 )
@@ -148,7 +148,7 @@ margin_right = 168.0
 margin_bottom = 120.0
 text = "GAME OVER"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SnakeBattle"]
+[node name="BGM" type="AudioStreamPlayer" parent="SnakeBattle"]
 stream = ExtResource( 12 )
 volume_db = -5.0
 autoplay = true
@@ -169,9 +169,13 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 [node name="Debug" type="Node2D" parent="."]
 
 [node name="FPSDebug" type="Label" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 4 )
 
+[connection signal="area_shape_entered" from="SnakeBattle/Player" to="SnakeBattle/Player" method="_on_Player_area_shape_entered"]
+[connection signal="body_shape_entered" from="SnakeBattle/Player" to="SnakeBattle/Player" method="_on_Player_body_shape_entered"]
+[connection signal="snake_died" from="SnakeBattle/Player" to="SnakeBattle" method="_on_Player_snake_died"]
+[connection signal="area_shape_entered" from="SnakeBattle/Enemy" to="SnakeBattle/Enemy" method="_on_Enemy_area_shape_entered"]
+[connection signal="snake_died" from="SnakeBattle/Enemy" to="SnakeBattle" method="_on_Enemy_snake_died"]
 [connection signal="pressed" from="SnakeBattle/GameOver" to="SnakeBattle" method="_on_GameOver_pressed"]

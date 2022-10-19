@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 class_name Snake, "res://Assets/Textures/snake_head.png"
 const Bullet = preload("res://Scripts/Bullet.gd")
 
@@ -7,6 +7,7 @@ signal ate_food()
 
 #class_name Bullet
 var sprites = []
+var colshapes = []
 var truecords = [] 
 var tilerot = []
 var snakecap = 5
@@ -51,6 +52,10 @@ func setup(player):
 	for sprite in sprites:
 		remove_child(sprite)
 		sprite.queue_free()
+	for colshape in colshapes:
+		remove_child(colshape)
+		colshape.queue_free()
+	colshapes = []
 	sprites = [];
 	truecords = []
 	tilerot = []
@@ -61,13 +66,20 @@ func setup(player):
 	
 	#build head specially
 	var poly = Sprite.new()
-#	poly.polygon = PoolVector2Array([
-#		Vector2(0,0),
-#		Vector2(0,GlobalSnakeVar.tilesize),
-#		Vector2(GlobalSnakeVar.tilesize,GlobalSnakeVar.tilesize),
-#		Vector2(GlobalSnakeVar.tilesize,0)])
-	#poly.centered = false
-	position = Vector2(0,0)
+	var colrect = CollisionShape2D.new()
+	colrect.shape = CircleShape2D.new()
+	colrect.shape.set_radius(1)
+	#colrect.shape.set_extents(Vector2(GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2))
+#	colrect.set_transform(Transform2D(
+#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
+#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
+#		Vector2( 0, 0 )
+#	))
+	colrect.position.x = startpos.x + GlobalSnakeVar.tilesize/2
+	colrect.position.y = startpos.y + GlobalSnakeVar.tilesize/2
+	colshapes.append(colrect)
+	add_child(colrect)
+	#position = Vector2(0,0)
 	####poly.position = GlobalSnakeVar.g_startpos[player]
 	poly.texture = headtex
 	truecords.append(startpos)
@@ -86,6 +98,7 @@ func setup(player):
 ##			bulletpoly.position = posdir2pos(snakes[x]["truecords"][0], snakes[x]["tilerot"][0])
 
 func _ready():
+	position = Vector2(0,0)
 	pass
 
 var lastrun = 0
@@ -111,12 +124,16 @@ func play_movement():
 	body_follow_head()
 	if (!move_head()):
 		died = true
+		return
 		#print("DIED")
 	if inputshoot && canfire:
 		shoot(truecords[0],truedir)
 	if snakecap > sprites.size():
 		grow(oldtailforgrow, oldtailsrot)
 	#futureheadpos = GlobalSnakeVar.posdir2pos(truecords[0], truedir)
+	for x in colshapes.size():
+		colshapes[x].position.x = truecords[x].x + GlobalSnakeVar.tilesize/2
+		colshapes[x].position.y = truecords[x].y + GlobalSnakeVar.tilesize/2
 	return died
 
 func _process(delta):
@@ -183,7 +200,7 @@ func get_input_ai():
 		var testpos = GlobalSnakeVar.posdir2pos(truecords[0], x)
 		if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(testpos)] != 1:
 			legalmoves.append(x)
-			#legalrank.append(150-abs(testpos.distance_to(Vector2(width/2,height/2))))
+			#legalrank.append(1 50-abs(testpos.distance_to(Vector2(width/2,height/2))))
 			#Vector2(0,0)
 			#legalfoodrank.append(Vector2(0,0).distance_to(Vector2(width,height))
 	#				- (testpos.distance_to(foodpoly.position)))
@@ -231,7 +248,8 @@ func move_head():
 	var goingto = GlobalSnakeVar.posdir2pos(truecords[0], truedir)
 	if (GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(goingto)] == 1):
 		emit_signal("snake_died", _player)
-		return false
+		return
+		pass
 	if (GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(goingto)] == 2):
 		emit_signal("ate_food")
 	truecords[0] = goingto
@@ -254,10 +272,10 @@ func shoot(pos, dir):
 	#var bullet = Bullet.new()
 	var bullet_packed = load("res://Assets/Bullet.tscn")
 	var bullet = bullet_packed.instance()
-	bullet.setup(pos, dir)
-	if (GlobalSnakeVar.g_numplayers == 2):
-		bullet.connect("bullet_moved", GlobalSnakeVar.snakes[(_player + 1)%2], "check_bullet")
-	add_child(bullet)
+	bullet.setup(pos, dir, _player)
+	#if (GlobalSnakeVar.g_numplayers == 2):
+		#bullet.connect("bullet_moved", GlobalSnakeVar.snakes[(_player + 1)%2], "check_bullet")
+	get_parent().add_child(bullet)
 	GlobalSnakeVar.bullets.append(bullet)
 	canfire = false
 	bulletcooldown.wait_time = GlobalSnakeVar.g_shoot_cooldown
@@ -273,9 +291,23 @@ func grow(tailpos, rot):
 	#])
 	#poly.centered = false
 	poly.texture = bodytex
+	#poly.scale.x = .5
+	#poly.scale.y = .5
 
-	poly.position = Vector2(-100,-100)
+	#poly.position = Vector2(-100,-100)
 	#poly.color = Color(0, 1, 0, 1)
+	var colrect = CollisionShape2D.new()
+	colrect.shape = CircleShape2D.new()
+	#colrect.shape.set_extents(Vector2(GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2))
+	colrect.shape.set_radius(1)
+	colrect.position.x = tailpos.x + GlobalSnakeVar.tilesize/2
+	colrect.position.y = tailpos.y + GlobalSnakeVar.tilesize/2
+#	colrect.set_transform(Transform2D(
+#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
+#		Vector2( GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2 ),
+#		Vector2( 0, 0 )
+#		))
+	colshapes.append(colrect)
 	sprites.append(poly)
 	truecords.append(tailpos)
 
@@ -283,20 +315,23 @@ func grow(tailpos, rot):
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(tailpos)] = 1
 	#tile_draw_snake_flag_from_true(i, snakes[i]["snakelen"])
 	add_child(poly)
+	add_child(colrect)
 	#colmap[pos2index(snakes[i]["truecords"][-1])] = 1
 	#snakes[i]["snakelen"] += 1
 	
-func check_bullet(bullet, pos):	
+func check_bullet(truepos, pastpos):	
 	var xcleanup = []
 	for x in truecords.size():
-		#print("compar pos ", pos, " to ", spos)
-		if (truecords[x] == pos):
-			print("SIGNAL shot segment ", x)
-			bullet.remove_bullet()
+		#print("compar pos ", truepos, pastpos, " to ", truecords[x])
+		#print("does pos ", pos, "match true cord[",x,"] = ", truecords[x])
+		if (truecords[x] == pastpos || truecords[x] == truepos):
+			#print("SIGNAL shot segment ", x)
 			#got_shot(x)
 			#emit_signal("snake_died", _player)
 			xcleanup.append(x)
-			continue
+			break #retool
+	if xcleanup.empty():
+		breakpoint
 	while (!xcleanup.empty()):
 		var x = xcleanup[-1]
 		got_shot(x)
@@ -304,14 +339,19 @@ func check_bullet(bullet, pos):
 	pass
 
 func got_shot(x):
-	if sprites.size() == 1:
-		emit_signal("snake_died", _player)
+	print(_player," was shot at", x)
+	#if sprites.size() == 1:
+	#	emit_signal("snake_died", _player)
 	if x == 0:
-		x += 1
+		
+		return
+	#	x += 1
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[x])] = 0
 	tilerot.erase(tilerot[x])
 	remove_child(sprites[x])
 	truecords.erase(truecords[x])
+	remove_child(colshapes[x])
+	colshapes.erase(colshapes[x])
 	sprites.erase(sprites[x])
 	snakecap -= 1
 	
@@ -343,3 +383,28 @@ func tile_draw_snake_flag_from_true(segment):
 func ate_food_snake():
 	GlobalSnakeVar.foodpoly.ate_food()
 	snakecap += GlobalSnakeVar.g_foodsegments
+
+func generic_area_handler(area_rid, area, area_shape_index, local_shape_index ):
+	if (area.get_class() == "Bullet"):
+		#print(_player, "ran into a bullet from ", area.parent_player)
+		if (_player != area.parent_player):
+			check_bullet(area.truepos,area.pastpos)
+			area.remove_bullet()
+			#print(area.truepos)
+	if (area.get_class() == "Snake"):
+		pass
+		#print("ran into a snake ", area.name, " remote =",area_shape_index , " local = ", local_shape_index, " ", OS.get_ticks_usec())
+		#emit_signal("snake_died", _player)
+	#print(area.name, " cords" , area.position, " my pos", position)
+	pass # Replace with function body.
+	
+
+func _on_Player_area_shape_entered (area_rid, area, area_shape_index, local_shape_index ):
+	generic_area_handler(area_rid, area, area_shape_index, local_shape_index )
+
+func _on_Enemy_area_shape_entered (area_rid, area, area_shape_index, local_shape_index ):
+	generic_area_handler(area_rid, area, area_shape_index, local_shape_index )
+
+func _on_Player_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	print("ran into a food? ", body.name, " ", OS.get_ticks_usec())
+	pass # Replace with function body.

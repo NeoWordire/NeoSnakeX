@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 class_name Bullet, "res://Assets/Textures/icon.png"
 
 signal bullet_moved(bullet,pos)
@@ -8,8 +8,11 @@ var truepos : Vector2
 var truedir = GlobalSnakeVar.EAST
 var pastpos : Vector2
 var bullet_interp_per_second
+var parent_player
+func get_class(): return "Bullet"
 
-func setup(pos, dir):
+func setup(pos, dir, player):
+	parent_player = player
 	pastpos = pos
 	position = pos
 	
@@ -42,6 +45,7 @@ func update_display():
 	#print("TEST", lerptime*bullet_interp_per_second)
 	#print(lerppos)
 	var lerppos = pastpos.linear_interpolate(truepos, lerptime)
+	#hitbox.position = lerppos 
 	position = lerppos
  
 
