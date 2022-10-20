@@ -12,7 +12,7 @@ export (float) var ShootCooldown = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#get_node("BGM").stream_paused = true
+	get_node("BGM").stream_paused = true
 	GlobalSnakeVar.g_bullet_moves_per_second = bullet_mps
 	GlobalSnakeVar.g_snake_moves_per_second = snake_mps
 	GlobalSnakeVar.g_FoodSegments = FoodSegments

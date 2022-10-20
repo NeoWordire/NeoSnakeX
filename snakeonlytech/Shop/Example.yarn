@@ -1,0 +1,11 @@
+title: Start
+tags:
+colorID: 0
+position: 120,-245
+---
+Shopkeeper Sally: Do you like Godot?Do you like Godot? Do you like Godot?  #line:f2404db4
+->   Buy #line:12e45190
+    Right on! #line:38196c7a 
+->   No #line:e055ef8e
+    Well, thats unfortunate... #line:54d66032 
+===

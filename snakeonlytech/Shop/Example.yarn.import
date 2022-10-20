@@ -1,0 +1,13 @@
+[remap]
+
+importer="gdyarn.yarnFile"
+type="Resource"
+path="res://.import/Example.yarn-43e2b29ec337b6ad709172e93911c356.tres"
+
+[deps]
+
+source_file="res://Shop/Example.yarn"
+dest_files=[ "res://.import/Example.yarn-43e2b29ec337b6ad709172e93911c356.tres" ]
+
+[params]
+

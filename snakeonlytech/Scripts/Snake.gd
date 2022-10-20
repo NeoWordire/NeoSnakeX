@@ -248,7 +248,7 @@ func body_follow_head():
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[inverse])] = 1
 
 func shoot(pos, dir):
-	var bullet_packed = load("res://Assets/Bullet.tscn")
+	var bullet_packed = load("res://BattleScene/Bullet.tscn")
 	var bullet = bullet_packed.instance()
 	bullet.setup(pos, dir, _player)
 	add_child(bullet)

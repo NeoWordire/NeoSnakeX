@@ -14,32 +14,77 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Bullet.gd"
 }, {
+"base": "Resource",
+"class": "CompiledYarnProgram",
+"language": "GDScript",
+"path": "res://addons/gdyarn/compiled_yarn_program.gd"
+}, {
 "base": "Area2D",
 "class": "Food",
 "language": "GDScript",
 "path": "res://Scripts/Food.gd"
 }, {
+"base": "Reference",
+"class": "MarkupRegion",
+"language": "GDScript",
+"path": "res://addons/gdyarn/core/dialogue/markup_regions.gd"
+}, {
 "base": "Area2D",
 "class": "Snake",
 "language": "GDScript",
 "path": "res://Scripts/Snake.gd"
+}, {
+"base": "Reference",
+"class": "Value",
+"language": "GDScript",
+"path": "res://addons/gdyarn/core/value.gd"
+}, {
+"base": "Node",
+"class": "VariableStorage",
+"language": "GDScript",
+"path": "res://addons/gdyarn/core/variable_storage.gd"
+}, {
+"base": "Control",
+"class": "YarnDisplay",
+"language": "GDScript",
+"path": "res://addons/gdyarn/yarn_gui.gd"
+}, {
+"base": "Resource",
+"class": "YarnFile",
+"language": "GDScript",
+"path": "res://addons/gdyarn/yarnfile.gd"
+}, {
+"base": "EditorImportPlugin",
+"class": "YarnImporter",
+"language": "GDScript",
+"path": "res://addons/gdyarn/yarn_importer.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "res://Assets/Textures/icon.png",
+"CompiledYarnProgram": "",
 "Food": "res://Assets/Textures/apple.png",
-"Snake": "res://Assets/Textures/snake_head.png"
+"MarkupRegion": "",
+"Snake": "res://Assets/Textures/snake_head.png",
+"Value": "",
+"VariableStorage": "res://addons/gdyarn/assets/storage.png",
+"YarnDisplay": "res://addons/gdyarn/assets/display.PNG",
+"YarnFile": "",
+"YarnImporter": ""
 }
 
 [application]
 
 config/name="snakealone"
-run/main_scene="res://snakebattlev3.tscn"
+run/main_scene="res://BattleScene/snakebattlev3.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GlobalSnakeVar="*res://Scripts/GlobalSnakeVar.gd"
 SoundPlayer="*res://Assets/SoundPlayer.tscn"
+ExecutionStates="*res://addons/gdyarn/autoloads/execution_states.gd"
+NumberPlurals="*res://addons/gdyarn/autoloads/number_plurals.gd"
+YarnGlobals="*res://addons/gdyarn/autoloads/execution_states.gd"
 
 [debug]
 
@@ -56,7 +101,7 @@ window/stretch/mode="2d"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/gdyarn/plugin.cfg" )
 
 [gdnative]
 
