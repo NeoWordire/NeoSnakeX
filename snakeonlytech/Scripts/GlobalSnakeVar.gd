@@ -1,8 +1,8 @@
 extends Node
 
-const width = 240
-const height = 160
-const tilesize = 8
+const width : int = 240
+const height : int = 160
+const tilesize : int = 8
 const borderintiles = 1
 
 var snakeupdatetimer = 0
@@ -61,13 +61,13 @@ func posdir2pos(pos, newdir):
 func pos2index(pos):
 	if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height):
 		return -1
-	return ((pos.y/tilesize)*(width/tilesize)) + (pos.x/tilesize)
+	return ((floor(pos.y)/tilesize)*(floor(width)/tilesize)) + (floor(pos.x)/tilesize)
 
 func initColMap():
 	colmap = []
-	for h in height/8.0:
-		for w in width/8.0:
-			if h == height/8-1 || h ==0:
+	for h in height/tilesize:
+		for w in width/tilesize:
+			if h == height/tilesize-1 || h ==0:
 				colmap.append(1);
 			elif w == width/8-1 || w ==0:
 				colmap.append(1);

@@ -41,6 +41,10 @@ config/icon="res://icon.png"
 GlobalSnakeVar="*res://Scripts/GlobalSnakeVar.gd"
 SoundPlayer="*res://Assets/SoundPlayer.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=240

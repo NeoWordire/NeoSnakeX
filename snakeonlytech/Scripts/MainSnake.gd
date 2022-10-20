@@ -35,7 +35,7 @@ func reset():
 			if node.get_class() == "Snake":
 				node.setup(player)
 				player += 1
-				node.connect("snake_died", self, "snake_died_func")
+				#node.connect("snake_died", self, "snake_died_func")
 				GlobalSnakeVar.snakes.append(node)
 		GlobalSnakeVar.g_numplayers = player
 	else:
@@ -47,7 +47,7 @@ func reset():
 	food.ate_food()
 	GlobalSnakeVar.foodpoly = food
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_released("ui_end"):
 		GlobalSnakeVar.debug = !GlobalSnakeVar.debug
 
@@ -92,7 +92,6 @@ func _on_Player_snake_died(player):
 	get_node("GameOver").raise()
 	GlobalSnakeVar.paused = true
 	
-
 
 func _on_Enemy_snake_died(player):
 	SoundPlayer.play_sound(SoundPlayer.SFXSNAKEDEFEATED)

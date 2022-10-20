@@ -3,7 +3,7 @@ class_name Food, "res://Assets/Textures/apple.png"
 
 var truepos : Vector2
 
-export (float) var respawntime = 2;
+export (float) var respawntime = 2.0;
 var respawntimer = Timer.new();
 
 func _ready():
@@ -27,7 +27,7 @@ func respawn():
 	pass
 	
 func ate_food():
-	print("move food")
+	#print("move food")
 	SoundPlayer.play_sound(SoundPlayer.SFXFOODPICKUP)
 	respawntimer.wait_time = respawntime
 	respawntimer.start()

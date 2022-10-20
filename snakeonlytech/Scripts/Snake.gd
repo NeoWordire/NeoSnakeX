@@ -27,12 +27,8 @@ export (GlobalSnakeVar.DIRS) var startRotation = GlobalSnakeVar.DIRS.EAST
 var futureheadpos : Vector2
 var _player
 
-var bulletcooldown = Timer.new()
 var canfire = true;
 
-
-func fire_cooled_off():
-	canfire = true;
 
 func update_ray():
 	get_node("ray").position = colshapes[0].position
@@ -42,8 +38,6 @@ func update_ray():
 
 func setup(player):
 	_player = player
-
-	connect("ate_food", self, "ate_food_snake")
 	for bullet in GlobalSnakeVar.bullets:
 		remove_child(bullet)
 		bullet.queue_free()
@@ -59,9 +53,8 @@ func setup(player):
 	truecords = []
 	tilerot = []
 	snakecap = 5
-	bulletcooldown.connect("timeout",self,"fire_cooled_off")
-	add_child(bulletcooldown)
-	bulletcooldown.one_shot = true
+	#get_node("shootCoolDown").connect("timeout",self,"fire_cooled_off")
+	#get_node("shootCoolDown").one_shot = true
 	
 	#build head specially
 	var poly = Sprite.new()
@@ -91,6 +84,8 @@ func setup(player):
 
 func _ready():
 	position = Vector2(0,0)
+	if (self.connect("ate_food", self, "ate_food_snake") != OK):
+		breakpoint # debugging only remove for release XXX
 	pass
 
 var lastrun = 0
@@ -128,11 +123,11 @@ func play_movement():
 		colshapes[x].position.y = truecords[x].y + GlobalSnakeVar.tilesize/2
 	return died
 
-func _process(delta):
+func _process(_delta):
 	if (HumanOrCPU==0):
 		get_input()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#no op since driven by MainSnake _physics_process?
 	pass
 
@@ -180,7 +175,6 @@ func get_input_ai():
 	var goalpos = GlobalSnakeVar.foodpoly.truepos
 	var legalmoves = []
 	var legalfoodrank = []
-	var legalfloodrank = []
 	var counts = []
 	for x in 4:
 		var testpos = GlobalSnakeVar.posdir2pos(truecords[0], x)
@@ -224,7 +218,7 @@ func get_input_ai():
 	inputshoot = false
 	update_ray()
 	get_node("ray").enabled = true
-	var hitnode = get_node("ray").get_collision_point()
+	#var hitnode = get_node("ray").get_collision_point()
 	if (get_node("ray").is_colliding()):
 		#print("hitnode = ", hitnode)
 		#var result = space_state.intersect_ray()
@@ -260,8 +254,8 @@ func shoot(pos, dir):
 	add_child(bullet)
 	GlobalSnakeVar.bullets.append(bullet)
 	canfire = false
-	bulletcooldown.wait_time = GlobalSnakeVar.g_shoot_cooldown
-	bulletcooldown.start()
+	get_node("shootCoolDown").wait_time = GlobalSnakeVar.g_shoot_cooldown
+	get_node("shootCoolDown").start()
 	SoundPlayer.play_sound(SoundPlayer.SFXSHOOT)
 
 func grow(tailpos, rot):
@@ -289,7 +283,7 @@ func grow(tailpos, rot):
 	
 func check_bullet(truepos, pastpos):	
 	for x in truecords.size():
-		if (truecords[x] == pastpos || truecords[x] == truepos):
+		if (truecords[x] == truepos || truecords[x] == pastpos):
 			got_shot(x)
 			return #retool
 	#debug XXX remove before ship
@@ -347,7 +341,7 @@ func ate_food_snake():
 	GlobalSnakeVar.foodpoly.ate_food()
 	snakecap += GlobalSnakeVar.g_foodsegments
 
-func generic_area_handler(area_rid, area, area_shape_index, local_shape_index ):
+func generic_area_handler(_area_rid, area, _area_shape_index, _local_shape_index ):
 	if (area.get_class() == "Bullet"):
 		#print(_player, "ran into a bullet from ", area.parent_player)
 		if (_player != area.parent_player):
@@ -368,6 +362,9 @@ func _on_Player_area_shape_entered (area_rid, area, area_shape_index, local_shap
 func _on_Enemy_area_shape_entered (area_rid, area, area_shape_index, local_shape_index ):
 	generic_area_handler(area_rid, area, area_shape_index, local_shape_index )
 
-func _on_Player_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_Player_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	print("ran into a food? ", body.name, " ", OS.get_ticks_usec())
 	pass # Replace with function body.
+
+func _on_shootCoolDown_timeout():
+	canfire = true;

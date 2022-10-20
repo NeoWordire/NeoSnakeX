@@ -2,7 +2,7 @@ extends Area2D
 class_name Bullet, "res://Assets/Textures/icon.png"
 func get_class(): return "Bullet"
 
-signal bullet_moved(bullet,pos)
+# signal bullet_moved(bullet,pos)
 
 var truepos : Vector2
 var truedir = GlobalSnakeVar.EAST
@@ -50,5 +50,5 @@ func _physics_process(delta):
 	update_display()
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	pass
