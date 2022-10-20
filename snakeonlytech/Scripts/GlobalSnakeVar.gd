@@ -1,7 +1,7 @@
 extends Node
 
 const width : int = 240
-const height : int = 160
+const height : int = 136
 const tilesize : int = 8
 const borderintiles = 1
 
