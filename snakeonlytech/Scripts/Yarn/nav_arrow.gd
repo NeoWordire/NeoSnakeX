@@ -2,9 +2,6 @@
 extends Control
 
 
-export(float,0.1, 100) var period = 1.0
-export(float) var amplitude = 1
-
 var elapsed : float = 0
 var startingPosition : Vector2
 var inOptions = false

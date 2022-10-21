@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gdyarn/compiled_yarn_program.gd"
 }, {
-"base": "EditorVCSInterface",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot-git-plugin/git_api.gdns"
-}, {
 "base": "Reference",
 "class": "MarkupRegion",
 "language": "GDScript",
@@ -51,7 +46,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "CompiledYarnProgram": "",
-"GitAPI": "",
 "MarkupRegion": "",
 "Value": "",
 "VariableStorage": "res://addons/gdyarn/assets/storage.png",
@@ -91,7 +85,7 @@ enabled=PoolStringArray( "res://addons/gdyarn/plugin.cfg" )
 
 [gdnative]
 
-singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+singletons=[  ]
 
 [gui]
 

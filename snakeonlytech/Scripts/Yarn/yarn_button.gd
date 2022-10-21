@@ -2,9 +2,6 @@
 extends Button
 
 
-export(float,0.1, 100) var period = 0.1
-export(float) var amplitude = 10
-
 var elapsed : float = 0
 var startingPosition : Vector2
 

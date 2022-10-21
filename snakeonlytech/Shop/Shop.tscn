@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Mockup/shop_mockup.png" type="Texture" id=1]
 [ext_resource path="res://addons/gdyarn/yarn_runner.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=7]
 [ext_resource path="res://Scripts/Yarn/nav_arrow.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=9]
+[ext_resource path="res://Shop/mouthmoveplaceholder.tres" type="Texture" id=10]
+[ext_resource path="res://Shop/MouthFlap.gd" type="Script" id=11]
 
 [sub_resource type="Resource" id=1]
 resource_local_to_scene = true
@@ -18,6 +20,7 @@ _directory = "res://Shop"
 _yarnPrograms = [ "res://Shop/Sally.yarn" ]
 
 [node name="Shop" type="Node2D"]
+scale = Vector2( 1, 1.01068 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 240.0
@@ -41,7 +44,13 @@ _yarnRunner = NodePath("../YarnRunner")
 _text = NodePath("Dialogue/VBoxContainer/RichTextLabel")
 _namePlate = NodePath("Dialogue/VBoxContainer/Name")
 _options = [ NodePath("ShopTopMenu/HBoxContainer/Options/Option1"), NodePath("ShopTopMenu/HBoxContainer/Options/Option2"), NodePath("ShopTopMenu/HBoxContainer/Options/Option3") ]
-_textSpeed = 24
+_textSpeed = 20
+
+[node name="MouthFlapTest" type="Sprite" parent="YarnDisplay"]
+visible = false
+position = Vector2( 154, 59.366 )
+texture = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Button" type="Button" parent="YarnDisplay"]
 visible = false
@@ -82,21 +91,21 @@ size_flags_vertical = 3
 theme = ExtResource( 7 )
 
 [node name="ShopTopMenu" type="PanelContainer" parent="YarnDisplay"]
-visible = false
 margin_left = 24.0
 margin_top = 16.0
-margin_right = 88.0
-margin_bottom = 61.0
-rect_clip_content = true
-size_flags_horizontal = 0
+margin_right = 78.0
+margin_bottom = 53.0
+size_flags_horizontal = 8
 size_flags_vertical = 0
 theme = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="YarnDisplay/ShopTopMenu"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 56.0
+margin_right = 46.0
 margin_bottom = 37.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 custom_constants/separation = 10
 
 [node name="MenuSelectControl" type="Control" parent="YarnDisplay/ShopTopMenu/HBoxContainer"]
@@ -113,11 +122,12 @@ offset = Vector2( 2.5, -1 )
 margin_left = 10.0
 margin_right = 38.0
 margin_bottom = 29.0
-size_flags_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource( 7 )
 
 [node name="Option1" type="Label" parent="YarnDisplay/ShopTopMenu/HBoxContainer/Options"]
-margin_right = 28.0
+margin_right = 12.0
 margin_bottom = 7.0
 size_flags_vertical = 0
 theme = ExtResource( 7 )
@@ -125,8 +135,9 @@ text = "Buy"
 
 [node name="Option2" type="Label" parent="YarnDisplay/ShopTopMenu/HBoxContainer/Options"]
 margin_top = 11.0
-margin_right = 28.0
+margin_right = 16.0
 margin_bottom = 18.0
+size_flags_vertical = 0
 theme = ExtResource( 7 )
 text = "Talk"
 
@@ -134,8 +145,23 @@ text = "Talk"
 margin_top = 22.0
 margin_right = 28.0
 margin_bottom = 29.0
+size_flags_vertical = 0
 theme = ExtResource( 7 )
 text = "Goodbye"
+
+[node name="PanelContainer" type="PanelContainer" parent="YarnDisplay"]
+visible = false
+margin_left = 98.0
+margin_top = 8.0
+margin_right = 233.0
+margin_bottom = 101.0
+theme = ExtResource( 7 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="YarnDisplay/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 127.0
+margin_bottom = 85.0
 
 [node name="YarnRunner" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -143,7 +169,9 @@ _autoStart = true
 _variableStorage = NodePath("../VariableStorage")
 _compiledYarnProgram = SubResource( 1 )
 
+[connection signal="line_finished" from="YarnDisplay" to="YarnDisplay/MouthFlapTest" method="_on_YarnDisplay_line_finished"]
 [connection signal="line_started" from="YarnDisplay" to="YarnDisplay" method="_on_MenuDisplay_line_started"]
+[connection signal="line_started" from="YarnDisplay" to="YarnDisplay/MouthFlapTest" method="_on_YarnDisplay_line_started"]
 [connection signal="option_selected" from="YarnDisplay" to="YarnDisplay/ShopTopMenu/HBoxContainer/MenuSelectControl" method="_on_YarnDisplay_option_selected"]
 [connection signal="options_shown" from="YarnDisplay" to="YarnDisplay/ShopTopMenu/HBoxContainer/MenuSelectControl" method="_on_YarnDisplay_options_shown"]
 [connection signal="pressed" from="YarnDisplay/Button" to="YarnDisplay" method="finish_line"]
