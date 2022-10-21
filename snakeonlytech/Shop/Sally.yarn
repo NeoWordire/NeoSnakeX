@@ -1,0 +1,32 @@
+title: Start
+tags:
+colorID: 0
+position: 120,-245
+---
+Shopkeeper Sally: okay #line:11d738a1
+[[Shop]] #line:321326fc
+
+===
+title: Shop
+tags:
+colorID: 0
+position: 170,-245
+---
+Shopkeeper Sally: hello #line:eac8a241
+->   Buy #line:933be3a8
+    Shopkeeper Sally: Right on! #line:2bbfe41b
+    Shopkeeper Sally: What are you Buying? #line:3758a045
+    -> gun #line:af799ac3
+        Shopkeeper Sally: got gun1 #line:8b6ddfd6
+    -> gun2 #line:abd9d96e
+        Shopkeeper Sally: got gun2 #line:697e9d57
+    -> gun3 #line:d829f578
+        Shopkeeper Sally: got gun3 #line:2828804b
+    [[Shop]] #line:cead1493
+-> Talk #line:7ed0f90f
+    Shopkeeper Sally: Hey #line:6e72171
+    [[Shop]] #line:d0450764 
+-> Goodbye #line:ee697e8b
+    Shopkeeper Sally: Well, thats unfortunate... #line:516ab65f
+    Shopkeeper Sally: Have fun in the void #line:30401896 
+===

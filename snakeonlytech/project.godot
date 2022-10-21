@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="snakealone"
-run/main_scene="res://BattleScene/snakebattlev3.tscn"
+run/main_scene="res://Shop/Shop.tscn"
 config/icon="res://icon.png"
 
 [autoload]

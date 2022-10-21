@@ -21,7 +21,7 @@ signal line_started
 signal line_finished
 
 #emit this signal when options have begun to be shown
-signal options_shown
+signal options_shown(lineOptions)
 
 # emit this signal once an option
 # has been selected
@@ -219,7 +219,7 @@ func show_options(optionLines):
 		options[i].visible = true
 
 	showingOptions = true
-	emit_signal("options_shown")
+	emit_signal("options_shown", optionLines)
 
 
 ## If we are currently showing options on the display

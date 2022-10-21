@@ -11,7 +11,39 @@
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:f2404db4"
+"operand_value": "line:11d738a1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Shop"
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L1": 0
+},
+"node_name": "Start",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L2"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:eac8a241"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -20,10 +52,10 @@
 "instruction_op": 5,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:12e45190"
+"operand_value": "line:933be3a8"
 }, {
 "operand_type": 1,
-"operand_value": "L3option_1"
+"operand_value": "L4option_1"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -32,10 +64,22 @@
 "instruction_op": 5,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:e055ef8e"
+"operand_value": "line:7ed0f90f"
 }, {
 "operand_type": 1,
-"operand_value": "L4option_2"
+"operand_value": "L5option_2"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:ee697e8b"
+}, {
+"operand_type": 1,
+"operand_value": "L6option_3"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -50,13 +94,79 @@
 "instruction_op": 0,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "L3option_1"
+"operand_value": "L4option_1"
 } ]
 }, {
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:38196c7a"
+"operand_value": "line:2bbfe41b"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:3758a045"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:af799ac3"
+}, {
+"operand_type": 1,
+"operand_value": "L8option_1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:abd9d96e"
+}, {
+"operand_type": 1,
+"operand_value": "L9option_2"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 5,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:d829f578"
+}, {
+"operand_type": 1,
+"operand_value": "L10option_3"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 6,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 2,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L8option_1"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:8b6ddfd6"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -65,19 +175,19 @@
 "instruction_op": 1,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "L2group_end"
+"operand_value": "L7group_end"
 } ]
 }, {
 "instruction_op": 0,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "L4option_2"
+"operand_value": "L9option_2"
 } ]
 }, {
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:54d66032"
+"operand_value": "line:697e9d57"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -86,13 +196,112 @@
 "instruction_op": 1,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "L2group_end"
+"operand_value": "L7group_end"
 } ]
 }, {
 "instruction_op": 0,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "L2group_end"
+"operand_value": "L10option_3"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:2828804b"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L7group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L7group_end"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Shop"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L5option_2"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:6e72171"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Shop"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L6option_3"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:516ab65f"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:30401896"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3group_end"
 } ]
 }, {
 "instruction_op": 12,
@@ -102,12 +311,17 @@
 "instruction_operands": [  ]
 } ],
 "node_labels": {
-"L1": 0,
-"L2group_end": 12,
-"L3option_1": 6,
-"L4option_2": 9
+"L10option_3": 21,
+"L2": 0,
+"L3group_end": 36,
+"L4option_1": 7,
+"L5option_2": 28,
+"L6option_3": 32,
+"L7group_end": 24,
+"L8option_1": 15,
+"L9option_2": 18
 },
-"node_name": "Start",
+"node_name": "Shop",
 "node_source_id": "",
 "node_tags": [  ]
 } ]
