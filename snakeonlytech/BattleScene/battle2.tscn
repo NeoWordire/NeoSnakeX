@@ -1,0 +1,356 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Assets/Textures/enemy_head.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Textures/fence_down.png" type="Texture" id=2]
+[ext_resource path="res://BattleScene/fence.tres" type="Texture" id=3]
+[ext_resource path="res://Scripts/FPS.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Textures/fence_corner.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/snake_box.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Textures/arena.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Textures/snake_head.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/MainSnake.gd" type="Script" id=10]
+[ext_resource path="res://BattleScene/fence_down.tres" type="Texture" id=11]
+[ext_resource path="res://Assets/Music/battle.ogg" type="AudioStream" id=12]
+[ext_resource path="res://BattleScene/Food.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Textures/snake_box_dead2.png" type="Texture" id=14]
+[ext_resource path="res://BattleScene/Snake.tscn" type="PackedScene" id=15]
+[ext_resource path="res://BattleScene/snakeBodyWarpTexture.tres" type="Texture" id=16]
+[ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=17]
+
+[sub_resource type="AnimatedTexture" id=9]
+frames = 2
+pause = true
+oneshot = true
+frame_1/texture = ExtResource( 14 )
+frame_1/delay_sec = 1.33
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 8, 16, 0, 16, 0, 0, 8, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 8, 16, 0, 16, 0, 0, 8, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=1]
+0/name = "fence.tres 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 8, 8 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "fence_corner.png 1"
+1/texture = ExtResource( 5 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 8, 8 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 3 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "fence_corner.png 2"
+2/texture = ExtResource( 5 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 8, 0, 8, 8 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 4 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "fence_down.png 3"
+3/texture = ExtResource( 2 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 8, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 5 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "fence_down.png 4"
+4/texture = ExtResource( 2 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 8, 0, 8, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 6 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+4/z_index = 0
+5/name = "fence_down.tres 5"
+5/texture = ExtResource( 11 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 8, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape = SubResource( 7 )
+5/shape_one_way = false
+5/shape_one_way_margin = 1.0
+5/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+5/z_index = 0
+6/name = "fence_down.tres 6"
+6/texture = ExtResource( 11 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 8, 0, 8, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape = SubResource( 8 )
+6/shape_one_way = false
+6/shape_one_way_margin = 1.0
+6/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+6/z_index = 0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SnakeBattle" type="CanvasLayer" parent="."]
+offset = Vector2( 0, 8 )
+transform = Transform2D( 1, 0, 0, 1, 0, 8 )
+script = ExtResource( 10 )
+FoodSegments = 3
+
+[node name="Player" parent="SnakeBattle" instance=ExtResource( 15 )]
+position = Vector2( 49, 39 )
+bodytex = ExtResource( 7 )
+headtex = ExtResource( 9 )
+bodywarptex = SubResource( 9 )
+startpos = Vector2( 16, 72 )
+
+[node name="Enemy" parent="SnakeBattle" instance=ExtResource( 15 )]
+HumanOrCPU = 1
+bodytex = ExtResource( 6 )
+headtex = ExtResource( 1 )
+bodywarptex = ExtResource( 16 )
+startpos = Vector2( 224, 72 )
+startRotation = 3
+
+[node name="StartCount" type="Label" parent="SnakeBattle"]
+margin_left = 116.0
+margin_top = 74.0
+margin_right = 150.0
+margin_bottom = 123.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+
+[node name="BGM" type="AudioStreamPlayer" parent="SnakeBattle"]
+stream = ExtResource( 12 )
+volume_db = -5.0
+autoplay = true
+
+[node name="Food" parent="SnakeBattle" instance=ExtResource( 13 )]
+position = Vector2( -100, 0 )
+
+[node name="HUD" type="CenterContainer" parent="SnakeBattle"]
+anchor_bottom = 0.1
+margin_top = 136.0
+margin_right = 240.0
+margin_bottom = 136.0
+
+[node name="CountdownTimer" type="Label" parent="SnakeBattle/HUD"]
+margin_left = 116.0
+margin_top = 4.0
+margin_right = 124.0
+margin_bottom = 11.0
+theme = ExtResource( 17 )
+text = "30"
+align = 1
+valign = 2
+
+[node name="PRESTART" type="Control" parent="SnakeBattle"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/PRESTART"]
+margin_left = 14.0
+margin_top = 9.0
+margin_right = 226.0
+margin_bottom = 99.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 17 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/PRESTART/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 204.0
+margin_bottom = 82.0
+rect_clip_content = false
+text = "BATTLE #2
+LEO VS <FRIENDNAME>
+
+BATTLE GOALS:
+	SURVIVE FOR 30 SECONDS
+	HAVE A BIGGER SNAKE AT END OF BATTLE
+	
+MODIFIERS:
+	FOOD GIVES 3 SEGMENTS"
+
+[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/PRESTART"]
+margin_left = 63.0
+margin_top = 99.0
+margin_right = 192.0
+margin_bottom = 127.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 17 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/PRESTART/PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 121.0
+margin_bottom = 20.0
+rect_clip_content = false
+text = "Press Fire Button TO START"
+
+[node name="WINSCREEN" type="PanelContainer" parent="SnakeBattle"]
+margin_left = 33.0
+margin_top = 18.0
+margin_right = 201.0
+margin_bottom = 93.0
+theme = ExtResource( 17 )
+
+[node name="REASON" type="RichTextLabel" parent="SnakeBattle/WINSCREEN"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 67.0
+rect_clip_content = false
+text = "YOU WON!!!!!
+TODO LOAD NEXT SCENE"
+
+[node name="LOSESCREEN" type="PanelContainer" parent="SnakeBattle"]
+margin_left = 33.0
+margin_top = 18.0
+margin_right = 201.0
+margin_bottom = 93.0
+theme = ExtResource( 17 )
+
+[node name="REASON" type="RichTextLabel" parent="SnakeBattle/LOSESCREEN"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 67.0
+rect_clip_content = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 240.0
+margin_bottom = 160.0
+texture = ExtResource( 8 )
+
+[node name="TileMap" type="TileMap" parent="."]
+visible = false
+tile_set = SubResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 0, 1, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 2, 0, 65536, 5, 0, 65565, 6, 0, 131072, 5, 0, 131101, 6, 0, 196608, 5, 0, 196637, 6, 0, 262144, 5, 0, 262173, 6, 0, 327680, 5, 0, 327709, 6, 0, 393216, 5, 0, 393245, 6, 0, 458752, 5, 0, 458781, 6, 0, 524288, 5, 0, 524317, 6, 0, 589824, 5, 0, 589853, 6, 0, 655360, 5, 0, 655389, 6, 0, 720896, 5, 0, 720925, 6, 0, 786432, 5, 0, 786461, 6, 0, 851968, 5, 0, 851997, 6, 0, 917504, 5, 0, 917533, 6, 0, 983040, 5, 0, 983069, 6, 0, 1048576, 5, 0, 1048605, 6, 0, 1114112, 5, 0, 1114141, 6, 0 )
+
+[node name="Debug" type="Node2D" parent="."]
+visible = false
+position = Vector2( 0, 8 )
+
+[node name="FPSDebug" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 4 )
+
+[connection signal="area_shape_entered" from="SnakeBattle/Player" to="SnakeBattle/Player" method="_on_Player_area_shape_entered"]
+[connection signal="body_shape_entered" from="SnakeBattle/Player" to="SnakeBattle/Player" method="_on_Player_body_shape_entered"]
+[connection signal="snake_died" from="SnakeBattle/Player" to="SnakeBattle" method="_on_Player_snake_died"]
+[connection signal="area_shape_entered" from="SnakeBattle/Enemy" to="SnakeBattle/Enemy" method="_on_Enemy_area_shape_entered"]
+[connection signal="snake_died" from="SnakeBattle/Enemy" to="SnakeBattle" method="_on_Enemy_snake_died"]

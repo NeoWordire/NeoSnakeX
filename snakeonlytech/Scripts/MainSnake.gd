@@ -58,17 +58,22 @@ func beginFight():
 	food.ate_food()
 	GlobalSnakeVar.foodpoly = food
 	
+var uiCooldown = 0.0
 func _process(_delta):
-	if Input.is_action_just_released("ui_end"):
-		GlobalSnakeVar.debug = !GlobalSnakeVar.debug
-	if Input.is_action_just_released("ui_accept"):
-		if battleState == 0:
-			startRequested()
-		if battleState == 2:
-			pre_start()
-		if battleState == 3:
-			#breakpoint # NEXT SCENE
-			pass
+	uiCooldown += _delta
+	if (uiCooldown > 0.5):
+		if Input.is_action_just_released("ui_end"):
+			GlobalSnakeVar.debug = !GlobalSnakeVar.debug
+			uiCooldown = 0.0
+		if Input.is_action_just_released("ui_accept"):
+			if battleState == 0:
+				startRequested()
+			if battleState == 2:
+				pre_start()
+			if battleState == 3:
+				#breakpoint # NEXT SCENE
+				pass
+			uiCooldown = 0.0
 	if (!GlobalSnakeVar.paused):
 		get_node("HUD").get_node("CountdownTimer").text = String(ceil(timerinstance))
 		timerinstance -= _delta
