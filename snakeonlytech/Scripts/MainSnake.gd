@@ -4,8 +4,8 @@ const Snake = preload("res://Scripts/Snake.gd")
 const Food = preload("res://Scripts/Food.gd")
 
 # Declare member variables here. Examples:
-export (int) var bullet_mps = 20
-export (int) var snake_mps = 12
+export (int) var bullet_mps = 12
+export (int) var snake_mps = 8
 export (int) var FoodSegments = 1
 export (bool) var debugging = false
 export (float) var ShootCooldown = 0.5 
