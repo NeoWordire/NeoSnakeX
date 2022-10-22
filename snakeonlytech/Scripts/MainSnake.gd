@@ -67,7 +67,8 @@ func _process(_delta):
 		if battleState == 2:
 			pre_start()
 		if battleState == 3:
-			breakpoint # NEXT SCENE
+			#breakpoint # NEXT SCENE
+			pass
 	if (!GlobalSnakeVar.paused):
 		get_node("HUD").get_node("CountdownTimer").text = String(ceil(timerinstance))
 		timerinstance -= _delta
@@ -116,6 +117,7 @@ func startRequested():
 func timer_complete():
 	if (GlobalSnakeVar.snakes[0].sprites.size() < GlobalSnakeVar.snakes[1].sprites.size()):
 		game_over_lost("YOUR SNAKE SMALL")
+		return
 	battleState = 3
 	get_node("WINSCREEN").visible = true
 
