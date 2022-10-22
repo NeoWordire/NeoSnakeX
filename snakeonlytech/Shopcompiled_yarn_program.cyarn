@@ -17,6 +17,21 @@
 "operand_value": 0.0
 } ]
 }, {
+"instruction_op": 9,
+"instruction_operands": [ {
+"operand_type": 2,
+"operand_value": false
+} ]
+}, {
+"instruction_op": 15,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$upgradepicked"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
 "instruction_op": 17,
 "instruction_operands": [ {
 "operand_type": 1,
@@ -106,13 +121,16 @@
 "operand_value": 0.0
 } ]
 }, {
-"instruction_op": 3,
+"instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:3758a045"
+"operand_value": "wait .1"
+} ]
 }, {
-"operand_type": 3,
-"operand_value": 0.0
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "upgrades1"
 } ]
 }, {
 "instruction_op": 5,
@@ -208,7 +226,7 @@
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:2828804b"
+"operand_value": "line:e73d80de"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -224,6 +242,21 @@
 "instruction_operands": [ {
 "operand_type": 1,
 "operand_value": "L7group_end"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 9,
+"instruction_operands": [ {
+"operand_type": 2,
+"operand_value": true
+} ]
+}, {
+"instruction_op": 15,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$upgradepicked"
 } ]
 }, {
 "instruction_op": 12,
@@ -250,7 +283,7 @@
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:6e72171"
+"operand_value": "line:7c504b3c"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -277,19 +310,97 @@
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:516ab65f"
+"operand_value": "line:981231a6"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
 } ]
 }, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$upgradepicked"
+} ]
+}, {
+"instruction_op": 9,
+"instruction_operands": [ {
+"operand_type": 2,
+"operand_value": true
+} ]
+}, {
+"instruction_op": 8,
+"instruction_operands": [ {
+"operand_type": 3,
+"operand_value": 2.0
+} ]
+}, {
+"instruction_op": 13,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "EqualTo"
+} ]
+}, {
+"instruction_op": 11,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L12skip_clause"
+} ]
+}, {
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:30401896"
+"operand_value": "line:5b1e2583"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait .5"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "gotoBattle1"
+} ]
+}, {
+"instruction_op": 1,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L11endif"
+} ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L12skip_clause"
+} ]
+}, {
+"instruction_op": 12,
+"instruction_operands": [  ]
+}, {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L11endif"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:225e1eff"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Shop"
 } ]
 }, {
 "instruction_op": 1,
@@ -311,15 +422,17 @@
 "instruction_operands": [  ]
 } ],
 "node_labels": {
-"L10option_3": 21,
+"L10option_3": 22,
+"L11endif": 49,
+"L12skip_clause": 47,
 "L2": 0,
-"L3group_end": 36,
+"L3group_end": 53,
 "L4option_1": 7,
-"L5option_2": 28,
-"L6option_3": 32,
-"L7group_end": 24,
-"L8option_1": 15,
-"L9option_2": 18
+"L5option_2": 32,
+"L6option_3": 36,
+"L7group_end": 25,
+"L8option_1": 16,
+"L9option_2": 19
 },
 "node_name": "Shop",
 "node_source_id": "",

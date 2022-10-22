@@ -89,6 +89,8 @@ margin_bottom = 40.0
 rect_clip_content = false
 size_flags_vertical = 3
 theme = ExtResource( 7 )
+custom_constants/line_separation = 2
+bbcode_enabled = true
 
 [node name="ShopTopMenu" type="PanelContainer" parent="YarnDisplay"]
 margin_left = 24.0
@@ -122,12 +124,12 @@ offset = Vector2( 2.5, -1 )
 margin_left = 10.0
 margin_right = 38.0
 margin_bottom = 29.0
-size_flags_horizontal = 8
+size_flags_horizontal = 2
 size_flags_vertical = 0
 theme = ExtResource( 7 )
 
 [node name="Option1" type="Label" parent="YarnDisplay/ShopTopMenu/HBoxContainer/Options"]
-margin_right = 12.0
+margin_right = 28.0
 margin_bottom = 7.0
 size_flags_vertical = 0
 theme = ExtResource( 7 )
@@ -135,7 +137,7 @@ text = "Buy"
 
 [node name="Option2" type="Label" parent="YarnDisplay/ShopTopMenu/HBoxContainer/Options"]
 margin_top = 11.0
-margin_right = 16.0
+margin_right = 28.0
 margin_bottom = 18.0
 size_flags_vertical = 0
 theme = ExtResource( 7 )
@@ -175,3 +177,4 @@ _compiledYarnProgram = SubResource( 1 )
 [connection signal="option_selected" from="YarnDisplay" to="YarnDisplay/ShopTopMenu/HBoxContainer/MenuSelectControl" method="_on_YarnDisplay_option_selected"]
 [connection signal="options_shown" from="YarnDisplay" to="YarnDisplay/ShopTopMenu/HBoxContainer/MenuSelectControl" method="_on_YarnDisplay_options_shown"]
 [connection signal="pressed" from="YarnDisplay/Button" to="YarnDisplay" method="finish_line"]
+[connection signal="command_emitted" from="YarnRunner" to="YarnDisplay/ShopTopMenu/HBoxContainer/MenuSelectControl" method="_on_YarnRunner_command_emitted"]

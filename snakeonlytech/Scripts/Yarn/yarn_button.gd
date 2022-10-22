@@ -1,7 +1,6 @@
 ### A Simple button that pulses up and down at the specified interval
 extends Button
 
-
 var elapsed : float = 0
 var startingPosition : Vector2
 

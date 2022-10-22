@@ -4,6 +4,7 @@ colorID: 0
 position: 120,-245
 ---
 Shopkeeper Sally: okay #line:11d738a1
+<<set $upgradepicked to false>>
 [[Shop]] #line:321326fc
 
 ===
@@ -15,18 +16,27 @@ position: 170,-245
 Shopkeeper Sally: hello #line:eac8a241
 ->   Buy #line:933be3a8
     Shopkeeper Sally: Right on! #line:2bbfe41b
-    Shopkeeper Sally: What are you Buying? #line:3758a045
+    <<wait .1>>
+    <<upgrades1>>
     -> gun #line:af799ac3
         Shopkeeper Sally: got gun1 #line:8b6ddfd6
     -> gun2 #line:abd9d96e
         Shopkeeper Sally: got gun2 #line:697e9d57
     -> gun3 #line:d829f578
-        Shopkeeper Sally: got gun3 #line:2828804b
-    [[Shop]] #line:cead1493
+        Shopkeeper Sally: got gun3 #line:e73d80de
+    <<set $upgradepicked to true>>
+    [[Shop]] #line:75a0fa6e
 -> Talk #line:7ed0f90f
-    Shopkeeper Sally: Hey #line:6e72171
-    [[Shop]] #line:d0450764 
+    Shopkeeper Sally: Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey #line:7c504b3c
+    [[Shop]] #line:d0450764
 -> Goodbye #line:ee697e8b
-    Shopkeeper Sally: Well, thats unfortunate... #line:516ab65f
-    Shopkeeper Sally: Have fun in the void #line:30401896 
+    Shopkeeper Sally: Okaybye #line:981231a6
+    <<if $upgradepicked is true>>
+        Shopkeeper Sally: Have fun in the arena #line:5b1e2583
+        <<wait .5>>
+        <<gotoBattle1>>
+    <<endif>>
+    Shopkeeper Sally: Wait, you forgot to get an upgrade? go buy something #line:225e1eff
+    [[Shop]] #line:2fd24429
+
 ===

@@ -2,16 +2,16 @@ id	text	file	node	lineNumber	implicit	tags
 line:11d738a1	Shopkeeper Sally: okay 	Sally.yarn	Start	0	False	
 line:eac8a241	Shopkeeper Sally: hello 	Sally.yarn	Shop	0	False	
 line:933be3a8	Buy 	Sally.yarn	Shop	1	False	
-line:7ed0f90f	Talk 	Sally.yarn	Shop	11	False	
-line:ee697e8b	Goodbye 	Sally.yarn	Shop	14	False	
+line:7ed0f90f	Talk 	Sally.yarn	Shop	13	False	
+line:ee697e8b	Goodbye 	Sally.yarn	Shop	16	False	
 line:2bbfe41b	Shopkeeper Sally: Right on! 	Sally.yarn	Shop	2	False	
-line:3758a045	Shopkeeper Sally: What are you Buying? 	Sally.yarn	Shop	3	False	
-line:af799ac3	gun 	Sally.yarn	Shop	4	False	
-line:abd9d96e	gun2 	Sally.yarn	Shop	6	False	
-line:d829f578	gun3 	Sally.yarn	Shop	8	False	
-line:8b6ddfd6	Shopkeeper Sally: got gun1 	Sally.yarn	Shop	5	False	
-line:697e9d57	Shopkeeper Sally: got gun2 	Sally.yarn	Shop	7	False	
-line:2828804b	Shopkeeper Sally: got gun3 	Sally.yarn	Shop	9	False	
-line:6e72171	Shopkeeper Sally: Hey 	Sally.yarn	Shop	12	False	
-line:516ab65f	Shopkeeper Sally: Well, thats unfortunate... 	Sally.yarn	Shop	15	False	
-line:30401896	Shopkeeper Sally: Have fun in the void 	Sally.yarn	Shop	16	False	
+line:af799ac3	gun 	Sally.yarn	Shop	5	False	
+line:abd9d96e	gun2 	Sally.yarn	Shop	7	False	
+line:d829f578	gun3 	Sally.yarn	Shop	9	False	
+line:8b6ddfd6	Shopkeeper Sally: got gun1 	Sally.yarn	Shop	6	False	
+line:697e9d57	Shopkeeper Sally: got gun2 	Sally.yarn	Shop	8	False	
+line:e73d80de	Shopkeeper Sally: got gun3 	Sally.yarn	Shop	10	False	
+line:7c504b3c	Shopkeeper Sally: Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey 	Sally.yarn	Shop	14	False	
+line:981231a6	Shopkeeper Sally: Okaybye 	Sally.yarn	Shop	17	False	
+line:5b1e2583	Shopkeeper Sally: Have fun in the arena 	Sally.yarn	Shop	19	False	
+line:225e1eff	Shopkeeper Sally: Wait, you forgot to get an upgrade? go buy something 	Sally.yarn	Shop	23	False	
