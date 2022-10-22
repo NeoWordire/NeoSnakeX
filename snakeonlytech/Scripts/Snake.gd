@@ -2,6 +2,9 @@ extends Area2D
 class_name Snake, "res://Assets/Textures/snake_head.png"
 func get_class(): return "Snake"
 const Bullet = preload("res://Scripts/Bullet.gd")
+var SnakeBodyParticle = load("res://BattleScene/SnakeBodyParticle.tscn")
+var SnakeBodyDeadParticle = load("res://BattleScene/SnakeBodyDeadParticle.tscn")
+var SnakeBodyMainSprite = load("res://BattleScene/SnakeBodyParticleIn.tscn")
 
 signal snake_died(player)
 signal ate_food()
@@ -22,7 +25,7 @@ export (int, "player","ai") var HumanOrCPU
 
 export (Texture) var bodytex
 export (Texture) var headtex
-export (AnimatedTexture) var bodywarptex
+export (Texture) var bodywarptex
 
 export (Vector2) var startpos
 export (GlobalSnakeVar.DIRS) var startRotation = GlobalSnakeVar.DIRS.EAST
@@ -60,7 +63,7 @@ func setup(player):
 	#get_node("shootCoolDown").one_shot = true
 	
 	#build head specially
-	var poly = Sprite.new()
+	var poly = SnakeBodyMainSprite.instance()
 	var hitbox = CollisionShape2D.new()
 	hitbox.shape = CircleShape2D.new()
 	hitbox.shape.set_radius(1)
@@ -260,7 +263,7 @@ func body_follow_head(prevheadpos,prevrot):
 	if sprites.size() <= 1:
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[0])] = 0
 		return
-	#terateSplitGroup()
+	iterateSplitGroup()
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[-1])] = 0
 	var followcord = prevheadpos
 	var followRot = prevrot
@@ -269,11 +272,10 @@ func body_follow_head(prevheadpos,prevrot):
 	for s in range(1, sprites.size()):
 		#swap followcords with current
 		if(splitMap[s] != followGroup):
-			sprites[s].texture = bodywarptex
 			warp = s
 			break
-		sprites[s].texture = bodytex
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 0
+		sprites[s].texture = bodytex
 		var tempCord = followcord
 		var tempRot = followRot
 		followcord = truecords[s]
@@ -281,9 +283,21 @@ func body_follow_head(prevheadpos,prevrot):
 		truecords[s] = tempCord
 		tilerot[s] = tempRot
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 1
-	if warp > 1:
-		sprites[warp - 1].texture = bodywarptex
-	iterateSplitGroup()
+	if warp > 2:
+		for s in range(warp, sprites.size()):
+			GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 1
+			#prites[s].texture = bodytex
+	if warp > 2 && snakecap - 1 < sprites.size():
+		var temp = SnakeBodyParticle.instance()
+		temp.texture = bodytex
+		add_child(temp)
+		temp.position = sprites[warp-1].position
+		temp.rotation = sprites[warp-1].rotation
+		sprites[warp-1].set_state(1)
+		#prites[warp-1].texture.pause = false
+		#prites[warp-1].texture.current_frame = 1
+		
+		pass
 
 #			GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[inverse])] = 1
 	
@@ -305,7 +319,7 @@ func shoot(pos, dir):
 	SoundPlayer.play_sound(SoundPlayer.SFXSHOOT)
 
 func grow(tailpos, rot):
-	var poly = Sprite.new()
+	var poly = SnakeBodyMainSprite.instance()
 	poly.texture = bodytex
 
 	var hitbox = CollisionShape2D.new()
@@ -353,6 +367,13 @@ func got_shot(x):
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[x])] = 0
 	for t in range(x, splitMap.size()):
 		splitMap[t] += 1
+	var temp = SnakeBodyDeadParticle.instance()
+	temp.position = sprites[x].position
+	temp.rotation = sprites[x].rotation
+	temp.texture = bodytex
+	add_child(temp)
+	sprites[x].texture = bodywarptex
+	sprites[x].texture.pause = true
 	splitMap.remove(x)
 	tilerot.remove(x)
 	remove_child(sprites[x])
