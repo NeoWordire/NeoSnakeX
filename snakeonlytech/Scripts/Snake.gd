@@ -361,26 +361,26 @@ func got_shot(x):
 		print("Too small to be shot")
 		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
 		return
-	#	x += 1
+	#	x += 
 	SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
 	print(_player," was shot at segment ", x)
-	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[x])] = 0
-	for t in range(x, splitMap.size()):
-		splitMap[t] += 1
+	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[sprites.size()-1])] = 0
+	#for t in range(x, splitMap.size()):
+	#	splitMap[t] += 1
 	var temp = SnakeBodyDeadParticle.instance()
 	temp.position = sprites[x].position
 	temp.rotation = sprites[x].rotation
 	temp.texture = bodytex
 	add_child(temp)
-	sprites[x].texture = bodywarptex
-	sprites[x].texture.pause = true
-	splitMap.remove(x)
-	tilerot.remove(x)
-	remove_child(sprites[x])
-	truecords.remove(x)
-	remove_child(colshapes[x])
-	colshapes.remove(x)
-	sprites.remove(x)
+	#sprites[x].texture = bodywarptex
+	#sprites[x].texture.pause = true
+	splitMap.remove(sprites.size()-1)
+	tilerot.remove(sprites.size()-1)
+	remove_child(sprites[sprites.size()-1])
+	truecords.remove(sprites.size()-1)
+	remove_child(colshapes[sprites.size()-1])
+	colshapes.remove(sprites.size()-1)
+	sprites.remove(sprites.size()-1)
 	snakecap -= 1
 	
 func flood(map, pos, depth):

@@ -204,7 +204,6 @@ FoodSegments = 5
 
 [node name="Player" parent="SnakeBattle" instance=ExtResource( 15 )]
 position = Vector2( 49, 39 )
-HumanOrCPU = 1
 bodytex = ExtResource( 7 )
 headtex = ExtResource( 9 )
 bodywarptex = SubResource( 9 )
