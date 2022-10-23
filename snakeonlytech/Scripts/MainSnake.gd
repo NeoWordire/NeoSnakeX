@@ -16,6 +16,8 @@ var battleState = 0 # 0 == PRESTART, 1 == IN BATTLE, 2 GAMEOVER LOST, 3 GAMEOVER
 var timerinstance
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GlobalSnakeVar.paused = true
+	GlobalSnakeVar.bullets = []
 	#get_node("BGM").stream_paused = true
 	GlobalSnakeVar.g_bullet_moves_per_second = bullet_mps
 	GlobalSnakeVar.g_snake_moves_per_second = snake_mps
@@ -26,7 +28,6 @@ func _ready():
 	GlobalSnakeVar.g_foodsegments = FoodSegments
 	GlobalSnakeVar.g_rng.randomize()
 	#beginFight()
-	GlobalSnakeVar.paused = true
 	pre_start()
 	pass # Replace with function body.
 
@@ -75,6 +76,7 @@ func _process(_delta):
 			uiCooldown = 0.0
 var bulletlastrun = 0
 var counterlastsnake = 0
+
 func _physics_process(delta):
 	counterlastsnake += 1
 	GlobalSnakeVar.snakeupdatetimer += delta

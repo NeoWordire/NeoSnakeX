@@ -26,15 +26,17 @@ func show_button():
 func hide_button():
 	visible = false
 
+var uiCooldown = 0.0
 func _process(delta):
-	if (inOptions):
-		
+	uiCooldown += delta
+	if (inOptions && uiCooldown > 1.0):
 		#var number_ioget_parent().get_parent().get_parent()._options.size())
-	#rect_position.y = startingPosition.y + (amplitude * sin(elapsed * ((2 * PI) / period)))
+		#rect_position.y = startingPosition.y + (amplitude * sin(elapsed * ((2 * PI) / period)))
 		if(Input.is_action_just_pressed("ui_accept")):
 			inUpgrades = false
 			get_parent().get_parent().get_parent().select_option(selectedOption-1)
 			choosenOption = selectedOption-1
+			uiCooldown = 0.0
 			return
 		if(Input.is_action_just_pressed("ui_down") && selectedOption < curOptions.size()):
 			selectedOption += 1
