@@ -60,6 +60,12 @@ func beginFight():
 	
 var uiCooldown = 0.0
 func _process(_delta):
+	if (!GlobalSnakeVar.paused):
+		#update hud
+		get_node("HUD").get_node("CountdownTimer").text = String(abs(ceil(timerinstance)))
+		get_node("HUD").get_node("Player/Score").text = "X" + String(GlobalSnakeVar.snakes[0].truecords.size())
+		get_node("HUD").get_node("Enemy/Score").text = "X" + String(GlobalSnakeVar.snakes[1].truecords.size())
+		timerinstance -= _delta
 	uiCooldown += _delta
 	if (uiCooldown > 0.5):
 		if Input.is_action_just_released("ui_end"):
@@ -72,12 +78,8 @@ func _process(_delta):
 				pre_start()
 			if battleState == 3:
 				#breakpoint # NEXT SCENE
-				pass
+				get_tree().change_scene("res://DevLevelSelect.tscn")
 			uiCooldown = 0.0
-	if (!GlobalSnakeVar.paused):
-		get_node("HUD").get_node("CountdownTimer").text = String(ceil(timerinstance))
-		timerinstance -= _delta
-
 var bulletlastrun = 0
 var counterlastsnake = 0
 func _physics_process(delta):

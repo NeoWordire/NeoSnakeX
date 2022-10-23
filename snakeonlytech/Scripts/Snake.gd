@@ -2,9 +2,10 @@ extends Area2D
 class_name Snake, "res://Assets/Textures/snake_head.png"
 func get_class(): return "Snake"
 const Bullet = preload("res://Scripts/Bullet.gd")
-var SnakeBodyParticle = load("res://BattleScene/SnakeBodyParticle.tscn")
-var SnakeBodyDeadParticle = load("res://BattleScene/SnakeBodyDeadParticle.tscn")
-var SnakeBodyMainSprite = load("res://BattleScene/SnakeBodyParticleIn.tscn")
+var bullet_packed = load("res://BattleScene/SubSceneObjects/Bullet.tscn")
+var SnakeBodyParticle = load("res://BattleScene/SubSceneObjects/SnakeBodyParticle.tscn")
+var SnakeBodyDeadParticle = load("res://BattleScene/SubSceneObjects/SnakeBodyDeadParticle.tscn")
+var SnakeBodyMainSprite = load("res://BattleScene/SubSceneObjects/SnakeBodyParticleIn.tscn")
 
 signal snake_died(player)
 signal ate_food()
@@ -25,7 +26,6 @@ export (int, "player","ai") var HumanOrCPU
 
 export (Texture) var bodytex
 export (Texture) var headtex
-export (Texture) var bodywarptex
 
 export (Vector2) var startpos
 export (GlobalSnakeVar.DIRS) var startRotation = GlobalSnakeVar.DIRS.EAST
@@ -308,7 +308,6 @@ func body_follow_head(prevheadpos,prevrot):
 #			tilerot[inverse] = tilerot[inverse - 1]
 #			GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[inverse])] = 1
 func shoot(pos, dir):
-	var bullet_packed = load("res://BattleScene/Bullet.tscn")
 	var bullet = bullet_packed.instance()
 	bullet.setup(pos, dir, _player)
 	add_child(bullet)
