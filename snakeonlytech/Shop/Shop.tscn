@@ -10,7 +10,7 @@
 [ext_resource path="res://Scripts/Yarn/nav_arrow.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=9]
 [ext_resource path="res://Shop/mouthmoveplaceholder.tres" type="Texture" id=10]
-[ext_resource path="res://Shop/MouthFlap.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/MouthFlap.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Mockup/bg.png" type="Texture" id=12]
 
 [sub_resource type="Resource" id=1]

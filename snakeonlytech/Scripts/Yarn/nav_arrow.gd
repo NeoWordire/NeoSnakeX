@@ -77,3 +77,8 @@ func _on_YarnRunner_command_emitted(command, arguments):
 	if command == "gotoBattle1":
 		get_tree().change_scene("res://BattleScene/snakebattlev3.tscn")
 	pass # Replace with function body.
+
+
+func _on_YarnRunner_dialogue_finished():
+	get_tree().change_scene("res://DevLevelSelect.tscn")
+	pass # Replace with function body.

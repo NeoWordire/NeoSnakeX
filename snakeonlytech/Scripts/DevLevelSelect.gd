@@ -7,10 +7,9 @@ extends Control
 var selected = 0
 var levels = [
 	"res://BattleScene/snakebattlev3.tscn",
-#	"res://BattleScene/battle2.tscn",
-#	"res://BattleScene/battle3.tscn",
 	"res://BattleScene/battle1.tscn",
 	"res://Shop/Shop.tscn",
+	"res://Dialogue/TalkTemplate.tscn",
 ]
 
 var levelpanels = []
