@@ -196,7 +196,6 @@ offset = Vector2( 0, 8 )
 transform = Transform2D( 1, 0, 0, 1, 0, 8 )
 script = ExtResource( 10 )
 FoodSegments = 3
-timer = 5.0
 
 [node name="HUD" type="Control" parent="SnakeBattle"]
 margin_top = 137.0
