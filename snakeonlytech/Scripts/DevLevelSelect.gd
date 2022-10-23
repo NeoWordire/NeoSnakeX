@@ -53,4 +53,8 @@ func _process(delta):
 		if (selected > 0):
 			selected -= 1
 	get_node("arrow").position.y = levelpanels[selected].rect_position.y + levelpanels[selected].rect_size.y/2
+	if get_node("arrow").position.y > 140 :
+		self.rect_position.y = -140
+	else :
+		self.rect_position.y = 0
 	pass
