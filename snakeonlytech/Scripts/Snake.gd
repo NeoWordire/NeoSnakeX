@@ -43,10 +43,6 @@ func update_ray():
 
 func setup(player):
 	_player = player
-	for bullet in GlobalSnakeVar.bullets:
-		remove_child(bullet)
-		bullet.queue_free()
-	GlobalSnakeVar.bullets = []
 	for sprite in sprites:
 		remove_child(sprite)
 		sprite.queue_free()

@@ -39,20 +39,17 @@ func beginFight():
 	battleState = 1
 	GlobalSnakeVar.paused = false
 	GlobalSnakeVar.initColMap()
-	if (GlobalSnakeVar.snakes.empty()):
-		var player = 0
-		for node in get_children():
-			print(node.get_class())
-			if node.get_class() == "Snake":
-				node.setup(player)
-				player += 1
-				#node.connect("snake_died", self, "snake_died_func")
-				GlobalSnakeVar.snakes.append(node)
+	GlobalSnakeVar.snakes = []
+	var player = 0
+	for node in get_children():
+		print(node.get_class())
+		if node.get_class() == "Snake":
+			node.setup(player)
+			player += 1
+			#node.connect("snake_died", self, "snake_died_func")
+			GlobalSnakeVar.snakes.append(node)
 		GlobalSnakeVar.g_numplayers = player
-	else:
-		for snake in GlobalSnakeVar.snakes:
-			snake.setup(snake._player)
-	print(GlobalSnakeVar.snakes.size())
+	assert(GlobalSnakeVar.snakes.size()==2)
 
 	var food = get_node("Food");
 	food.ate_food()
@@ -67,17 +64,16 @@ func _process(_delta):
 		get_node("HUD").get_node("Enemy/Score").text = "X" + String(GlobalSnakeVar.snakes[1].truecords.size())
 		timerinstance -= _delta
 	uiCooldown += _delta
-	if (uiCooldown > 0.5):
-		if Input.is_action_just_released("ui_end"):
+	if (uiCooldown > 0.5 || battleState == 3):
+		if Input.is_action_just_pressed("ui_end"):
 			GlobalSnakeVar.debug = !GlobalSnakeVar.debug
 			uiCooldown = 0.0
-		if Input.is_action_just_released("ui_accept"):
+		if Input.is_action_just_pressed("ui_accept"):
 			if battleState == 0:
 				startRequested()
 			if battleState == 2:
 				pre_start()
 			if battleState == 3:
-				#breakpoint # NEXT SCENE
 				get_tree().change_scene("res://DevLevelSelect.tscn")
 			uiCooldown = 0.0
 var bulletlastrun = 0
@@ -122,21 +118,34 @@ func startRequested():
 	beginFight()
 
 func timer_complete():
+	clean_up_before_change()
+	if (GlobalSnakeVar.snakes[0].sprites.size() == GlobalSnakeVar.snakes[1].sprites.size()):
+		game_over_lost("TIED, CLOSE BUT NOT A VICTORY...")
+		return
 	if (GlobalSnakeVar.snakes[0].sprites.size() < GlobalSnakeVar.snakes[1].sprites.size()):
 		game_over_lost("YOUR SNAKE SMALL")
 		return
+	uiCooldown = 0.0
 	battleState = 3
 	get_node("WINSCREEN").visible = true
 
 func pre_start():
+	uiCooldown = 0.0
 	battleState = 0
 	get_node("LOSESCREEN").visible = false
 	get_node("WINSCREEN").visible = false
 	get_node("PRESTART").visible = true
 	get_node("PRESTART").raise()
 	
+func clean_up_before_change():
+	for bullet in GlobalSnakeVar.bullets:
+		bullet.queue_free()
+	GlobalSnakeVar.bullets = []	
+
 func game_over_lost(reason):
+	uiCooldown = 0.0
 	battleState = 2
+	clean_up_before_change()
 	print("LOST BECAUSE =", reason)
 	GlobalSnakeVar.paused = true
 	get_node("LOSESCREEN").visible = true
@@ -151,6 +160,10 @@ func _on_Player_snake_died(player):
 
 func _on_Enemy_snake_died(player):
 	SoundPlayer.play_sound(SoundPlayer.SFXSNAKEDEFEATED)
+	
 	print("player = ", player, "has DIED")
-	game_over_lost("WTF ENEMY DIED????????????????????????/")
+	#game_over_lost("WTF ENEMY DIED????????????????????????/")
+	uiCooldown = 0.0
+	battleState = 3
+	get_node("WINSCREEN").visible = true
 	pass
