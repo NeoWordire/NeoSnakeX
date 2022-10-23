@@ -52,6 +52,7 @@ var options : Array
 
 # the next line queued up to be displayed.
 var nextLine    : String = ""
+var nextName   : String = "" # CoryXXX
 
 # used to check if the current line is finished being displayed
 var lineFinished : bool = true
@@ -126,6 +127,7 @@ func hide_gui():
 ## set the next line to be displayed
 ## if the current line is empty then immediately display the next line
 func set_line(line : String):
+	
 	if config.unknownOutput:
 		return
 
@@ -134,8 +136,8 @@ func set_line(line : String):
 	if namePlate:
 		if result:
 			var name : String = result.get_string()
+			nextName = name
 			line = line.replace(name +':', "")
-			set_name_plate(name)
 		else:
 			namePlate.visible = false
 
@@ -164,6 +166,12 @@ func display_next_line():
 			text.parse_bbcode(nextLine)
 		else:
 			text.set_text(nextLine)
+			
+		if namePlate:
+			if nextName:
+				set_name_plate(nextName)
+			else:
+				namePlate.visible = false
 
 		shouldUpdateTotalLineTime = true
 		emit_signal("text_changed")
