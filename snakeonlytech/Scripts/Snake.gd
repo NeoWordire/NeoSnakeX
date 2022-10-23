@@ -15,7 +15,7 @@ var sprites = []
 var colshapes = []
 var truecords = [] 
 var tilerot = []
-var splitMap = []
+#var splitMap = []
 var snakecap = 5
 var truedir = GlobalSnakeVar.NODIR
 var reqdir = GlobalSnakeVar.NODIR
@@ -53,7 +53,7 @@ func setup(player):
 	sprites = [];
 	truecords = []
 	tilerot = []
-	splitMap = []
+#	splitMap = []
 	snakecap = 5
 	#get_node("shootCoolDown").connect("timeout",self,"fire_cooled_off")
 	#get_node("shootCoolDown").one_shot = true
@@ -72,7 +72,7 @@ func setup(player):
 	update_ray()
 	poly.texture = headtex
 	truecords.append(startpos)
-	splitMap.append(0)
+#	splitMap.append(0)
 	
 	reqdir = startRotation
 	truedir = startRotation
@@ -225,10 +225,7 @@ func get_input_ai():
 	inputshoot = false
 	update_ray()
 	get_node("ray").enabled = true
-	#var hitnode = get_node("ray").get_collision_point()
 	if (get_node("ray").is_colliding()):
-		#print("hitnode = ", hitnode)
-		#var result = space_state.intersect_ray()
 		inputshoot = true
 
 func move_head():
@@ -242,34 +239,16 @@ func move_head():
 	truecords[0] = goingto
 	tilerot[0] = truedir
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[0])] = 1
-	#update_display() #XXXXXXX
 	return true
-
-func iterateSplitGroup():
-	var group = 0 #splitMap[t] group
-	assert(splitMap.size() == sprites.size())
-	for x in splitMap.size():
-		if (splitMap[x] != group):
-			var temp = group
-			group = splitMap[x]
-			splitMap[x] = temp
-	#splitMap[-1] = splitMap[-1] - 1
 
 func body_follow_head(prevheadpos,prevrot):
 	if sprites.size() <= 1:
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[0])] = 0
 		return
-	iterateSplitGroup()
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[-1])] = 0
 	var followcord = prevheadpos
 	var followRot = prevrot
-	var followGroup = splitMap[0]
-	var warp = -1
 	for s in range(1, sprites.size()):
-		#swap followcords with current
-		if(splitMap[s] != followGroup):
-			warp = s
-			break
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 0
 		sprites[s].texture = bodytex
 		var tempCord = followcord
@@ -279,30 +258,7 @@ func body_follow_head(prevheadpos,prevrot):
 		truecords[s] = tempCord
 		tilerot[s] = tempRot
 		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 1
-	if warp > 2:
-		for s in range(warp, sprites.size()):
-			GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 1
-			#prites[s].texture = bodytex
-	if warp > 2 && snakecap - 1 < sprites.size():
-		var temp = SnakeBodyParticle.instance()
-		temp.texture = bodytex
-		add_child(temp)
-		temp.position = sprites[warp-1].position
-		temp.rotation = sprites[warp-1].rotation
-		sprites[warp-1].set_state(1)
-		#prites[warp-1].texture.pause = false
-		#prites[warp-1].texture.current_frame = 1
-		
-		pass
 
-#			GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[inverse])] = 1
-	
-#	for s in (sprites.size()-1):
-#		var inverse = sprites.size() - s - 1
-#		if(splitMap[inverse] == 0):
-#			truecords[inverse] = truecords[inverse-1]
-#			tilerot[inverse] = tilerot[inverse - 1]
-#			GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[inverse])] = 1
 func shoot(pos, dir):
 	var bullet = bullet_packed.instance()
 	bullet.setup(pos, dir, _player)
@@ -327,7 +283,7 @@ func grow(tailpos, rot):
 	colshapes.append(hitbox)
 	sprites.append(poly)
 	truecords.append(tailpos)
-	splitMap.append(splitMap[-1])
+#	splitMap.append(splitMap[-1])
 
 	tilerot.append(rot)
 	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(tailpos)] = 1
@@ -369,7 +325,7 @@ func got_shot(x):
 	add_child(temp)
 	#sprites[x].texture = bodywarptex
 	#sprites[x].texture.pause = true
-	splitMap.remove(sprites.size()-1)
+#	splitMap.remove(sprites.size()-1)
 	tilerot.remove(sprites.size()-1)
 	remove_child(sprites[sprites.size()-1])
 	truecords.remove(sprites.size()-1)

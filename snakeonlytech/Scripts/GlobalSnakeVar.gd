@@ -102,4 +102,6 @@ func debug_colmap():
 				debugcolmapnodes.append(debugpoly)
 				dbgnode.add_child(debugpoly)
 
-
+func _process(delta):
+	if Input.is_action_just_pressed("ui_end"):
+		get_tree().change_scene("res://DevLevelSelect.tscn")

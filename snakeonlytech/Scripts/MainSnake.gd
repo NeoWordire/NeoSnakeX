@@ -65,9 +65,6 @@ func _process(_delta):
 		timerinstance -= _delta
 	uiCooldown += _delta
 	if (uiCooldown > 0.5 || battleState == 3):
-		if Input.is_action_just_pressed("ui_end"):
-			GlobalSnakeVar.debug = !GlobalSnakeVar.debug
-			uiCooldown = 0.0
 		if Input.is_action_just_pressed("ui_accept"):
 			if battleState == 0:
 				startRequested()
