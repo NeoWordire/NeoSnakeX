@@ -22,12 +22,9 @@ func _ready():
 var lerptime = 0.1
 var updatetime = 999
 func update_display():
-	if GlobalSnakeVar.paused:
-		lerptime = 0
-		return
-
-	var lerppos = pastpos.linear_interpolate(truepos, lerptime)
-	position = lerppos
+	pass
+	#var lerppos = pastpos.linear_interpolate(truepos, lerptime)
+	#position = lerppos
  
 
 func step_simulation():
@@ -37,6 +34,7 @@ func step_simulation():
 		remove_bullet()
 		return
 	lerptime = 0.0
+	position = pastpos
 	pass
 
 func remove_bullet():
@@ -46,7 +44,9 @@ func remove_bullet():
 	queue_free()
 
 func _physics_process(delta):
-	lerptime += delta * ( 120.0 / (120 * GlobalSnakeVar.g_bullet_moves_per_second))
+	lerptime += delta * (60.0 / GlobalSnakeVar.g_bullet_moves_per_second)
+	if (lerptime > 1.0):
+		lerptime = 1.0
 	update_display()
 	pass
 	

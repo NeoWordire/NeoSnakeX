@@ -9,8 +9,24 @@ export (int) var snake_mps = 8
 export (int) var FoodSegments = 1
 export (bool) var debugging = false
 export (float) var ShootCooldown = 0.5 
-export (float) var timer = 30.0
+#export (float) var timer = 30.0 EndConditions["TIMER"]
 var battleState = 0 # 0 == PRESTART, 1 == IN BATTLE, 2 GAMEOVER LOST, 3 GAMEOVERWIN
+
+#not used outside doucmentation rn
+var WinLoseEndCons = [
+	"APPLES", #0 no checks, >0 end game once this many apples collected
+	"SEGMENTS", #0 not checked, #1 (on end) Compare and player must have more segments
+	"TIMER", #0 no timer, >0 end game after this many seconds
+]
+
+export (Dictionary) var WinConditions = {
+	"APPLES" : 0,
+	"SEGMENTS" : 1,
+}
+
+export (Dictionary) var EndConditions = {
+	"TIMER" : 30,
+}
 
 
 var timerinstance
@@ -35,7 +51,8 @@ func start():
 	GlobalSnakeVar.paused = false
 
 func beginFight():
-	timerinstance = timer
+	if (EndConditions["TIMER"] != 0):
+		timerinstance = EndConditions["TIMER"]
 	get_node("PRESTART").visible = false
 	battleState = 1
 	GlobalSnakeVar.paused = false
@@ -60,10 +77,12 @@ var uiCooldown = 0.0
 func _process(_delta):
 	if (!GlobalSnakeVar.paused):
 		#update hud
-		get_node("HUD").get_node("CountdownTimer").text = String(abs(ceil(timerinstance)))
+		if (EndConditions["TIMER"] != 0):
+			get_node("HUD").get_node("CountdownTimer").text = String(abs(ceil(timerinstance)))
+			timerinstance -= _delta
 		get_node("HUD").get_node("Player/Score").text = "X" + String(GlobalSnakeVar.snakes[0].truecords.size())
 		get_node("HUD").get_node("Enemy/Score").text = "X" + String(GlobalSnakeVar.snakes[1].truecords.size())
-		timerinstance -= _delta
+
 	uiCooldown += _delta
 	if (uiCooldown > 0.5 || battleState == 3):
 		if Input.is_action_just_pressed("ui_accept"):
@@ -83,9 +102,9 @@ func _physics_process(delta):
 	GlobalSnakeVar.bulletupdatetimer += delta
 	if GlobalSnakeVar.paused:
 		return
-	if (timerinstance <= 0.0):
+	if (EndConditions["TIMER"] != 0 && timerinstance <= 0.0):
 		timerinstance = 0
-		timer_complete()
+		end_con_hit()
 		return
 		#if (updatetime*GlobalSnakeVar.moves_per_second >= 1.0):
 	if (GlobalSnakeVar.snakeupdatetimer * GlobalSnakeVar.g_snake_moves_per_second >= 1.0):
@@ -115,18 +134,26 @@ func _on_GameOver_pressed():
 	
 func startRequested():	
 	beginFight()
-
-func timer_complete():
+	
+func end_con_hit():
 	clean_up_before_change()
-	if (GlobalSnakeVar.snakes[0].sprites.size() == GlobalSnakeVar.snakes[1].sprites.size()):
-		game_over_lost("TIED, CLOSE BUT NOT A VICTORY...")
-		return
-	if (GlobalSnakeVar.snakes[0].sprites.size() < GlobalSnakeVar.snakes[1].sprites.size()):
-		game_over_lost("YOUR SNAKE SMALL")
-		return
+	if (WinConditions["SEGMENTS"] == 1):
+		if (GlobalSnakeVar.snakes[0].sprites.size() == GlobalSnakeVar.snakes[1].sprites.size()):
+			game_over_lost("TIED, CLOSE BUT NOT A VICTORY...")
+			return
+		elif (GlobalSnakeVar.snakes[0].sprites.size() < GlobalSnakeVar.snakes[1].sprites.size()):
+			game_over_lost("YOUR SNAKE SMALL")
+			return
+		else:
+			game_over_won("BIGGER SNAKE DIPLOMACY, YOU WON")
+	else:
+		game_over_won("ERROR NO WIN CONDITION HIT SO THIS BATTLE NEEDS A WIN CON?")
+		
+func game_over_won(reason):
 	uiCooldown = 0.0
 	battleState = 3
 	get_node("WINSCREEN").visible = true
+	get_node("WINSCREEN/REASON").text = reason
 
 func pre_start():
 	uiCooldown = 0.0
