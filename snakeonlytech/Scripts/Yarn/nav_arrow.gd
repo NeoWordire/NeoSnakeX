@@ -10,6 +10,10 @@ var selectedOption = 1
 var choosenOption = -1
 var curOptions = []
 
+export (String) var EndScene
+
+signal finish_line_early
+
 var upgradeDesc = ["GUN 1 DESC,GUN 1 DESC,GUN 1 DESC,GUN 1 DESC,GUN 1 DESC", "GUN 2 DESC,GUN 2 DESC,GUN 2 DESC,GUN 2 DESC,GUN 2 DESC", "GUN 3 DESC,GUN 3 DESC,GUN 3 DESC,GUN 3 DESC,GUN 3 DESC"]
 
 func _ready():
@@ -49,6 +53,7 @@ func _process(delta):
 		get_parent().get_parent().get_parent().get_node("Dialogue/VBoxContainer/RichTextLabel").text = upgradeDesc[selectedOption-1]
 	else:
 		if(Input.is_action_just_pressed("ui_accept")):
+			emit_signal("finish_line_early")
 			get_parent().get_parent().get_parent().finish_line()
 	elapsed+=delta
 
@@ -71,14 +76,10 @@ func _on_YarnDisplay_option_selected():
 
 
 func _on_YarnRunner_command_emitted(command, arguments):
-	print(command)
-	if command == "upgrades1":
-		inUpgrades = true
-	if command == "gotoBattle1":
-		get_tree().change_scene("res://BattleScene/snakebattlev3.tscn")
-	pass # Replace with function body.
-
+	print("command = ", command, arguments)
+	
+	pass
 
 func _on_YarnRunner_dialogue_finished():
-	get_tree().change_scene("res://DevLevelSelect.tscn")
+	get_tree().change_scene(EndScene)
 	pass # Replace with function body.

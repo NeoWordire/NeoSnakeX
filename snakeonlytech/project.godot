@@ -67,7 +67,7 @@ _global_script_class_icons={
 "Snake": "res://Assets/Textures/snake_head.png",
 "Value": "",
 "VariableStorage": "res://addons/gdyarn/assets/storage.png",
-"YarnDisplay": "",
+"YarnDisplay": "res://addons/gdyarn/assets/display.PNG",
 "YarnFile": "",
 "YarnImporter": ""
 }

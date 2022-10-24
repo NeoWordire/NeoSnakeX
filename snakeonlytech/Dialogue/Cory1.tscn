@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Assets/Textures/Girl Sprites/girl.tres" type="Texture" id=1]
+[ext_resource path="res://Assets/Textures/Rival Boy Called Cory/cory_mouth.png" type="Texture" id=1]
 [ext_resource path="res://addons/gdyarn/yarn_runner.gd" type="Script" id=2]
 [ext_resource path="res://addons/gdyarn/yarn_gui.gd" type="Script" id=3]
 [ext_resource path="res://addons/gdyarn/core/variable_storage.gd" type="Script" id=4]
@@ -11,12 +11,15 @@
 [ext_resource path="res://Scripts/MouthFlap.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Mockup/bg.png" type="Texture" id=12]
 
+[sub_resource type="AnimatedTexture" id=2]
+frame_0/texture = ExtResource( 1 )
+
 [sub_resource type="Resource" id=1]
 resource_local_to_scene = true
 script = ExtResource( 5 )
 _programName = "compiled_yarn_program"
 _directory = "res://Dialogue"
-_yarnPrograms = [ "res://Dialogue/YarnTemplate.yarn" ]
+_yarnPrograms = [ "res://Dialogue/Cory1.yarn" ]
 
 [node name="Shop" type="Node2D"]
 scale = Vector2( 1, 1.01068 )
@@ -30,9 +33,9 @@ texture = ExtResource( 12 )
 [node name="Character" type="Node2D" parent="."]
 position = Vector2( 5, -1.97887 )
 
-[node name="Girl1" type="Sprite" parent="Character"]
+[node name="Cory" type="Sprite" parent="Character"]
 position = Vector2( 167, 82.1229 )
-texture = ExtResource( 1 )
+texture = SubResource( 2 )
 script = ExtResource( 10 )
 
 [node name="VariableStorage" type="Node" parent="."]
@@ -147,10 +150,10 @@ _autoStart = true
 _variableStorage = NodePath("../VariableStorage")
 _compiledYarnProgram = SubResource( 1 )
 
-[connection signal="line_finished" from="YarnDisplay" to="Character/Girl1" method="_on_YarnDisplay_line_finished"]
-[connection signal="line_started" from="YarnDisplay" to="Character/Girl1" method="_on_YarnDisplay_line_started"]
-[connection signal="finish_line_early" from="YarnDisplay/Menu/HBoxContainer/MenuSelectControl" to="Character/Girl1" method="_on_MenuSelectControl_finish_line_early"]
+[connection signal="line_finished" from="YarnDisplay" to="Character/Cory" method="_on_YarnDisplay_line_finished"]
+[connection signal="line_started" from="YarnDisplay" to="Character/Cory" method="_on_YarnDisplay_line_started"]
+[connection signal="finish_line_early" from="YarnDisplay/Menu/HBoxContainer/MenuSelectControl" to="Character/Cory" method="_on_MenuSelectControl_finish_line_early"]
 [connection signal="command_emitted" from="YarnRunner" to="YarnDisplay/Menu/HBoxContainer/MenuSelectControl" method="_on_YarnRunner_command_emitted"]
-[connection signal="dialogue_finished" from="YarnRunner" to="Character/Girl1" method="_on_YarnRunner_dialogue_finished"]
+[connection signal="dialogue_finished" from="YarnRunner" to="Character/Cory" method="_on_YarnRunner_dialogue_finished"]
 [connection signal="dialogue_finished" from="YarnRunner" to="YarnDisplay/Menu/HBoxContainer/MenuSelectControl" method="_on_YarnRunner_dialogue_finished"]
-[connection signal="line_emitted" from="YarnRunner" to="Character/Girl1" method="_on_YarnRunner_line_emitted"]
+[connection signal="line_emitted" from="YarnRunner" to="Character/Cory" method="_on_YarnRunner_line_emitted"]

@@ -10,6 +10,9 @@ var levels = [
 	"res://BattleScene/battle1.tscn",
 	"res://Shop/Shop.tscn",
 	"res://Dialogue/TalkTemplate.tscn",
+	"res://Dialogue/Cory1.tscn",
+	"res://Dialogue/Cory1.tscn",
+	"res://Dialogue/Cory1.tscn",
 ]
 
 var levelpanels = []

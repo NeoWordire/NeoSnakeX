@@ -17,6 +17,12 @@
 "operand_value": 0.0
 } ]
 }, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "playsound sound1"
+} ]
+}, {
 "instruction_op": 17,
 "instruction_operands": [ {
 "operand_type": 1,
@@ -110,6 +116,30 @@
 }, {
 "operand_type": 3,
 "operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:70501dee"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:ec2f7cbb"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Start"
 } ]
 }, {
 "instruction_op": 16,

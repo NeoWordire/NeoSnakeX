@@ -21,7 +21,7 @@ signal line_started
 signal line_finished
 
 #emit this signal when options have begun to be shown
-signal options_shown(lineOptions)
+signal options_shown
 
 # emit this signal once an option
 # has been selected
@@ -41,35 +41,34 @@ export(Array, NodePath) var _options setget set_option_nodes
 # controls the rate at which the text is displayed
 export(int) var _textSpeed = 1
 
-
 # just holds variables I dont want too exposed to the outside.
-var config : Configuration = Configuration.new()
+var config: Configuration = Configuration.new()
 
 var yarnRunner
 var text
 var namePlate
-var options : Array
+var options: Array
 
-# the next line queued up to be displayed.
-var nextLine    : String = ""
-var nextName   : String = "" # CoryXXX
+# the next line and name queued up to be displayed.
+var nextLine: String = ""
+var nextName: String = ""
 
 # used to check if the current line is finished being displayed
-var lineFinished : bool = true
-var elapsedTime : float = 0
-var totalLineTime : float = 1
-var showingOptions : bool = false
-var shouldContinue : bool = true
-var isDialogueFinished : bool = false
+var lineFinished: bool = true
+var elapsedTime: float = 0
+var totalLineTime: float = 1
+var showingOptions: bool = false
+var shouldContinue: bool = true
+var isDialogueFinished: bool = false
 
-var shouldUpdateTotalLineTime : bool = false
+var shouldUpdateTotalLineTime: bool = false
 
-var nameRegex : RegEx
+var nameRegex: RegEx
 
-var lastVisibleChars : int = 0
+var lastVisibleChars: int = 0
+
 
 func _ready():
-
 	nameRegex = RegEx.new()
 	nameRegex.compile("^(?:.*(?=:))")
 	if _namePlate:
@@ -77,38 +76,65 @@ func _ready():
 		if !namePlate.has_method("set_text"):
 			namePlate = null
 
-	if (_yarnRunner):
+	if _yarnRunner:
 		yarnRunner = get_node(_yarnRunner)
-		yarnRunner.connect("line_emitted", self, "set_line");
+		yarnRunner.connect("line_emitted", self, "set_line")
 		yarnRunner.connect("node_started", self, "on_node_start")
 		yarnRunner.connect("options_emitted", self, "show_options")
 		yarnRunner.connect("dialogue_finished", self, "on_dialogue_finished")
 		yarnRunner.connect("command_emitted", self, "on_command")
 
-	if (_text):
-		text       = get_node(_text)
+	if _text:
+		text = get_node(_text)
 		if text is RichTextLabel:
 			config.richTextLabel = true
 		elif text is Label:
 			pass
-		elif text &&  !text.has_method("set_text"):
+		elif text && !text.has_method("set_text"):
 			config.unknownOutput = true
 	else:
 		config.unknownOutput = true
 	for option in _options:
 		options.push_back(get_node(option))
 		if options.back().has_signal("pressed"):
-			options.back().connect("pressed",self,"select_option",[options.size() - 1])
+			options.back().connect("pressed", self, "select_option", [options.size() - 1])
 
 	hide_options()
+
+
+func _process(delta):
+	if shouldUpdateTotalLineTime:
+		shouldUpdateTotalLineTime = false
+		totalLineTime = float(text.get_total_character_count()) / float(_textSpeed)
+
+	if !lineFinished && !config.unknownOutput:
+		if _textSpeed <= 0 || elapsedTime >= totalLineTime:
+			lineFinished = true
+			elapsedTime += totalLineTime
+			emit_signal("line_finished")
+			yarnRunner.resume()
+
+	if totalLineTime > 0:
+		text.set_percent_visible(elapsedTime / totalLineTime)
+		if lastVisibleChars != text.visible_characters:
+			emit_signal("text_changed")
+		lastVisibleChars = text.visible_characters
+	else:
+		text.set_percent_visible(1.0)
+
+	elapsedTime += delta
+	pass
+
 
 func on_dialogue_finished():
 	isDialogueFinished = true
 
-func on_command(command, arguments:Array):
+
+func on_command(command, arguments: Array):
 	if command == "wait":
 		clear_text()
 		emit_signal("line_started")
+
 
 ## make the yarn gui visible and emit the gui shown signal
 func show_gui():
@@ -117,6 +143,7 @@ func show_gui():
 	isDialogueFinished = false
 	lineFinished = false
 
+
 ## hide the yarn gui and emit the gui hidden signal
 ## NOTE: not calling this can break certain things if they are
 ## 		 depengint on the gui_hidden signal from the yarn gui.
@@ -124,30 +151,30 @@ func hide_gui():
 	emit_signal("gui_hidden")
 	self.visible = false
 
+
 ## set the next line to be displayed
 ## if the current line is empty then immediately display the next line
-func set_line(line : String):
-	
+func set_line(line: String):
 	if config.unknownOutput:
 		return
 
-	var result : RegExMatch = nameRegex.search(line)
+	var result: RegExMatch = nameRegex.search(line)
 
 	if namePlate:
 		if result:
-			var name : String = result.get_string()
+			var name: String = result.get_string()
+			line = line.replace(name + ":", "")
 			nextName = name
-			line = line.replace(name +':', "")
 		else:
-			namePlate.visible = false
-
+			nextName = ""
 
 	nextLine = line
 	if shouldContinue:
 		shouldContinue = false
 		display_next_line()
 
-func set_name_plate(name : String):
+
+func set_name_plate(name: String):
 	namePlate.set_text(name)
 	namePlate.visible = true
 
@@ -160,18 +187,18 @@ func display_next_line():
 	if !config.unknownOutput && !nextLine.empty():
 		# TODO add some preprocessing if we have a name plate available and the line contains
 		#      a string in the format "name: content"
+		if namePlate:
+			if nextName:
+				set_name_plate(nextName)
+			else:
+				namePlate.visible = false
+
 		if config.richTextLabel:
 			lastVisibleChars = 0
 			(text as RichTextLabel).percent_visible = 0
 			text.parse_bbcode(nextLine)
 		else:
 			text.set_text(nextLine)
-			
-		if namePlate:
-			if nextName:
-				set_name_plate(nextName)
-			else:
-				namePlate.visible = false
 
 		shouldUpdateTotalLineTime = true
 		emit_signal("text_changed")
@@ -199,18 +226,21 @@ func finish_line():
 			display_next_line()
 	else:
 		lineFinished = true
-		elapsedTime+=totalLineTime
+		elapsedTime += totalLineTime
 		yarnRunner.resume()
+
 
 ## do this when a new node starts
 ## to get the dialogue rolling
 func on_node_start(nodeName):
 	yarnRunner.resume()
 
+
 func hide_options():
 	for option in options:
 		option.visible = false
 	showingOptions = false
+
 
 ## display the optionlines to the user
 ## by using the options that we set in the inspector
@@ -220,14 +250,19 @@ func hide_options():
 ## to the user as this might be unwanted behavior.
 func show_options(optionLines):
 	if self.options.size() < optionLines.size():
-		printerr("Received [%d] options, but only have[%d] option nodes in yarn_gui." %[optionLines.size(), options.size()])
+		printerr(
+			(
+				"Received [%d] options, but only have[%d] option nodes in yarn_gui."
+				% [optionLines.size(), options.size()]
+			)
+		)
 
-	for i in range(min(options.size(),optionLines.size())):
+	for i in range(min(options.size(), optionLines.size())):
 		options[i].set_text(optionLines[i])
 		options[i].visible = true
 
 	showingOptions = true
-	emit_signal("options_shown", optionLines)
+	emit_signal("options_shown")
 
 
 ## If we are currently showing options on the display
@@ -240,10 +275,12 @@ func select_option(option):
 	finish_line()
 	emit_signal("option_selected")
 
+
 func set_runner_node(runner):
 	if get_node(runner) && !get_node(runner).has_signal("line_emitted"):
 		return
 	_yarnRunner = runner
+
 
 func set_text_node(node):
 	_text = node
@@ -252,6 +289,7 @@ func set_text_node(node):
 func set_option_nodes(nodes):
 	_options = nodes
 
+
 func clear_text():
 	if text:
 		text.set_text("")
@@ -259,43 +297,15 @@ func clear_text():
 	if namePlate:
 		namePlate.visible = false
 
-func _process(delta):
-	if shouldUpdateTotalLineTime:
-		shouldUpdateTotalLineTime = false
-		totalLineTime = float( text.get_total_character_count()) / float( _textSpeed )
-
-
-	if !lineFinished && !config.unknownOutput:
-
-		if _textSpeed <= 0 || elapsedTime >= totalLineTime:
-			lineFinished = true
-			elapsedTime += totalLineTime
-			emit_signal("line_finished")
-			yarnRunner.resume()
-
-	if(totalLineTime > 0):
-		text.set_percent_visible(elapsedTime / totalLineTime)
-		if lastVisibleChars != text.visible_characters:
-			emit_signal("text_changed")
-		lastVisibleChars = text.visible_characters
-	else:
-		text.set_percent_visible(1.0)
-
-	elapsedTime+= delta
-	pass
 
 class Configuration:
 	# if this is a rich text label then we are going to use
 	# bb text by default , if we change this again at runtime
 	# then we will no longer use bb text
-	var richTextLabel : bool = false
+	var richTextLabel: bool = false
 
 	# if an output is unknown we will expect it to contain
 	# a set_text(text) function and if it does not then we
 	# want to print out an error to the console instead letting the user
 	# know that the output form is invalid.
-	var unknownOutput : bool = false
-
-
-func _on_MenuDisplay_line_started():
-	pass # Replace with function body.
+	var unknownOutput: bool = false

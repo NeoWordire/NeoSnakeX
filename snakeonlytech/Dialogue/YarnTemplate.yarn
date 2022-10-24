@@ -4,7 +4,8 @@ colorID: 0
 position: 120,-245
 ---
 Friend1: okay #line:11d738a1
-[[talk]] #line:321326fc
+<<playsound sound1>>
+[[Start]] #line:321326fc
 
 ===
 title: talk
@@ -12,19 +13,20 @@ tags:
 colorID: 0
 position: 170,-245
 ---
-Friend1: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. #line:f2e22884 
+Friend1: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. #line:f2e22884
 
-you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. #line:64c81415 
+you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. #line:64c81415
 
 Friend1: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. #line:9e94722e
 
 Friend1: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. #line:24f7d5a5
 
-Friend1: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. #line:e11397d8 
+Friend1: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. #line:e11397d8
 
-you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. #line:12f19ad0 
-
+you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. #line:12f19ad0
 Friend1: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. #line:c6f085de
-
 Friend1: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. #line:f5c3e664
+NO ONE SAYS THIS
+Friend1: test 1
+[[Start]]
 ===

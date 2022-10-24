@@ -1,10 +1,12 @@
 id	text	file	node	lineNumber	implicit	tags
-line:11d738a1	Friend1: okay 	YarnTemplate.yarn	Start	0	False	
-line:f2e22884	Friend1: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 	YarnTemplate.yarn	talk	0	False	
-line:64c81415	you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 	YarnTemplate.yarn	talk	2	False	
-line:9e94722e	Friend1: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 	YarnTemplate.yarn	talk	4	False	
-line:24f7d5a5	Friend1: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 	YarnTemplate.yarn	talk	6	False	
-line:e11397d8	Friend1: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 	YarnTemplate.yarn	talk	8	False	
-line:12f19ad0	you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 	YarnTemplate.yarn	talk	10	False	
-line:c6f085de	Friend1: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 	YarnTemplate.yarn	talk	12	False	
-line:f5c3e664	Friend1: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 	YarnTemplate.yarn	talk	14	False	
+line:11d738a1	Friend1: okay 	Cory1.yarn	Start	0	False	
+line:f2e22884	Cory: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 	Cory1.yarn	talk	0	False	
+line:64c81415	you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 	Cory1.yarn	talk	2	False	
+line:9e94722e	Cory: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 	Cory1.yarn	talk	4	False	
+line:24f7d5a5	Cory: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 	Cory1.yarn	talk	6	False	
+line:e11397d8	Cory: Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 	Cory1.yarn	talk	8	False	
+line:12f19ad0	you: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 	Cory1.yarn	talk	10	False	
+line:c6f085de	Cory: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 	Cory1.yarn	talk	11	False	
+line:f5c3e664	Cory: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 	Cory1.yarn	talk	12	False	
+line:70501dee	NO ONE SAYS THIS 	Cory1.yarn	talk	13	False	
+line:ec2f7cbb	Cory: test 1 	Cory1.yarn	talk	14	False	

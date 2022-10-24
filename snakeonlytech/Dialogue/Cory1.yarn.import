@@ -1,0 +1,13 @@
+[remap]
+
+importer="gdyarn.yarnFile"
+type="Resource"
+path="res://.import/Cory1.yarn-1b7e2ee2a4b272f6b40d2f034fac6084.tres"
+
+[deps]
+
+source_file="res://Dialogue/Cory1.yarn"
+dest_files=[ "res://.import/Cory1.yarn-1b7e2ee2a4b272f6b40d2f034fac6084.tres" ]
+
+[params]
+
