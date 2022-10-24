@@ -14,14 +14,18 @@
 [ext_resource path="res://Assets/Mockup/bg.png" type="Texture" id=12]
 
 [sub_resource type="AnimatedTexture" id=2]
-frames = 4
+frames = 5
+fps = 14.0
 frame_0/texture = ExtResource( 1 )
+frame_0/delay_sec = 0.1
 frame_1/texture = ExtResource( 11 )
-frame_1/delay_sec = 0.0
+frame_1/delay_sec = 0.1
 frame_2/texture = ExtResource( 6 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 1 )
-frame_3/delay_sec = 0.0
+frame_2/delay_sec = 0.1
+frame_3/texture = ExtResource( 11 )
+frame_3/delay_sec = 0.1
+frame_4/texture = ExtResource( 1 )
+frame_4/delay_sec = 0.0
 
 [sub_resource type="Resource" id=1]
 resource_local_to_scene = true
