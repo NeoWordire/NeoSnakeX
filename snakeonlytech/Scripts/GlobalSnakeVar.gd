@@ -9,6 +9,7 @@ var snakeupdatetimer = 0
 var bulletupdatetimer = 0
 var paused = false;
 var debug = false;
+var g_battleState = 0
 
 var colmap = []
 

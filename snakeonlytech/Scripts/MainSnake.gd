@@ -10,7 +10,8 @@ const Food = preload("res://Scripts/Food.gd")
 export (bool) var debugging = false
 #export (float) var ShootCooldown = 0.5 
 #export (float) var timer = 30.0 EndConditions["TIMER"]
-var battleState = 0 # 0 == PRESTART, 1 == IN BATTLE, 2 GAMEOVER LOST, 3 GAMEOVERWIN
+
+enum battleStateEnum {PRESTART, INBATTLE,ROUNDOVER,GAMEOVERLOST,GAMEOVERWON}
 
 #not used outside doucmentation rn
 var WinLoseEndCons = [
@@ -44,6 +45,7 @@ var bestOfTracker = [0,0]
 var timerinstance
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GlobalSnakeVar.g_battleState = battleStateEnum.PRESTART
 	GlobalSnakeVar.paused = true
 	GlobalSnakeVar.bullets = []
 	#get_node("BGM").stream_paused = true
@@ -64,7 +66,7 @@ func beginFight():
 	if (EndConditions["TIMER"] != 0):
 		timerinstance = EndConditions["TIMER"]
 	get_node("PRESTART").visible = false
-	battleState = 1
+	GlobalSnakeVar.g_battleState = battleStateEnum.INBATTLE
 	GlobalSnakeVar.paused = false
 	GlobalSnakeVar.initColMap()
 	GlobalSnakeVar.snakes = []
@@ -94,13 +96,16 @@ func _process(_delta):
 		get_node("HUD").get_node("Enemy/Score").text = "X" + String(GlobalSnakeVar.snakes[1].truecords.size())
 
 	uiCooldown += _delta
-	if (uiCooldown > 0.5 || battleState == 3):
+	if (uiCooldown > 0.5 || GlobalSnakeVar.g_battleState == battleStateEnum.GAMEOVERWON):
 		if Input.is_action_just_pressed("ui_accept"):
-			if battleState == 0:
+			if GlobalSnakeVar.g_battleState == battleStateEnum.PRESTART: #start from zero
 				startRequested()
-			if battleState == 2:
+			#GlobalSnakeVar.g_battleState == 1 in battle
+			if GlobalSnakeVar.g_battleState == battleStateEnum.ROUNDOVER: #continmu best of 3
 				pre_start()
-			if battleState == 3:
+			if GlobalSnakeVar.g_battleState == battleStateEnum.GAMEOVERLOST: #lost best of 3
+				pre_start() 
+			if GlobalSnakeVar.g_battleState == battleStateEnum.GAMEOVERWON: #won best of 3
 				get_tree().change_scene("res://DevLevelSelect.tscn")
 			uiCooldown = 0.0
 var bulletlastrun = 0
@@ -138,9 +143,6 @@ func _physics_process(delta):
 		GlobalSnakeVar.g_time_between_bullet = time - bulletlastrun
 		bulletlastrun = time
 		GlobalSnakeVar.bulletupdatetimer = 0
-
-func _on_GameOver_pressed():
-	beginFight()
 	
 func startRequested():	
 	beginFight()
@@ -149,38 +151,31 @@ func end_con_hit():
 	clean_up_before_change()
 	if (WinConditions["SEGMENTS"] == 1):
 		if (GlobalSnakeVar.snakes[0].sprites.size() == GlobalSnakeVar.snakes[1].sprites.size()):
-			game_over_lost("TIED, CLOSE BUT NOT A VICTORY...")
+			round_over_lost("TIED, CLOSE BUT NOT A VICTORY...")
 			return
 		elif (GlobalSnakeVar.snakes[0].sprites.size() < GlobalSnakeVar.snakes[1].sprites.size()):
-			game_over_lost("YOUR SNAKE SMALL")
+			round_over_lost("YOUR SNAKE SMALL")
 			return
 		else:
-			game_over_won("BIGGER SNAKE DIPLOMACY, YOU WON")
+			round_over_won("BIGGER SNAKE DIPLOMACY, YOU WON")
 	else:
-		game_over_won("ERROR NO WIN CONDITION HIT SO THIS BATTLE NEEDS A WIN CON?")
+		round_over_won("ERROR NO WIN CONDITION HIT SO THIS BATTLE NEEDS A WIN CON?")
 		
-func game_over_won(reason):
+func round_over_won(reason):
 	uiCooldown = 0.0
-	battleState = 3
+	GlobalSnakeVar.g_battleState = battleStateEnum.GAMEOVERWON
 	get_node("WINSCREEN").visible = true
 	get_node("WINSCREEN/REASON").text = reason
 
 func pre_start():
 	uiCooldown = 0.0
-	battleState = 0
+	GlobalSnakeVar.g_battleState = battleStateEnum.PRESTART
 	get_node("LOSESCREEN").visible = false
 	get_node("WINSCREEN").visible = false
 	get_node("PRESTART").visible = true
 	get_node("PRESTART").raise()
-	
-func clean_up_before_change():
-	for bullet in GlobalSnakeVar.bullets:
-		bullet.queue_free()
-	GlobalSnakeVar.bullets = []	
 
 func game_over_lost(reason):
-	uiCooldown = 0.0
-	battleState = 2
 	clean_up_before_change()
 	print("LOST BECAUSE =", reason)
 	GlobalSnakeVar.paused = true
@@ -188,11 +183,26 @@ func game_over_lost(reason):
 	get_node("WINSCREEN").visible = false
 	get_node("LOSESCREEN/REASON").text = "GAMEOVER \n " + reason
 	get_node("LOSESCREEN").raise()
+
+	pass
 	
+func game_over_won():
+	pass
+
+func round_over_lost(reason):
+	uiCooldown = 0.0
+	GlobalSnakeVar.g_battleState = 2
+	game_over_lost(reason)
+
+func clean_up_before_change():
+	for bullet in GlobalSnakeVar.bullets:
+		bullet.queue_free()
+	GlobalSnakeVar.bullets = []	
+
 func _on_Player_snake_died(player):
 	SoundPlayer.play_sound(SoundPlayer.SFXSNAKEDEFEATED)
 	print("player = ", player, "has DIED")
-	game_over_lost("YOU CRASHED")
+	round_over_lost("YOU CRASHED")
 
 func _on_Enemy_snake_died(player):
 	SoundPlayer.play_sound(SoundPlayer.SFXSNAKEDEFEATED)
@@ -200,6 +210,6 @@ func _on_Enemy_snake_died(player):
 	print("player = ", player, "has DIED")
 	#game_over_lost("WTF ENEMY DIED????????????????????????/")
 	uiCooldown = 0.0
-	battleState = 3
+	GlobalSnakeVar.g_battleState = 3
 	get_node("WINSCREEN").visible = true
 	pass
