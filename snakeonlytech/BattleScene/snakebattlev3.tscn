@@ -195,7 +195,6 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
 offset = Vector2( 0, 8 )
 transform = Transform2D( 1, 0, 0, 1, 0, 8 )
 script = ExtResource( 10 )
-FoodSegments = 3
 
 [node name="Player" parent="SnakeBattle" instance=ExtResource( 15 )]
 position = Vector2( 49, 39 )
@@ -339,7 +338,7 @@ size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/PRESTART"]
 margin_left = 14.0
-margin_top = 9.0
+margin_top = 1.0
 margin_right = 226.0
 margin_bottom = 99.0
 size_flags_horizontal = 0
@@ -350,10 +349,11 @@ theme = ExtResource( 17 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 204.0
-margin_bottom = 82.0
+margin_bottom = 90.0
 rect_clip_content = false
 text = "BATTLE #1
 LEO VS <FRIENDNAME>
+Best OF THREE (First to 2 Wins)
 
 BATTLE GOALS:
 	SURVIVE FOR 30 SECONDS
@@ -361,6 +361,7 @@ BATTLE GOALS:
 	
 MODIFIERS:
 	FOOD GIVES 3 SEGMENTS"
+scroll_active = false
 
 [node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/PRESTART"]
 margin_left = 63.0
@@ -380,6 +381,7 @@ rect_clip_content = false
 text = "Press Fire Button TO START"
 
 [node name="WINSCREEN" type="PanelContainer" parent="SnakeBattle"]
+visible = false
 margin_left = 33.0
 margin_top = 18.0
 margin_right = 201.0
@@ -396,6 +398,7 @@ text = "YOU WON!!!!!
 TODO LOAD NEXT SCENE"
 
 [node name="LOSESCREEN" type="PanelContainer" parent="SnakeBattle"]
+visible = false
 margin_left = 33.0
 margin_top = 18.0
 margin_right = 201.0

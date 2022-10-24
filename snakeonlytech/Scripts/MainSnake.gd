@@ -4,11 +4,11 @@ const Snake = preload("res://Scripts/Snake.gd")
 const Food = preload("res://Scripts/Food.gd")
 
 # Declare member variables here. Examples:
-export (int) var bullet_mps = 12
-export (int) var snake_mps = 8
-export (int) var FoodSegments = 1
+#export (int) var bullet_mps = 12
+#export (int) var snake_mps = 8
+#export (int) var FoodSegments = 1
 export (bool) var debugging = false
-export (float) var ShootCooldown = 0.5 
+#export (float) var ShootCooldown = 0.5 
 #export (float) var timer = 30.0 EndConditions["TIMER"]
 var battleState = 0 # 0 == PRESTART, 1 == IN BATTLE, 2 GAMEOVER LOST, 3 GAMEOVERWIN
 
@@ -17,7 +17,16 @@ var WinLoseEndCons = [
 	"APPLES", #0 no checks, >0 end game once this many apples collected
 	"SEGMENTS", #0 not checked, #1 (on end) Compare and player must have more segments
 	"TIMER", #0 no timer, >0 end game after this many seconds
+	"ENEMYDESTROYED", #0 no end, 1 if any snake size == 2
 ]
+
+export (Dictionary) var ModConditions = {
+	"BulletMps" : 12,
+	"SnakeMps" : 8,
+	"ShootDisabled" : false,
+	"ShootCooldown" : 1.0,
+	"FoodSegmentsGain" : 1,
+}
 
 export (Dictionary) var WinConditions = {
 	"APPLES" : 0,
@@ -26,8 +35,11 @@ export (Dictionary) var WinConditions = {
 
 export (Dictionary) var EndConditions = {
 	"TIMER" : 30,
+	"ENEMYDESTROYED" : 0
 }
 
+export (bool) var bestOfThree = true
+var bestOfTracker = [0,0]
 
 var timerinstance
 # Called when the node enters the scene tree for the first time.
@@ -35,13 +47,11 @@ func _ready():
 	GlobalSnakeVar.paused = true
 	GlobalSnakeVar.bullets = []
 	#get_node("BGM").stream_paused = true
-	GlobalSnakeVar.g_bullet_moves_per_second = bullet_mps
-	GlobalSnakeVar.g_snake_moves_per_second = snake_mps
-	GlobalSnakeVar.g_FoodSegments = FoodSegments
 	GlobalSnakeVar.g_debugging = debugging
-	GlobalSnakeVar.g_shoot_cooldown = ShootCooldown
-	GlobalSnakeVar.debug = debugging
-	GlobalSnakeVar.g_foodsegments = FoodSegments
+	GlobalSnakeVar.g_bullet_moves_per_second = ModConditions["BulletMps"]
+	GlobalSnakeVar.g_snake_moves_per_second = ModConditions["SnakeMps"]
+	GlobalSnakeVar.g_shoot_cooldown = ModConditions["ShootCooldown"]
+	GlobalSnakeVar.g_foodsegments = ModConditions["FoodSegmentsGain"]
 	GlobalSnakeVar.g_rng.randomize()
 	#beginFight()
 	pre_start()
@@ -116,7 +126,7 @@ func _physics_process(delta):
 				#GlobalSnakeVar.paused = true
 		GlobalSnakeVar.g_counterlastsnake = counterlastsnake
 		counterlastsnake = 0
-		if GlobalSnakeVar.debug:
+		if GlobalSnakeVar.g_debugging:
 			GlobalSnakeVar.debug_colmap()
 		#print("snaketime")
 		GlobalSnakeVar.snakeupdatetimer = 0

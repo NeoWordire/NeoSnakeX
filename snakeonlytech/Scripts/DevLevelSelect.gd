@@ -43,19 +43,29 @@ func _ready():
 		levelpanels.append(panel)
 	pass # Replace with function body.
 
-
+var uidelay = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	uidelay += delta
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().change_scene(levels[selected])
-	if Input.is_action_just_pressed("ui_down"):
-		if (selected < levels.size()-1):
-			selected += 1
-	if Input.is_action_just_pressed("ui_up"):
-		if (selected > 0):
-			selected -= 1
+	if (uidelay > 0.2):
+		if Input.is_action_pressed("ui_down"):
+			if (selected < levels.size()-1):
+				selected += 1
+				uidelay = 0.0
+		if Input.is_action_pressed("ui_up"):
+			if (selected > 0):
+				selected -= 1
+				uidelay = 0.0
 	get_node("arrow").position.y = levelpanels[selected].rect_position.y + levelpanels[selected].rect_size.y/2
-	if get_node("arrow").position.y > 140 :
+	if get_node("arrow").position.y > 600 :
+		self.rect_position.y = -600
+	elif get_node("arrow").position.y > 430 :
+		self.rect_position.y = -440
+	elif get_node("arrow").position.y > 300 :
+		self.rect_position.y = -290
+	elif get_node("arrow").position.y > 150 :
 		self.rect_position.y = -140
 	else :
 		self.rect_position.y = 0

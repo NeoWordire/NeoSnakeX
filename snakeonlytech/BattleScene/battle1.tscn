@@ -195,8 +195,13 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
 offset = Vector2( 0, 8 )
 transform = Transform2D( 1, 0, 0, 1, 0, 8 )
 script = ExtResource( 10 )
-FoodSegments = 3
-ShootCooldown = 1.0
+ModConditions = {
+"BulletMps": 12,
+"FoodSegmentsGain": 3,
+"ShootCooldown": 1.0,
+"ShootDisabled": false,
+"SnakeMps": 8
+}
 
 [node name="HUD" type="Control" parent="SnakeBattle"]
 margin_top = 137.0
@@ -325,54 +330,6 @@ autoplay = true
 [node name="Food" parent="SnakeBattle" instance=ExtResource( 13 )]
 position = Vector2( -100, 0 )
 
-[node name="PRESTART" type="Control" parent="SnakeBattle"]
-margin_right = 40.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/PRESTART"]
-margin_left = 14.0
-margin_top = 9.0
-margin_right = 226.0
-margin_bottom = 99.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 17 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/PRESTART/PanelContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 204.0
-margin_bottom = 82.0
-rect_clip_content = false
-text = "BATTLE #1
-LEO VS <FRIENDNAME>
-
-BATTLE GOALS:
-	SURVIVE FOR 30 SECONDS
-	HAVE A BIGGER SNAKE AT END OF BATTLE
-	
-MODIFIERS:
-	FOOD GIVES 3 SEGMENTS"
-
-[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/PRESTART"]
-margin_left = 63.0
-margin_top = 99.0
-margin_right = 192.0
-margin_bottom = 127.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 17 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/PRESTART/PanelContainer2"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 121.0
-margin_bottom = 20.0
-rect_clip_content = false
-text = "Press Fire Button TO START"
-
 [node name="WINSCREEN" type="PanelContainer" parent="SnakeBattle"]
 margin_left = 33.0
 margin_top = 18.0
@@ -402,6 +359,56 @@ margin_top = 8.0
 margin_right = 160.0
 margin_bottom = 67.0
 rect_clip_content = false
+
+[node name="PRESTART" type="Control" parent="SnakeBattle"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/PRESTART"]
+margin_left = 14.0
+margin_top = 1.0
+margin_right = 226.0
+margin_bottom = 99.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 17 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/PRESTART/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 204.0
+margin_bottom = 90.0
+rect_clip_content = false
+text = "BATTLE #1
+LEO VS <FRIENDNAME>
+Best OF THREE (First to 2 Wins)
+
+BATTLE GOALS:
+	SURVIVE FOR 30 SECONDS
+	HAVE A BIGGER SNAKE AT END OF BATTLE
+	
+MODIFIERS:
+	FOOD GIVES 3 SEGMENTS"
+scroll_active = false
+
+[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/PRESTART"]
+margin_left = 63.0
+margin_top = 99.0
+margin_right = 192.0
+margin_bottom = 127.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 17 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/PRESTART/PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 121.0
+margin_bottom = 20.0
+rect_clip_content = false
+text = "Press Fire Button TO START"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 240.0
