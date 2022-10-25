@@ -15,7 +15,7 @@ class_name YarnDisplay, "res://addons/gdyarn/assets/display.PNG"
 signal text_changed
 
 # emit this signal when a new line has started to display
-signal line_started
+signal line_started(name, line)
 
 # emit this signal when a new line has finished displaying
 signal line_finished
@@ -133,7 +133,7 @@ func on_dialogue_finished():
 func on_command(command, arguments: Array):
 	if command == "wait":
 		clear_text()
-		emit_signal("line_started")
+		emit_signal("line_started", "", "")
 
 
 ## make the yarn gui visible and emit the gui shown signal
@@ -202,7 +202,7 @@ func display_next_line():
 
 		shouldUpdateTotalLineTime = true
 		emit_signal("text_changed")
-		emit_signal("line_started")
+		emit_signal("line_started", nextName, nextLine)
 		elapsedTime = 0
 		nextLine = ""
 
@@ -222,6 +222,7 @@ func finish_line():
 		if nextLine.empty():
 			shouldContinue = true
 			yarnRunner.resume()
+			emit_signal("line_finished")
 		elif !nextLine.empty():
 			display_next_line()
 	else:

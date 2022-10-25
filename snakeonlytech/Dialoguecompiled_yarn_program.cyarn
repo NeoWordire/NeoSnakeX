@@ -88,7 +88,7 @@
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "spawn sprite cory left"
+"operand_value": "spawn_sprite cory left"
 } ]
 }, {
 "instruction_op": 3,
@@ -118,13 +118,19 @@
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "move sprite cory right"
+"operand_value": "move_sprite cory right"
 } ]
 }, {
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "spawn sprite friend left"
+"operand_value": "spawn_sprite apple left"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait 1"
 } ]
 }, {
 "instruction_op": 3,
@@ -145,7 +151,7 @@
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "play sfx sfx_hit.wav"
+"operand_value": "play_sfx sfx_hit.wav"
 } ]
 }, {
 "instruction_op": 3,
@@ -161,6 +167,18 @@
 "instruction_operands": [ {
 "operand_type": 1,
 "operand_value": "fade out"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "remove_sprite right"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait .5"
 } ]
 }, {
 "instruction_op": 17,

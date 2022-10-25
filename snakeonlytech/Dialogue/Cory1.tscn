@@ -1,33 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Textures/Rival Boy Called Cory/cory_mouth.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Textures/Rival Boy Called Cory/Cory.tres" type="Texture" id=1]
 [ext_resource path="res://addons/gdyarn/yarn_runner.gd" type="Script" id=2]
 [ext_resource path="res://addons/gdyarn/yarn_gui.gd" type="Script" id=3]
 [ext_resource path="res://addons/gdyarn/core/variable_storage.gd" type="Script" id=4]
 [ext_resource path="res://addons/gdyarn/compiled_yarn_program.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Textures/Rival Boy Called Cory/cory_mouth3.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=7]
 [ext_resource path="res://Scripts/Yarn/nav_arrow.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/MouthFlap.gd" type="Script" id=10]
-[ext_resource path="res://Assets/Textures/Rival Boy Called Cory/cory_mouth2.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Mockup/bg.png" type="Texture" id=12]
-
-[sub_resource type="AnimatedTexture" id=2]
-frames = 6
-fps = 14.0
-frame_0/texture = ExtResource( 1 )
-frame_0/delay_sec = 0.1
-frame_1/texture = ExtResource( 11 )
-frame_1/delay_sec = 0.1
-frame_2/texture = ExtResource( 6 )
-frame_2/delay_sec = 0.1
-frame_3/texture = ExtResource( 1 )
-frame_3/delay_sec = 0.1
-frame_4/texture = ExtResource( 11 )
-frame_4/delay_sec = 0.2
-frame_5/texture = ExtResource( 1 )
-frame_5/delay_sec = 0.2
 
 [sub_resource type="Resource" id=1]
 resource_local_to_scene = true
@@ -50,7 +32,7 @@ position = Vector2( 5, -1.97887 )
 
 [node name="Cory" type="Sprite" parent="Character"]
 position = Vector2( 167, 82.1229 )
-texture = SubResource( 2 )
+texture = ExtResource( 1 )
 script = ExtResource( 10 )
 
 [node name="VariableStorage" type="Node" parent="."]

@@ -18,15 +18,18 @@ It's a beautiful day. The sun shines. #line:2f98bde2
 <<bg lobby.png>>
 <<fade in>>
 <<play bgm robot shopping.wav>>
-<<spawn sprite cory left>>
+<<spawn_sprite cory left>>
 Cory: Well well well, if it isn't the meathead dummy deluxe. #line:34dca313 
 Cory: Honestly, {$yourname}, it's surprising you'd dare show your face here after your crushing defeat. #line:fdb435e1 
-<<move sprite cory right>>
-<<spawn sprite friend left>>
-Friend: Shut up, CORY! #line:439f582b 
+<<move_sprite cory right>>
+<<spawn_sprite apple left>>
+<<wait 1>>
+Apple: Shut up, CORY! #line:439f582b
 <<effect shakescreen>>
-<<play sfx sfx_hit.wav>>
+<<play_sfx sfx_hit.wav>>
 Cory: OUCH OW AUA!!!!!! #line:22c438e0 
 <<fade out>>
+<<remove_sprite right>>
+<<wait .5>>
 [[Start]] #line:6f1ad262
 ===
