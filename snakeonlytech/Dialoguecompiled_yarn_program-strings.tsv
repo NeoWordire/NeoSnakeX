@@ -1,4 +1,7 @@
 id	text	file	node	lineNumber	implicit	tags
-line:3ad3ee65	Friend1: testing testing 	Cory1.yarn	Start	0	False	
-line:636131c8	Cory: i am just a little guy in a big world... 	Cory1.yarn	talk	0	False	
-line:1935b86b	Cory: hihi... 	Cory1.yarn	talk	1	False	
+line:9a97514c	Loop Point 	SampleScene.yarn	Start	0	False	
+line:2f98bde2	It's a beautiful day. The sun shines. 	SampleScene.yarn	talk	2	False	
+line:34dca313	Cory: Well well well, if it isn't the meathead dummy deluxe. 	SampleScene.yarn	talk	8	False	
+line:fdb435e1	Cory: Honestly, {0}, it's surprising you'd dare show your face here after your crushing defeat. 	SampleScene.yarn	talk	9	False	
+line:439f582b	Friend: Shut up, CORY! 	SampleScene.yarn	talk	12	False	
+line:22c438e0	Cory: OUCH OW AUA!!!!!! 	SampleScene.yarn	talk	15	False	

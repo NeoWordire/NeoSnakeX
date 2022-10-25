@@ -1,0 +1,32 @@
+title: Start
+tags:
+colorID: 0
+position: -135,-672
+---
+Loop Point #line:9a97514c 
+[[talk]] #line:cd445b19
+===
+title: talk
+tags:
+colorID: 0
+position: 268,-613
+---
+<<fade in>>
+<<bg sky.png>>
+It's a beautiful day. The sun shines. #line:2f98bde2 
+<<fade out>>
+<<bg lobby.png>>
+<<fade in>>
+<<play bgm robot shopping.wav>>
+<<spawn sprite cory left>>
+Cory: Well well well, if it isn't the meathead dummy deluxe. #line:34dca313 
+Cory: Honestly, {$yourname}, it's surprising you'd dare show your face here after your crushing defeat. #line:fdb435e1 
+<<move sprite cory right>>
+<<spawn sprite friend left>>
+Friend: Shut up, CORY! #line:439f582b 
+<<effect shakescreen>>
+<<play sfx sfx_hit.wav>>
+Cory: OUCH OW AUA!!!!!! #line:22c438e0 
+<<fade out>>
+[[Start]] #line:6f1ad262
+===
