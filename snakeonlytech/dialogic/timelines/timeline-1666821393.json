@@ -1,8 +1,48 @@
 {
 	"events": [
 		{
-			"animation": "[Default]",
-			"animation_length": 0,
+			"background": "res://Assets/Textures/BGs/sky.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 0
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1666857522.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "20XX\nIt's been 10 years after the 17th Battle Snake Tournament concluded and it's organizer, the Carrot Group, disappeared under unknown circumstances.\nThe legendary sport of Battle Snake became nothing more than a footnote in history, [pause=0.5] mostly forgotten by the general public, [pause=0.5] until the Carrot Group leaders suddenly reappeared and once again opened their doors to young competitors wishing to prove themselves."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"background": "res://Assets/Textures/BGs/outside.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Snake Tower\nA crowd of excited youths has gathered around this iconic building that had been dormant for an entire decade. \nEach and every one of them is here to participate in the 18th Battle Snake Tournament.\nBut...\nUnbeknownst to everyone, [pause=0.5]a dark and sinister secret lies deep within the tower that they're so eager to climb. \nAnd so, the adventure of our two heroes begins..."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1666820942.json",
@@ -24,42 +64,217 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Hello Cory.\nIt's me, Apple. \nYou're probably wondering where you are. \nWell... it's the void. \nYou were sent here by Mocca 2000 years ago...\n...and only now woke up. \nSuch a sadness."
+			"text": "Well, {$yourname}, here we are! \nWould you look at this crowd!?\nI thought Battle Snake was more of a retro thing but looks like there were more fans than I thought!\nC'mon, let's try to squeeze through this crowd and make our way in, {$yourname}!"
 		},
 		{
-			"audio_bus": "Master",
-			"background-music": "play",
-			"event_id": "dialogic_031",
-			"event_name": "BackgroundMusic",
-			"fade_length": 1,
-			"file": "res://Assets/Music/weirdchamp deluxe.wav",
-			"volume": 0
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"event_id": "dialogic_023",
 			"hide_dialogbox": true,
-			"wait_seconds": 0.2
+			"wait_seconds": 0.5
 		},
 		{
-			"background": "res://Assets/Mockup/bg.png",
+			"background": "res://Assets/Textures/BGs/lobby.png",
 			"event_id": "dialogic_021",
-			"fade_duration": 0.5
+			"fade_duration": 1
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
 		},
 		{
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Hear that sound? \nThat's the song of despair.\nIt is a sign of devilish power.\nA power that is commanding you...\nTo add..."
+			"text": "Woah...\nThis building certainly is extravagant, don't you think?\nI heard that the CEO of Carrot Group himself is the architect!\nRumor has it he designed it like a sprout to symbolize the growth of all the competitors reaching for the top!\nA bit artsy-fartsy, [pause=0.5]if you ask me!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"event_id": "dialogic_023",
 			"hide_dialogbox": true,
-			"wait_seconds": 0.2
+			"wait_seconds": 0.6
 		},
 		{
-			"animation": "flash.gd",
-			"animation_length": 1,
-			"animation_repeat": 10,
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "",
+			"volume": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 2
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ah!\nLooks like registration is opening!\nLet's go, {$yourname}! Let's become Snake Battlers!!!\nThe registration desk is right there, {$yourname}!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"character": "character-1666860059.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Welcome to Snake Tower! \nTwo competitors registered.\nHave fun Apple and {$yourname} [pause=0.5]and good luck!"
+		},
+		{
+			"background": "res://Assets/Textures/BGs/arena.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Look at the size of this place... \nWe're really going to compete here, aren't we?"
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_hit.wav",
+			"volume": 0
+		},
+		{
+			"animation": "headshake.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_position": false,
 			"change_z_index": false,
@@ -79,62 +294,290 @@
 			"z_index": 0
 		},
 		{
-			"audio": "play",
-			"audio_bus": "Master",
-			"event_id": "dialogic_030",
-			"event_name": "AudioEvent",
-			"file": "res://Assets/SFX/sfx_hit.wav",
-			"volume": 0
-		},
-		{
 			"event_id": "dialogic_023",
 			"hide_dialogbox": true,
-			"wait_seconds": 0.2
-		},
-		{
-			"audio": "play",
-			"audio_bus": "Master",
-			"event_id": "dialogic_030",
-			"event_name": "AudioEvent",
-			"file": "res://Assets/SFX/sfx_hit.wav",
-			"volume": 0
-		},
-		{
-			"event_id": "dialogic_023",
-			"hide_dialogbox": true,
-			"wait_seconds": 0.2
-		},
-		{
-			"audio": "play",
-			"audio_bus": "Master",
-			"event_id": "dialogic_030",
-			"event_name": "AudioEvent",
-			"file": "res://Assets/SFX/sfx_hit.wav",
-			"volume": 0
-		},
-		{
-			"event_id": "dialogic_023",
-			"hide_dialogbox": true,
-			"wait_seconds": 0.2
-		},
-		{
-			"audio": "play",
-			"audio_bus": "Master",
-			"event_id": "dialogic_030",
-			"event_name": "AudioEvent",
-			"file": "res://Assets/SFX/sfx_hit.wav",
-			"volume": 0
+			"wait_seconds": 0.5
 		},
 		{
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "HECKING SCREENSHAKE!!!!!!!!!!!!!!!!"
+			"text": "Hey, what gives?"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666856136.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"character": "character-1666856136.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666856136.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "It's rude to bump into someone this cute and not apologize, [pause=0.2]you know!!!\nAh, he's already gone...\nWhat a weird kid. I wonder what his problem is.\nHe was kind of handsome though, don't you think {$yourname}?"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "",
+			"volume": 0
+		},
+		{
+			"character": "character-1666860966.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "ALL NEWLY REGISTERED PARTICIPANTS PLEASE MAKE YOUR WAY TO YOUR DESIGNATED BATTLE ARENAS\nTO PARTICIPATE IN YOUR PRELIMINARY BATTLES!"
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "{$yourname}!\nLet's run!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oh, I almost forgot!\nGood luck on your first round! [pause=0.5]Don't lose!"
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "",
+				"target_node_path": ""
+			},
+			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {
 		"dialogic-version": "1.4.5",
 		"file": "timeline-1666821393.json",
-		"name": "timeline-1666821393"
+		"name": "First Scene"
 	}
 }

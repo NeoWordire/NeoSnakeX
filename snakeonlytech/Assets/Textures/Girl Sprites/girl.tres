@@ -1,7 +1,4 @@
-[gd_resource type="AnimatedTexture" load_steps=5 format=2]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/girl_mouth1.png-8a7d6149769ba76d4fff8002905ad1c7.stex"
+[gd_resource type="AnimatedTexture" load_steps=4 format=2]
 
 [sub_resource type="StreamTexture" id=2]
 load_path = "res://.import/girl_mouth2.png-687e427bb47559dec81753ce8aa7dbe6.stex"
@@ -13,12 +10,11 @@ load_path = "res://.import/girl_mouth3.png-e4cca274b17436a5c3e04ecb6c6d9aba.stex
 load_path = "res://.import/girl_mouth1.png-8a7d6149769ba76d4fff8002905ad1c7.stex"
 
 [resource]
-frames = 4
+frames = 3
 pause = true
-frame_0/texture = SubResource( 1 )
-frame_1/texture = SubResource( 2 )
+fps = 10.0
+frame_0/texture = SubResource( 2 )
+frame_1/texture = SubResource( 3 )
 frame_1/delay_sec = 0.0
-frame_2/texture = SubResource( 3 )
+frame_2/texture = SubResource( 4 )
 frame_2/delay_sec = 0.0
-frame_3/texture = SubResource( 4 )
-frame_3/delay_sec = 0.0

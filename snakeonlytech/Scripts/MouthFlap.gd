@@ -28,4 +28,4 @@ func startFlapping():
 
 func stopFlapping():
 		texture.oneshot = true
-		#texture.current_frame = 0
+		texture.current_frame = 0
