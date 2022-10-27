@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/snow ruin.ogg-2be90964deb46da705a06d4146dd7a0d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/snow ruin.ogg"
+dest_files=[ "res://.import/snow ruin.ogg-2be90964deb46da705a06d4146dd7a0d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

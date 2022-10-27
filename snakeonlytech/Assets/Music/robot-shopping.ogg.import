@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/robot-shopping.ogg-2b61ef2625efe14f0c03eb0ed84562a0.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/robot-shopping.ogg"
+dest_files=[ "res://.import/robot-shopping.ogg-2b61ef2625efe14f0c03eb0ed84562a0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

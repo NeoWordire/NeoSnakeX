@@ -1,6 +1,15 @@
 {
 	"events": [
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 0,
+			"file": "res://Assets/Music/nightloop.ogg",
+			"volume": 0
+		},
+		{
 			"background": "res://Assets/Textures/BGs/sky.png",
 			"event_id": "dialogic_021",
 			"fade_duration": 0
@@ -28,7 +37,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Snake Tower\nA crowd of excited youths has gathered around this iconic building that had been dormant for an entire decade. \nEach and every one of them is here to participate in the 18th Battle Snake Tournament.\nBut...\nUnbeknownst to everyone, [pause=0.5]a dark and sinister secret lies deep within the tower that they're so eager to climb. \nAnd so, the adventure of our two heroes begins..."
+			"text": "Snake Tower\nA crowd of excited youths has gathered around this iconic building that had been dormant for an entire decade. \nEach and every one of them is here to participate in the 18th Battle Snake Tournament.\nBut...\nUnbeknownst to to all the hopeful participants, [pause=0.5]a dark and sinister secret lies deep within the very  tower that they're so eager to climb. \nAnd so, the adventure of our two heroes begins..."
 		},
 		{
 			"event_id": "dialogic_023",
@@ -38,6 +47,15 @@
 		{
 			"event_id": "dialogic_024",
 			"set_theme": "default-theme.cfg"
+		},
+		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 0.2,
+			"file": "res://Assets/Music/robot-shopping.ogg",
+			"volume": 0
 		},
 		{
 			"animation": "1-fade_in.gd",
@@ -272,6 +290,15 @@
 			"volume": 0
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 0.2,
+			"file": "res://Assets/Music/weirdchamp-deluxe.ogg",
+			"volume": 0
+		},
+		{
 			"animation": "headshake.gd",
 			"animation_length": 0.5,
 			"animation_wait": true,
@@ -389,7 +416,7 @@
 			"wait_seconds": 0.5
 		},
 		{
-			"animation": "2-fade_in_up.gd",
+			"animation": "1-fade_in.gd",
 			"animation_length": 0.5,
 			"animation_wait": false,
 			"change_mirror_portrait": false,
@@ -410,7 +437,7 @@
 			"z_index": 0
 		},
 		{
-			"animation": "2-fade_in_up.gd",
+			"animation": "1-fade_in.gd",
 			"animation_length": 0.5,
 			"animation_wait": false,
 			"change_mirror_portrait": false,
@@ -467,6 +494,15 @@
 			"audio_bus": "Master",
 			"event_id": "dialogic_030",
 			"event_name": "AudioEvent",
+			"file": "",
+			"volume": 0
+		},
+		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
 			"file": "",
 			"volume": 0
 		},
