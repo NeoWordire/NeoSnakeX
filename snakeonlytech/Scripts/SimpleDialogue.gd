@@ -36,6 +36,7 @@ func _on_YarnRunner_command_emitted(command, arguments):
 			spawn = apple.instance()
 			pass
 		var location
+
 		if (arguments[1] == "left"):
 			location = get_node(Characters).get_node("left")
 			pass

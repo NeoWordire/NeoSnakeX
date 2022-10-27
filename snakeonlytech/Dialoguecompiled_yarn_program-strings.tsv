@@ -1,7 +1,45 @@
 id	text	file	node	lineNumber	implicit	tags
-line:9a97514c	Loop Point 	SampleScene.yarn	Start	0	False	
-line:2f98bde2	It's a beautiful day. The sun shines. 	SampleScene.yarn	talk	2	False	
-line:34dca313	Cory: Well well well, if it isn't the meathead dummy deluxe. 	SampleScene.yarn	talk	8	False	
-line:fdb435e1	Cory: Honestly, {0}, it's surprising you'd dare show your face here after your crushing defeat. 	SampleScene.yarn	talk	9	False	
-line:439f582b	Apple: Shut up, CORY! 	SampleScene.yarn	talk	13	False	
-line:22c438e0	Cory: OUCH OW AUA!!!!!! 	SampleScene.yarn	talk	16	False	
+line:3f11034b	Loop Point 	SampleScene.yarn	Start	0	False	
+line:6bfcaff5	20XX 	SampleScene.yarn	Scene1	3	False	
+line:464c240c	It's been 10 years after the 17th Battle Snake Tournament concluded and it's organizer, the Carrot Group, disappeared mysteriously. 	SampleScene.yarn	Scene1	4	False	
+line:c3700581	The legendary sport of Battle Snake became nothing more than a footnote in history, long forgotten, until the Carrot Group leaders suddenly reappeared 	SampleScene.yarn	Scene1	5	False	
+line:ed3ab827	and once again opened their doors to young competitors wishing to prove themselves. 	SampleScene.yarn	Scene1	6	False	
+line:b3fe078f	Snake Tower 	SampleScene.yarn	Scene1	13	False	
+line:1cbdad5e	A crowd of excited youths has gathered around this iconic building that had been dormant for an entire decade. 	SampleScene.yarn	Scene1	14	False	
+line:fb8a5a33	Apple: Well, {0}, here we are! 	SampleScene.yarn	Scene1	16	False	
+line:e4a85b85	Apple: Would you look at this crowd!? 	SampleScene.yarn	Scene1	17	False	
+line:f106529b	Apple: I thought Battle Snake was more of a retro thing but looks like there were more fans than I thought! 	SampleScene.yarn	Scene1	18	False	
+line:b7141678	Apple: C'mon, let's try to squeeze through this crowd and make our way in, {0}! 	SampleScene.yarn	Scene1	19	False	
+line:8b84bc66	Apple: Woah... 	SampleScene.yarn	Scene1	25	False	
+line:48e11d34	Apple: This building certainly is extravagant, don't you think? 	SampleScene.yarn	Scene1	26	False	
+line:49932414	Apple: I heard that the CEO of Carrot Group designed it himself! 	SampleScene.yarn	Scene1	27	False	
+line:5f1a502f	Apple: Rumor has it he designed it like a sprout to symbolize the growth of all the competitors reaching for the top! 	SampleScene.yarn	Scene1	28	False	
+line:7a22262a	Apple: A bit artsy-fartsy, if you ask me! 	SampleScene.yarn	Scene1	29	False	
+line:984b137	Apple: Ah! 	SampleScene.yarn	Scene1	33	False	
+line:a7a75635	Apple: Looks like registration is starting! 	SampleScene.yarn	Scene1	34	False	
+line:dbb31654	Apple: Let's go, {0}! Let's become Snake Battlers!!! 	SampleScene.yarn	Scene1	35	False	
+line:e51541c0	Apple: The registration desk is right there, {0}! 	SampleScene.yarn	Scene1	36	False	
+line:18757e31	Receptionist: Welcome to Snake Tower! 	SampleScene.yarn	Scene1	38	False	
+line:6335ea4	Receptionist: Two competitors registered! Have fun Apple and {0} and good luck! 	SampleScene.yarn	Scene1	39	False	
+line:7b3bfbf8	Apple: OH MY GOSH! 	SampleScene.yarn	Scene1	43	False	
+line:9e13ca68	Apple: It's finally here... 	SampleScene.yarn	Scene1	44	False	
+line:3a8139b9	Apple: I never thought I would compete... Heck, I never thought there would ever be another competition!!! 	SampleScene.yarn	Scene1	45	False	
+line:6d7775f5	Apple: Let's go explore until the first battles start, {0}!! 	SampleScene.yarn	Scene1	46	False	
+line:b0256e91	Apple: Look at the size of this place... 	SampleScene.yarn	Scene1	53	False	
+line:9b0cf525	Apple: We're really going to compete here, aren't we? 	SampleScene.yarn	Scene1	54	False	
+line:17d3a71	Apple: Hey, what gives? 	SampleScene.yarn	Scene1	57	False	
+line:9d682826	???: ... 	SampleScene.yarn	Scene1	59	False	
+line:e2d1c524	Apple: It's quite rude to bump into someone and not apologize, you know!!! 	SampleScene.yarn	Scene1	61	False	
+line:e9682b54	Apple: Ah, he's already gone... 	SampleScene.yarn	Scene1	62	False	
+line:676114e9	Apple: What a weird kid. I wonder what his problem is. 	SampleScene.yarn	Scene1	63	False	
+line:e508e949	Apple: He was kind of cute though, don't you think {0}? 	SampleScene.yarn	Scene1	64	False	
+line:215379d1	Announcer: ALL NEWLY REGISTERED PARTICIPANTS PLEASE MAKE YOUR WAY TO YOUR DESIGNATED BATTLE ARENAS 	SampleScene.yarn	Scene1	67	False	
+line:c8752f29	Announcer: TO PARTICIPATE IN YOUR PRELIMINARY BATTLES! 	SampleScene.yarn	Scene1	68	False	
+line:c543216b	Apple: {0}! Let's run! 	SampleScene.yarn	Scene1	70	False	
+line:368d5cce	Apple: Oh, I almost forgot! 	SampleScene.yarn	Scene1	73	False	
+line:ab22b87f	Apple: Good luck on your first round! Don't lose! 	SampleScene.yarn	Scene1	74	False	
+line:5ccae293	Apple: Good job, {0}!!! 	SampleScene.yarn	Scene2	2	False	
+line:42702c2c	Apple: Looks like we both made it through preliminaries! 	SampleScene.yarn	Scene2	3	False	
+line:49487953	Apple: It was quite easy for me, hehe! 	SampleScene.yarn	Scene2	4	False	
+line:9836fc1e	Apple: Things will get harder from here. 	SampleScene.yarn	Scene2	6	False	
+line:b0c20fe8	Apple: Let's visit the 	SampleScene.yarn	Scene2	7	False	

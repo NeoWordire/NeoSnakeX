@@ -11,7 +11,7 @@
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:9a97514c"
+"operand_value": "line:3f11034b"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -20,7 +20,7 @@
 "instruction_op": 17,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "talk"
+"operand_value": "Scene1"
 } ]
 }, {
 "instruction_op": 16,
@@ -52,13 +52,52 @@
 "operand_value": "bg sky.png"
 } ]
 }, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "play_bgm intro.wav"
+} ]
+}, {
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:2f98bde2"
+"operand_value": "line:6bfcaff5"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:464c240c"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:c3700581"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:ed3ab827"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "wait 0.5"
 } ]
 }, {
 "instruction_op": 4,
@@ -70,7 +109,7 @@
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "bg lobby.png"
+"operand_value": "wait 0.1"
 } ]
 }, {
 "instruction_op": 4,
@@ -82,19 +121,67 @@
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "play bgm robot shopping.wav"
+"operand_value": "bg outside.png"
 } ]
 }, {
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "spawn_sprite cory left"
+"operand_value": "wait 0,1"
 } ]
 }, {
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:34dca313"
+"operand_value": "line:b3fe078f"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:1cbdad5e"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple right"
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:fb8a5a33"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:e4a85b85"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:f106529b"
 }, {
 "operand_type": 3,
 "operand_value": 0.0
@@ -109,64 +196,10 @@
 "instruction_op": 3,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "line:fdb435e1"
+"operand_value": "line:b7141678"
 }, {
 "operand_type": 3,
 "operand_value": 1.0
-} ]
-}, {
-"instruction_op": 4,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "move_sprite cory right"
-} ]
-}, {
-"instruction_op": 4,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "spawn_sprite apple left"
-} ]
-}, {
-"instruction_op": 4,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "wait 1"
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:439f582b"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 4,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "effect shakescreen"
-} ]
-}, {
-"instruction_op": 4,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "play_sfx sfx_hit.wav"
-} ]
-}, {
-"instruction_op": 3,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "line:22c438e0"
-}, {
-"operand_type": 3,
-"operand_value": 0.0
-} ]
-}, {
-"instruction_op": 4,
-"instruction_operands": [ {
-"operand_type": 1,
-"operand_value": "fade out"
 } ]
 }, {
 "instruction_op": 4,
@@ -178,13 +211,469 @@
 "instruction_op": 4,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "wait .5"
+"operand_value": "fade out"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "fade in"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "bg lobby.png"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple right"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:8b84bc66"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:48e11d34"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:49932414"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:5f1a502f"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:7a22262a"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "despawn_sprite"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "play_sfx bell.wav"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple left"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:984b137"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:a7a75635"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:dbb31654"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:e51541c0"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "despawn_sprite apple"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:18757e31"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:6335ea4"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "screenshake"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "play_sfx hit.wav"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:7b3bfbf8"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:9e13ca68"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:3a8139b9"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:6d7775f5"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "despawn_sprite apple"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "fade out"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "fade in"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "play_sfx crowd.wav"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "bg arena.png"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple left"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:b0256e91"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:9b0cf525"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "screenshake"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "play_sfx hit.wav"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:17d3a71"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite cory right"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:9d682826"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "remove_sprite cory"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:e2d1c524"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:e9682b54"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:676114e9"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:e508e949"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "play_sfx bell.wav"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "remove_sprite apple"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:215379d1"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:c8752f29"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple left"
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:c543216b"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "remove_sprite apple"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple left"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:368d5cce"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:ab22b87f"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "remove_sprite apple"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "fade out"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "fade in"
 } ]
 }, {
 "instruction_op": 17,
 "instruction_operands": [ {
 "operand_type": 1,
-"operand_value": "Start"
+"operand_value": "battle1"
 } ]
 }, {
 "instruction_op": 16,
@@ -193,7 +682,110 @@
 "node_labels": {
 "L2": 0
 },
-"node_name": "talk",
+"node_name": "Scene1",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L3"
+} ]
+}, {
+"instruction_op": 17,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "Scene2"
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L3": 0
+},
+"node_name": "battle1",
+"node_source_id": "",
+"node_tags": [  ]
+}, {
+"node_instructions": [ {
+"instruction_op": 0,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "L4"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "bg lobby.png"
+} ]
+}, {
+"instruction_op": 4,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "spawn_sprite apple right"
+} ]
+}, {
+"instruction_op": 14,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "$yourname"
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:5ccae293"
+}, {
+"operand_type": 3,
+"operand_value": 1.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:42702c2c"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:49487953"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:9836fc1e"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 3,
+"instruction_operands": [ {
+"operand_type": 1,
+"operand_value": "line:b0c20fe8"
+}, {
+"operand_type": 3,
+"operand_value": 0.0
+} ]
+}, {
+"instruction_op": 16,
+"instruction_operands": [  ]
+} ],
+"node_labels": {
+"L4": 0
+},
+"node_name": "Scene2",
 "node_source_id": "",
 "node_tags": [  ]
 } ]
