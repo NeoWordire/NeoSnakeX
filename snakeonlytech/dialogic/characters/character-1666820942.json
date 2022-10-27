@@ -9,19 +9,11 @@
 	"nickname": "",
 	"nickname_bool": false,
 	"offset_x": 0,
-	"offset_y": 0,
+	"offset_y": -70,
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://Assets/Textures/Girl Sprites/girl_blink1.png"
-		},
-		{
-			"name": "girl_blink2",
-			"path": "res://Assets/Textures/Girl Sprites/girl_blink2.png"
-		},
-		{
-			"name": "girl_blink3",
-			"path": "res://Assets/Textures/Girl Sprites/girl_blink3.png"
+			"path": "res://Dialogue/Characters/Apple.tscn"
 		}
 	],
 	"scale": 100,
