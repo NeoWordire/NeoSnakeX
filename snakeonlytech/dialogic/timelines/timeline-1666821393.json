@@ -10,26 +10,6 @@
 			"volume": 0
 		},
 		{
-			"background": "res://Assets/Textures/BGs/sky.png",
-			"event_id": "dialogic_021",
-			"fade_duration": 0
-		},
-		{
-			"event_id": "dialogic_024",
-			"set_theme": "theme-1666857522.cfg"
-		},
-		{
-			"character": "",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": "20XX\nIt's been 10 years after the 17th Battle Snake Tournament concluded and it's organizer, the Carrot Group, disappeared under unknown circumstances.\nThe legendary sport of Battle Snake became nothing more than a footnote in history, [pause=0.5] mostly forgotten by the general public, [pause=0.5] until the Carrot Group leaders suddenly reappeared and once again opened their doors to young competitors wishing to prove themselves."
-		},
-		{
-			"event_id": "dialogic_023",
-			"hide_dialogbox": true,
-			"wait_seconds": 0.5
-		},
-		{
 			"background": "res://Assets/Textures/BGs/outside.png",
 			"event_id": "dialogic_021"
 		},
@@ -82,7 +62,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Well, {$yourname}, here we are! \nWould you look at this crowd!?\nI thought Battle Snake was more of a retro thing but looks like there were more fans than I thought!\nC'mon, let's try to squeeze through this crowd and make our way in, {$yourname}!"
+			"text": "Well, [yourname], here we are! \nWould you look at this crowd!?\nI thought Battle Snake was more of a retro thing but looks like there were more fans than I thought!\nC'mon, let's try to squeeze through this crowd and make our way in, [yourname]!"
 		},
 		{
 			"animation": "4-fade_out.gd",
@@ -599,16 +579,6 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Oh, I almost forgot!\nGood luck on your first round! [pause=0.5]Don't lose!"
-		},
-		{
-			"call_node": {
-				"arguments": [
-
-				],
-				"method_name": "",
-				"target_node_path": ""
-			},
-			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {
