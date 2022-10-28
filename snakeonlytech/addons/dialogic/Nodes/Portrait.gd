@@ -115,13 +115,15 @@ func set_mirror(value):
 			$TextureRect.flip_h = value
 
 
-func move_to_position(position_offset):
+func move_to_position(position_offset, time = 0.5):
+	var reference = get_viewport().get_visible_rect().size
 	var positions = {
-		'left': Vector2(-400, 0),
-		'right': Vector2(+400, 0),
+		'left': Vector2(-2*(reference.x/7), 0),
+		'right': Vector2(2*(reference.x/7), 0),
 		'center': Vector2(0, 0),
-		'center_right': Vector2(200, 0),
-		'center_left': Vector2(-200, 0)}
+		'center_right': Vector2(reference.x/7, 0),
+		'center_left': Vector2(-(reference.x/7), 0)
+		}
 	
 	direction = position_offset
 	rect_position = positions[position_offset]
