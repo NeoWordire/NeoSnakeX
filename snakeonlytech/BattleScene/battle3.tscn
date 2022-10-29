@@ -192,7 +192,6 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 16, 0, 16 )
 offset = Vector2( 0, 8 )
 transform = Transform2D( 1, 0, 0, 1, 0, 8 )
 script = ExtResource( 10 )
-FoodSegments = 3
 
 [node name="Player" parent="SnakeBattle" instance=ExtResource( 15 )]
 position = Vector2( 49, 39 )
