@@ -8,7 +8,7 @@ var selected = 0
 var levels = [
 	"res://BattleScene/snakebattlev3.tscn",
 	"res://BattleScene/battle1.tscn",
-	"res://Dialogue/SCENE1.tscn",
+	"res://Dialogue/NameSelect.tscn",
 ]
 
 var levelpanels = []

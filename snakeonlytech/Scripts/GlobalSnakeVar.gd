@@ -42,6 +42,7 @@ var g_debugging
 #var g_startrot
 #var g_player1Ctrl
 var g_foodsegments
+var g_yourname
 
 var g_time_between_snake = 0
 var g_time_between_bullet = 0
