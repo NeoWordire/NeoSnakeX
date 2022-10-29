@@ -1,0 +1,20 @@
+{
+	"events": [
+		{
+			"background": "res://Assets/Textures/BGs/arena.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 0
+		},
+		{
+			"character": "character-1666860966.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "AND THE WINNER IS: [YOURNAME]"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1667083385.json",
+		"name": "Scene2"
+	}
+}
