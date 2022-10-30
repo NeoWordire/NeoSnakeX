@@ -202,6 +202,7 @@ script/source = "extends Sprite
 offset = Vector2( 0, 8 )
 transform = Transform2D( 1, 0, 0, 1, 0, 8 )
 script = ExtResource( 10 )
+WinScene = "res://Dialogue/VNPART2.tscn"
 ModConditions = {
 "BulletMps": 12,
 "FoodSegmentsGain": 3,

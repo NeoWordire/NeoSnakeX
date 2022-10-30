@@ -49,6 +49,8 @@ var g_time_between_bullet = 0
 var g_time_between_input = 0
 var g_counterlastsnake = 0
 
+var g_camera = null
+
 func posdir2pos(pos, newdir):
 	if (newdir == NORTH):
 		pos.y -= 1 * tilesize

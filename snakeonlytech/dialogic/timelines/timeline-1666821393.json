@@ -348,6 +348,18 @@
 			"z_index": 0
 		},
 		{
+			"call_node": {
+				"arguments": [
+					"500",
+					".3",
+					"500"
+				],
+				"method_name": "shake",
+				"target_node_path": "VNPART1/Camera2DForShake"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
 			"event_id": "dialogic_023",
 			"hide_dialogbox": true,
 			"wait_seconds": 0.2

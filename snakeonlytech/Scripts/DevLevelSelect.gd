@@ -6,9 +6,9 @@ extends Control
 # var b = "text"
 var selected = 0
 var levels = [
-	"res://BattleScene/snakebattlev3.tscn",
-	"res://BattleScene/battle1.tscn",
 	"res://Dialogue/NameSelect.tscn",
+	"res://BattleScene/battle1.tscn",
+	"res://Dialogue/VNPART2.tscn",
 ]
 
 var levelpanels = []
@@ -45,6 +45,7 @@ func _process(delta):
 	uidelay += delta
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().change_scene(levels[selected])
+		get_parent().get_node("Camera2DForShake").shake(3,0.5,3)
 	if (uidelay > 0.2):
 		if Input.is_action_pressed("ui_down"):
 			if (selected < levels.size()-1):
@@ -66,3 +67,5 @@ func _process(delta):
 	else :
 		self.rect_position.y = 0
 	pass
+
+	

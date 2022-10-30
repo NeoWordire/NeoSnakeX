@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Camera2DForShake.gd" type="Script" id=1]
+
+[node name="Camera2DForShake" type="Camera2D"]
+offset = Vector2( 120, 80 )
+anchor_mode = 0
+current = true
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -3,6 +3,8 @@ const Bullet  = preload("res://Scripts/Bullet.gd")
 const Snake = preload("res://Scripts/Snake.gd")
 const Food = preload("res://Scripts/Food.gd")
 
+export (String) var WinScene
+
 # Declare member variables here. Examples:
 #export (int) var bullet_mps = 12
 #export (int) var snake_mps = 8
@@ -106,7 +108,7 @@ func _process(_delta):
 			if GlobalSnakeVar.g_battleState == battleStateEnum.GAMEOVERLOST: #lost best of 3
 				pre_start() 
 			if GlobalSnakeVar.g_battleState == battleStateEnum.GAMEOVERWON: #won best of 3
-				get_tree().change_scene("res://DevLevelSelect.tscn")
+				get_tree().change_scene(WinScene)
 			uiCooldown = 0.0
 var bulletlastrun = 0
 var counterlastsnake = 0

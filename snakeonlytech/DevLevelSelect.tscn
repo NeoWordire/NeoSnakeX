@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/DevLevelSelect.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=3]
+[ext_resource path="res://Camera2DForShake.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -32,3 +33,5 @@ bbcode_enabled = true
 bbcode_text = "[wave amp=50 freq=2]CORYS DEV LEVEL SELECT (SHORTCUT HERE = END KEY)[/wave]"
 text = "CORYS DEV LEVEL SELECT (SHORTCUT HERE = END KEY)"
 scroll_active = false
+
+[node name="Camera2DForShake" parent="." instance=ExtResource( 4 )]
