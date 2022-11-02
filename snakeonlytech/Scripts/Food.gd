@@ -1,7 +1,6 @@
 extends Area2D
 class_name Food, "res://Assets/Textures/apple.png"
 
-var truepos : Vector2
 
 export (float) var respawntime = 2.0;
 var respawntimer = Timer.new();
@@ -16,14 +15,15 @@ func _ready():
 func respawn():
 	if (GlobalSnakeVar.paused):
 		return
-	truepos.x = GlobalSnakeVar.g_rng.randi_range(GlobalSnakeVar.borderintiles*2, GlobalSnakeVar.width/GlobalSnakeVar.tilesize - 2*GlobalSnakeVar.borderintiles)*GlobalSnakeVar.tilesize
-	truepos.y = GlobalSnakeVar.g_rng.randi_range(GlobalSnakeVar.borderintiles*2, GlobalSnakeVar.height/GlobalSnakeVar.tilesize- 2*GlobalSnakeVar.borderintiles)*GlobalSnakeVar.tilesize
-	if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truepos)] != 0:
+	var temppos = Vector2(GlobalSnakeVar.g_rng.randi_range(GlobalSnakeVar.borderintiles*2, GlobalSnakeVar.width/GlobalSnakeVar.tilesize - 2*GlobalSnakeVar.borderintiles)*GlobalSnakeVar.tilesize,
+			GlobalSnakeVar.g_rng.randi_range(GlobalSnakeVar.borderintiles*2, GlobalSnakeVar.height/GlobalSnakeVar.tilesize- 2*GlobalSnakeVar.borderintiles)*GlobalSnakeVar.tilesize)
+	#if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truepos)] != 0:
+	if GlobalSnakeVar.g_boardSprites.has(temppos):
 		ate_food();
 		return
 
-	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truepos)] = 2
-	position = truepos
+	#GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truepos)] = 2
+	position = temppos
 	pass
 	
 func ate_food():

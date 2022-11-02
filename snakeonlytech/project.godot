@@ -75,12 +75,12 @@ _global_script_classes=[ {
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
 "base": "Area2D",
-"class": "Snake",
+"class": "Snake2",
 "language": "GDScript",
 "path": "res://Scripts/Snake.gd"
 } ]
 _global_script_class_icons={
-"Bullet": "res://Assets/Textures/icon.png",
+"Bullet": "",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
@@ -93,22 +93,19 @@ _global_script_class_icons={
 "DialogicUtil": "",
 "Food": "res://Assets/Textures/apple.png",
 "HistoryRow": "",
-"Snake": "res://Assets/Textures/snake_head.png"
+"Snake2": "res://Assets/Textures/snake_head.png"
 }
 
 [application]
 
 config/name="snakealone"
-run/main_scene="res://DevLevelSelect.tscn"
+run/main_scene="res://Snakev2/SnakeBattlev2.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GlobalSnakeVar="*res://Scripts/GlobalSnakeVar.gd"
 SoundPlayer="*res://Assets/SoundPlayer.tscn"
-ExecutionStates="*res://addons/gdyarn/autoloads/execution_states.gd"
-NumberPlurals="*res://addons/gdyarn/autoloads/number_plurals.gd"
-YarnGlobals="*res://addons/gdyarn/autoloads/execution_states.gd"
 
 [debug]
 
@@ -179,9 +176,11 @@ dialogic_default_action={
 
 [layer_names]
 
-2d_physics/layer_2="food"
-2d_physics/layer_3="bullets"
-2d_physics/layer_4="players"
+2d_physics/layer_2="PlayerFrontnav"
+2d_physics/layer_3="EnemyFrontnav"
+2d_physics/layer_4="Walls"
+2d_physics/layer_5="Player1"
+2d_physics/layer_6="Enemy"
 
 [physics]
 

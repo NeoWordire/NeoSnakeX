@@ -1,5 +1,7 @@
 extends Node
 
+const customAStar = preload("res://Scripts/customAStar.gd")
+
 const width : int = 240
 const height : int = 136
 const tilesize : int = 8
@@ -43,11 +45,14 @@ var g_debugging
 #var g_player1Ctrl
 var g_foodsegments
 var g_yourname
+var g_boardSprites = {}
 
 var g_time_between_snake = 0
 var g_time_between_bullet = 0
 var g_time_between_input = 0
 var g_counterlastsnake = 0
+
+var g_astar_empty;
 
 var g_camera = null
 
@@ -67,6 +72,27 @@ func pos2index(pos):
 		return -1
 	return ((floor(pos.y)/tilesize)*(floor(width)/tilesize)) + (floor(pos.x)/tilesize)
 
+func _estimate_cost(from_id, to_id):
+	print(from_id)
+	print(to_id)
+	breakpoint
+	
+
+func initAstar():
+	g_astar_empty = customAStar.new()
+	#g_astar_empty._estimate_cost = estimate_astar_cost
+	for h in height/tilesize:
+		for w in width/tilesize:
+			var pos = Vector2(tilesize*h,w*tilesize)
+			g_astar_empty.add_point(pos2index(pos), pos, 1.0)
+			if (h != 0):
+				var prevpos = Vector2(tilesize*(h-1),w*tilesize)
+				g_astar_empty.connect_points(pos2index(prevpos), pos2index(pos))
+			if (w != 0):
+				var prevpos = Vector2(tilesize*h,(w-1)*tilesize)
+				g_astar_empty.connect_points(pos2index(prevpos), pos2index(pos))
+	print(g_astar_empty.get_point_path(pos2index(Vector2(0,0)),pos2index(Vector2(64,64))))
+	
 func initColMap():
 	colmap = []
 	for h in height/tilesize:
@@ -77,18 +103,15 @@ func initColMap():
 				colmap.append(1);
 			else :
 				colmap.append(0);
-
 var debugcolmapnodes = []
 
 func debug_colmap():
 	var dbgnode = get_tree().root.get_node("Node2D").get_node("Debug")
 	if (debugcolmapnodes.size() != 0):
 		for node in debugcolmapnodes:
-			if (colmap[pos2index(node.position)] == 2):
+			if g_boardSprites.has(node.position):
 				node.color = Color(1,0,1,1)
-			if (colmap[pos2index(node.position)] == 1):
-				node.color = Color(1,1,1,1)
-			if (colmap[pos2index(node.position)] == 0):
+			else:
 				node.color = Color(0,1,1,1)
 			#dbgnode.remove_child(n)
 			#n.queue_free()

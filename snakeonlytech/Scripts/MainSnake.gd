@@ -1,9 +1,9 @@
 extends CanvasLayer
-const Bullet  = preload("res://Scripts/Bullet.gd")
-const Snake = preload("res://Scripts/Snake.gd")
-const Food = preload("res://Scripts/Food.gd")
+#const Bullet  = preload("res://Scripts/Bullet.gd")
+#const Snake = preload("res://Scripts/Snake.gd")
+#const Food = preload("res://Scripts/Food.gd")
 
-export (String) var WinScene
+export (String) var WinScene = "res://DevLevelSelect.tscn"
 
 # Declare member variables here. Examples:
 #export (int) var bullet_mps = 12
@@ -70,7 +70,9 @@ func beginFight():
 	get_node("PRESTART").visible = false
 	GlobalSnakeVar.g_battleState = battleStateEnum.INBATTLE
 	GlobalSnakeVar.paused = false
-	GlobalSnakeVar.initColMap()
+	#GlobalSnakeVar.initColMap()
+	GlobalSnakeVar.initAstar()
+	GlobalSnakeVar.g_boardSprites = {}
 	GlobalSnakeVar.snakes = []
 	var player = 0
 	for node in get_children():
@@ -94,9 +96,10 @@ func _process(_delta):
 		if (EndConditions["TIMER"] != 0):
 			get_node("HUD").get_node("CountdownTimer").text = String(abs(ceil(timerinstance)))
 			timerinstance -= _delta
-		get_node("HUD").get_node("Player/Score").text = "X" + String(GlobalSnakeVar.snakes[0].truecords.size())
-		get_node("HUD").get_node("Enemy/Score").text = "X" + String(GlobalSnakeVar.snakes[1].truecords.size())
+		get_node("HUD").get_node("Player/Score").text = "X" + String(GlobalSnakeVar.snakes[0].sprites.size())
+		get_node("HUD").get_node("Enemy/Score").text = "X" + String(GlobalSnakeVar.snakes[1].sprites.size())
 
+	uiCooldown += _delta
 	uiCooldown += _delta
 	if (uiCooldown > 0.5 || GlobalSnakeVar.g_battleState == battleStateEnum.GAMEOVERWON):
 		if Input.is_action_just_pressed("ui_accept"):
@@ -125,10 +128,15 @@ func _physics_process(delta):
 		return
 		#if (updatetime*GlobalSnakeVar.moves_per_second >= 1.0):
 	if (GlobalSnakeVar.snakeupdatetimer * GlobalSnakeVar.g_snake_moves_per_second >= 1.0):
+		var anyDied = false
 		for snake in GlobalSnakeVar.snakes:
-			snake.step_simulation()
-			if GlobalSnakeVar.paused:
-				return
+			snake.decide_turn()
+			if (snake.play_movement()):
+				anyDied = true
+		if anyDied:
+			GlobalSnakeVar.paused = true
+			return
+		for snake in GlobalSnakeVar.snakes:
 			snake.update_display()
 				#GlobalSnakeVar.paused = true
 		GlobalSnakeVar.g_counterlastsnake = counterlastsnake

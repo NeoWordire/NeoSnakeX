@@ -1,20 +1,16 @@
 extends Area2D
-class_name Snake, "res://Assets/Textures/snake_head.png"
+class_name Snake2, "res://Assets/Textures/snake_head.png"
 func get_class(): return "Snake"
-const Bullet = preload("res://Scripts/Bullet.gd")
+#const Bullet = preload("res://Scripts/Bullet.gd")
 var bullet_packed = load("res://BattleScene/SubSceneObjects/Bullet.tscn")
-var SnakeBodyParticle = load("res://BattleScene/SubSceneObjects/SnakeBodyParticle.tscn")
 var SnakeBodyDeadParticle = load("res://BattleScene/SubSceneObjects/SnakeBodyDeadParticle.tscn")
-var SnakeBodyMainSprite = load("res://BattleScene/SubSceneObjects/SnakeBodyParticleIn.tscn")
+var SnakeBodyMainSprite = load("res://BattleScene/SubSceneObjects/SnakeBodyParticle.tscn")
 
 signal snake_died(player)
 signal ate_food()
 
 #class_name Bullet
 var sprites = []
-var colshapes = []
-var truecords = [] 
-var tilerot = []
 #var splitMap = []
 var snakecap = 5
 var truedir = GlobalSnakeVar.NODIR
@@ -36,7 +32,7 @@ var canfire = true;
 
 
 func update_ray():
-	get_node("ray").position = colshapes[0].position
+	get_node("ray").position = sprites[0].position
 	var castscalar = GlobalSnakeVar.posdir2pos(Vector2(0,0), reqdir)
 	castscalar *= max(GlobalSnakeVar.width,GlobalSnakeVar.height)/GlobalSnakeVar.tilesize
 	get_node("ray").cast_to = castscalar
@@ -46,13 +42,8 @@ func setup(player):
 	for sprite in sprites:
 		remove_child(sprite)
 		sprite.queue_free()
-	for colshape in colshapes:
-		remove_child(colshape)
-		colshape.queue_free()
-	colshapes = []
+
 	sprites = [];
-	truecords = []
-	tilerot = []
 #	splitMap = []
 	snakecap = 5
 	#get_node("shootCoolDown").connect("timeout",self,"fire_cooled_off")
@@ -60,27 +51,18 @@ func setup(player):
 	
 	#build head specially
 	var poly = SnakeBodyMainSprite.instance()
-	var hitbox = CollisionShape2D.new()
-	hitbox.shape = CircleShape2D.new()
-	hitbox.shape.set_radius(1)
-
-	hitbox.position.x = startpos.x + GlobalSnakeVar.tilesize/2
-	hitbox.position.y = startpos.y + GlobalSnakeVar.tilesize/2
-	colshapes.append(hitbox)
-	add_child(hitbox)
-
-	update_ray()
+	
 	poly.texture = headtex
-	truecords.append(startpos)
+	poly.position = startpos
+	poly.truedir = truedir
+	
 #	splitMap.append(0)
 	
 	reqdir = startRotation
 	truedir = startRotation
-	tilerot.append(truedir)
-	
 	sprites.append(poly)
-	poly.position = Vector2(-100,-100)
 	add_child(poly)
+	update_ray()
 	for i in snakecap:
 		pass
 		#play_movement()
@@ -94,7 +76,10 @@ func _ready():
 
 var lastrun = 0
 
-func step_simulation():
+
+
+#func step_simulation():
+func decide_turn():
 	var time = OS.get_ticks_usec()
 	GlobalSnakeVar.g_time_between_snake = time - lastrun
 	lastrun = time
@@ -102,37 +87,35 @@ func step_simulation():
 		get_input()
 	else :
 		get_input_ai()
-	play_movement()
+	#play_movement()
 	pass
 	
 func play_movement():
 	var died = false
-	var oldtailforgrow = truecords[-1]
-	var oldtailsrot = tilerot[-1]
-	var oldheadpos = truecords[0]
-	var oldheadrot = tilerot[0]
+	var oldtailforgrow = sprites[-1].position
+	var oldtailsrot = sprites[-1].truedir
+	var oldheadpos = sprites[0].position
+	var oldheadrot = sprites[0].truedir
 		#grow
 	truedir = reqdir
 	if (!move_head()):
 		died = true
-		return
+		return died
 		#print("DIED")
 	if inputshoot && canfire:
-		shoot(truecords[0],truedir)
+		shoot(sprites[0].position,truedir)
 	if snakecap > sprites.size():
 		grow(oldtailforgrow, oldtailsrot)
 	body_follow_head(oldheadpos, oldheadrot)
-	#futureheadpos = GlobalSnakeVar.posdir2pos(truecords[0], truedir)
-	for x in colshapes.size():
-		colshapes[x].position.x = truecords[x].x + GlobalSnakeVar.tilesize/2
-		colshapes[x].position.y = truecords[x].y + GlobalSnakeVar.tilesize/2
-	if (tilerot.size() > 1):
-		tilerot[1] =truedir  #rotate old head to current dir
+
+	if (sprites.size() > 1):
+		sprites[1].truedir =truedir  #rotate old head to current dir
 	return died
 
 func _process(_delta):
-	if (HumanOrCPU==0):
-		get_input()
+#	if (HumanOrCPU==0):
+		#get_input()
+	pass
 
 func _physics_process(_delta):
 	#no op since driven by MainSnake _physics_process?
@@ -179,27 +162,58 @@ func get_input():
 
 func get_input_ai():
 	var currentdir = truedir
-	var goalpos = GlobalSnakeVar.foodpoly.truepos
+	var goalpos = GlobalSnakeVar.foodpoly.position
 	var legalmoves = []
 	var legalfoodrank = []
 	var counts = []
 	for x in 4:
-		var testpos = GlobalSnakeVar.posdir2pos(truecords[0], x)
-		if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(testpos)] != 1:
-			legalmoves.append(x)
-			var value = (Vector2(0,0).distance_to(Vector2(GlobalSnakeVar.width,GlobalSnakeVar.height)) - testpos.distance_to(goalpos))/2
-			var newmap = GlobalSnakeVar.colmap.duplicate()
-			if GlobalSnakeVar.g_numplayers == 2:
-				var enemyindex = (_player + 1 ) % GlobalSnakeVar.g_numplayers
-				var enemynext = GlobalSnakeVar.posdir2pos(GlobalSnakeVar.snakes[enemyindex].truecords[0], GlobalSnakeVar.snakes[enemyindex].truedir)
-				newmap[GlobalSnakeVar.pos2index(enemynext)] = 1;
-			counts.append(flood(newmap, testpos, 0))
-			#if count2 < 30:
-			#	value = 0
-			if currentdir == x:
-				if !(GlobalSnakeVar.foodpoly.truepos.x == truecords[0].x || GlobalSnakeVar.foodpoly.truepos.y == truecords[0].y):
-					value = value * 1.2
-			legalfoodrank.append(value)
+		
+		get_node("ray").position = sprites[0].position
+		var castscalar = GlobalSnakeVar.posdir2pos(Vector2(0,0), x)
+		castscalar *= max(GlobalSnakeVar.width,GlobalSnakeVar.height)/GlobalSnakeVar.tilesize
+		get_node("ray").cast_to = castscalar
+
+		get_node("ray").enabled = true
+		if (get_node("ray").is_colliding()):
+			print(get_node("ray").get_collider_shape)
+			break
+#		var testpos = GlobalSnakeVar.posdir2pos(sprites[0].position, x)
+#		#if GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(testpos)] != 1:
+#		if (truedir + 2 % 4) == x:
+#			continue
+#		if GlobalSnakeVar.g_boardSprites.has(testpos):
+#			continue
+#		if (testpos.x < 0 ||
+#				testpos.y < 0):
+#			continue
+#		if (testpos.x > GlobalSnakeVar.width - GlobalSnakeVar.borderintiles * 1 * GlobalSnakeVar.tilesize ||
+#				testpos.y > GlobalSnakeVar.height - GlobalSnakeVar.borderintiles * 1 * GlobalSnakeVar.tilesize):
+#			continue
+#		if GlobalSnakeVar.g_numplayers == 2:
+#			var enemyindex = (_player + 1 ) % GlobalSnakeVar.g_numplayers
+#			var safe = true
+#			#for dir in 4:
+#			var enemynext = GlobalSnakeVar.posdir2pos(GlobalSnakeVar.snakes[enemyindex].sprites[0].position, GlobalSnakeVar.snakes[enemyindex].sprites[0].truedir)
+#			if enemynext == testpos:
+#					safe = false
+#			if !safe:
+#				continue
+		legalmoves.append(x) 
+		#var value = (Vector2(0,0).distance_to(Vector2(GlobalSnakeVar.width,GlobalSnakeVar.height)) - testpos.distance_to(goalpos))/2
+#		var newmap = GlobalSnakeVar.colmap.duplicate()
+#		if GlobalSnakeVar.g_numplayers == 2:
+#			var enemyindex = (_player + 1 ) % GlobalSnakeVar.g_numplayers
+#			var enemynext = GlobalSnakeVar.posdir2pos(GlobalSnakeVar.snakes[enemyindex].truecords[0], GlobalSnakeVar.snakes[enemyindex].truedir)
+#			newmap[GlobalSnakeVar.pos2index(enemynext)] = 1;
+#		counts.append(flood(newmap, testpos, 0))
+		counts.append(100)
+		#if count2 < 30:
+		#	value = 0
+#		if currentdir == x:
+#			if !(GlobalSnakeVar.foodpoly.position.x == sprites[0].position.x ||
+#					GlobalSnakeVar.foodpoly.position.y == sprites[0].position.y):
+#				value = value * 1.2
+	#legalfoodrank.append(value)
 	
 	for x in legalmoves.size():
 		if counts[x] < 10:
@@ -223,41 +237,47 @@ func get_input_ai():
 	else:
 		reqdir = bestans;
 	inputshoot = false
-	update_ray()
-	get_node("ray").enabled = true
-	if (get_node("ray").is_colliding()):
-		inputshoot = true
+	print("player ", _player, " move ", reqdir, " choices ", legalmoves)
 
 func move_head():
-	var goingto = GlobalSnakeVar.posdir2pos(truecords[0], truedir)
-	if (GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(goingto)] == 1):
-		emit_signal("snake_died", _player)
-		return
+	var goingto = GlobalSnakeVar.posdir2pos(sprites[0].position, truedir)
+	if (GlobalSnakeVar.g_boardSprites.has(goingto) ||
+			goingto.x < 0 || 
+			goingto.y < 0 ||
+			goingto.x > GlobalSnakeVar.width - GlobalSnakeVar.borderintiles * -2 *GlobalSnakeVar.tilesize ||
+			goingto.y > GlobalSnakeVar.height - GlobalSnakeVar.borderintiles * -2 * GlobalSnakeVar.tilesize):
+#		print(goingtopre
+#		print("x = ", GlobalSnakeVar.width - GlobalSnakeVar.borderintiles * GlobalSnakeVar.tilesize * 2)
+#		print("y = ", GlobalSnakeVar.width - GlobalSnakeVar.borderintiles * GlobalSnakeVar.tilesize * 2)
+		#XXXemit_signal("snake_died", _player)
+		#XXXreturn
 		pass
-	if (GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(goingto)] == 2):
+	if (goingto == GlobalSnakeVar.foodpoly.position):
 		emit_signal("ate_food")
-	truecords[0] = goingto
-	tilerot[0] = truedir
-	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[0])] = 1
+	GlobalSnakeVar.g_boardSprites.erase(sprites[0].position)
+	sprites[0].position = goingto
+	sprites[0].truedir = truedir
+	GlobalSnakeVar.g_boardSprites[sprites[0].position] = sprites[0]
 	return true
 
 func body_follow_head(prevheadpos,prevrot):
 	if sprites.size() <= 1:
-		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[0])] = 0
+		GlobalSnakeVar.g_boardSprites.erase(sprites[0].position)
 		return
-	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[-1])] = 0
+	GlobalSnakeVar.g_boardSprites.erase(sprites[-1].position)
+	
 	var followcord = prevheadpos
 	var followRot = prevrot
 	for s in range(1, sprites.size()):
-		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 0
+		GlobalSnakeVar.g_boardSprites.erase(sprites[s].position)
 		sprites[s].texture = bodytex
 		var tempCord = followcord
 		var tempRot = followRot
-		followcord = truecords[s]
-		followRot = tilerot[s]
-		truecords[s] = tempCord
-		tilerot[s] = tempRot
-		GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[s])] = 1
+		followcord = sprites[s].position
+		followRot = sprites[s].truedir
+		sprites[s].position = tempCord
+		sprites[s].truedir = tempRot
+		GlobalSnakeVar.g_boardSprites[sprites[s].position] = sprites[s]
 
 func shoot(pos, dir):
 	var bullet = bullet_packed.instance()
@@ -270,32 +290,25 @@ func shoot(pos, dir):
 	SoundPlayer.play_sound(SoundPlayer.SFXSHOOT)
 
 func grow(tailpos, rot):
-	var poly = SnakeBodyMainSprite.instance()
-	poly.texture = bodytex
+	var spriteinstance = SnakeBodyMainSprite.instance()
+	spriteinstance.texture = bodytex
 
-	var hitbox = CollisionShape2D.new()
-	hitbox.shape = CircleShape2D.new()
-	#hitbox.shape.set_extents(Vector2(GlobalSnakeVar.tilesize/2, GlobalSnakeVar.tilesize/2))
-	hitbox.shape.set_radius(1)
-	hitbox.position.x = tailpos.x + GlobalSnakeVar.tilesize/2
-	hitbox.position.y = tailpos.y + GlobalSnakeVar.tilesize/2
+	GlobalSnakeVar.g_boardSprites[tailpos] = spriteinstance
+	spriteinstance.position = tailpos
+	spriteinstance.truedir = rot
+	sprites.append(spriteinstance)
 
-	colshapes.append(hitbox)
-	sprites.append(poly)
-	truecords.append(tailpos)
 #	splitMap.append(splitMap[-1])
 
-	tilerot.append(rot)
-	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(tailpos)] = 1
+	#GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(tailpos)] = 1
 	#tile_draw_snake_flag_from_true(i, snakes[i]["snakelen"])
-	add_child(poly)
-	add_child(hitbox)
+	add_child(spriteinstance)
 	#colmap[pos2index(snakes[i]["truecords"][-1])] = 1
 	#snakes[i]["snakelen"] += 1
 	
 func check_bullet(truepos, pastpos):	
-	for x in truecords.size():
-		if (truecords[x] == truepos || truecords[x] == pastpos):
+	for x in sprites.size():
+		if (sprites[x].position == truepos || sprites[x].position == pastpos):
 			got_shot(x)
 			return #retool
 	#debug XXX remove before ship
@@ -315,7 +328,8 @@ func got_shot(x):
 	#	x += 
 	SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
 	print(_player," was shot at segment ", x)
-	GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[sprites.size()-1])] = 0
+	#GlobalSnakeVar.colmap[GlobalSnakeVar.pos2index(truecords[sprites.size()-1])] = 0
+	GlobalSnakeVar.g_boardSprites.erase(sprites[-1].position)
 	#for t in range(x, splitMap.size()):
 	#	splitMap[t] += 1
 	var temp = SnakeBodyDeadParticle.instance()
@@ -326,11 +340,7 @@ func got_shot(x):
 	#sprites[x].texture = bodywarptex
 	#sprites[x].texture.pause = true
 #	splitMap.remove(sprites.size()-1)
-	tilerot.remove(sprites.size()-1)
 	remove_child(sprites[sprites.size()-1])
-	truecords.remove(sprites.size()-1)
-	remove_child(colshapes[sprites.size()-1])
-	colshapes.remove(sprites.size()-1)
 	sprites.remove(sprites.size()-1)
 	snakecap -= 1
 	
@@ -348,15 +358,15 @@ func flood(map, pos, depth):
 	return ans;
 	
 func tile_draw_snake_flag_from_true(segment):
-	sprites[segment].position.x = truecords[segment].x + GlobalSnakeVar.tilesize/2
-	sprites[segment].position.y = truecords[segment].y + GlobalSnakeVar.tilesize/2
-	if (tilerot[segment] == GlobalSnakeVar.NORTH):
+#	sprites[segment].position.x = truecords[segment].x + GlobalSnakeVar.tilesize/2
+#	sprites[segment].position.y = truecords[segment].y + GlobalSnakeVar.tilesize/2
+	if (sprites[segment].truedir == GlobalSnakeVar.NORTH):
 		sprites[segment].rotation = deg2rad(270)
-	if (tilerot[segment] == GlobalSnakeVar.EAST):
+	if (sprites[segment].truedir == GlobalSnakeVar.EAST):
 		sprites[segment].rotation = 0
-	if (tilerot[segment] == GlobalSnakeVar.SOUTH):
+	if (sprites[segment].truedir == GlobalSnakeVar.SOUTH):
 		sprites[segment].rotation = deg2rad(90)
-	if (tilerot[segment] == GlobalSnakeVar.WEST):
+	if (sprites[segment].truedir == GlobalSnakeVar.WEST):
 		sprites[segment].rotation = deg2rad(180)
 
 func ate_food_snake():
