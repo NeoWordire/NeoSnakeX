@@ -12,9 +12,10 @@ const tilesize = 8
 var reqdir
 var truedir
 export (int) var player = 0
+export (int, "player","ai") var HumanOrCPU
 export (Texture) var bodytex
 export (Texture) var headtex
-export (int) var startDir = 1
+export (bool) var flipDir = false
 var inputqueue = []
 var rays = [Vector2(0,-8),Vector2(8,0),Vector2(0,8),Vector2(-8,0)]
 
@@ -45,7 +46,8 @@ func get_input():
 	else:
 		inputqueue.erase(GlobalSnakeVar.SOUTH)
 	if (inputqueue.size()!= 0):
-		reqdir = inputqueue[-1]
+		if ((truedir + 2)%4 != inputqueue[-1]):
+			reqdir = inputqueue[-1]
 	else:
 		reqdir = truedir
 
@@ -57,14 +59,14 @@ func _ready():
 		if (ray.get_class() == "RayCast2D"):
 			ray.add_exception(get_node("Head/Segment/SegmentHitbox"))
 			ray.add_exception(get_node("Head/NavObj/Front33Area"))
-	get_node("Head").position = get_node("Head").global_position
-	for seg in get_node("Body").get_children():
+	$Head.position = $Head.global_position
+	for seg in $Body.get_children():
 		seg.position = seg.global_position
 	position = Vector2(0,0)
-	if (startDir == GlobalSnakeVar.DIRS.WEST):
+	if (flipDir):
 		flip_snake()
-	get_node("Head").texture = headtex
-	for segment in get_node("Body").get_children():
+	$Head.texture = headtex
+	for segment in $Body.get_children():
 		segment.texture = bodytex
 
 func _process(delta):
@@ -72,11 +74,21 @@ func _process(delta):
 	pass
 	
 func flip_snake():
-	var count = get_node("Body").get_child_count()
-	for seg in ceil(count/2.0):
-		var firstpos = 0
-		
+	var count = $Body.get_child_count() -1
+	var last = $Body.get_child(count).position
+	$Body.get_child(count).position = $Head.position
+	$Head.position = last
+	for segid in range(0,(count)/2.0):
+		print("swap, ", segid, count - segid-1)
+		var temp = $Body.get_child(count - segid-1).position
+		$Body.get_child(count - segid-1).position = $Body.get_child(segid).position
+		$Body.get_child(segid).position = temp
+	truedir = GlobalSnakeVar.DIRS.WEST
+	$Head.rotation = deg2rad(180)
+	for seg in $Body.get_children():
+		seg.rotation = deg2rad(180)
 	pass
+	
 func update_rays(dir):
 	#get_node("Head/CenterStepRay").cast_to = rays[dir]
 	#get_node("Head/LeftStepRay").cast_to = rays[(dir+3)%4]
@@ -102,17 +114,19 @@ func ai_ray_input():
 #			print("seen value", value)
 		valid_moves[truedir] = value
 		#print("center hit ", rayhit.get_parent().name)
-	else :
+	else:
 		var raypos = get_node("Head/NavObj/CenterStepRay").get_collision_point()
-		var centerdist = get_node("Head").position.distance_to(raypos)
-		print("dist =", get_node("Head").position, raypos)
+		var centerdist = $Head.position.distance_to(raypos)
+		#print("dist =", $Head.position, raypos)
 		if (centerdist > tilesize):
 			valid_moves[truedir] = centerdist
+		if rayhit.get_parent().get_class() == "Food":
+			valid_moves[truedir] = 10000
 	if !rayhitleft:
-		var value = GlobalSnakeVar.g_rng.randi_range(0,10)
+		var value = GlobalSnakeVar.g_rng.randi_range(12,30)
 		valid_moves[(truedir + 3)%4] = value
 	if !rayhitright:
-		var value = GlobalSnakeVar.g_rng.randi_range(0,10)
+		var value = GlobalSnakeVar.g_rng.randi_range(12,30)
 		valid_moves[(truedir + 1)%4] = value
 	
 	var bestrank = -9999
@@ -121,10 +135,10 @@ func ai_ray_input():
 		if valid_moves[key] > bestrank:
 			bestrank = valid_moves[key]
 			bestans = key
-	print(player, ":", valid_moves,bestans)
+	#print(player, ":", valid_moves,bestans)
 	if (bestans == GlobalSnakeVar.NODIR):
 		reqdir = truedir
-		breakpoint
+		#breakpoint
 	else:
 		reqdir = bestans
 	
@@ -134,7 +148,7 @@ func ai_ray_input():
 #			var hitsnake = hitsegment
 #			while hitsnake.get_class() != "SnakeActor":
 #				hitsnake = hitsnake.get_parent()
-#			var hitdistance = get_node("Head").position.distance_to(hitsegment.position)
+#			var hitdistance = $Head.position.distance_to(hitsegment.position)
 #			print("hit node,",hitsegment.name)
 #			print("distance = ", hitdistance)
 #			print("hitsnake = ", hitsnake)
@@ -144,52 +158,58 @@ func grow_tail(pos):
 	var new = SnakeBodyMainSprite.instance()
 	new.position = pos
 	new.texture = bodytex
-	get_node("Body").add_child(new)
+	$Body.add_child(new)
 	new.name = String(get_index())
 
+var iterateNext = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	#get_input() ###### MAYBE?
-	ai_ray_input()
-	var prevpos = get_node("Head").position
-	var tailpos = get_node("Body").get_child(get_node("Body").get_child_count()-1).position
-#	for childx in range(get_node("Body").get_child_count() -1, -1, -1):
-	for childx in get_node("Body").get_child_count():
-		var temppos = get_node("Body").get_child(childx).position
-		get_node("Body").get_child(childx).position = prevpos
+	if !iterateNext:
+		return
+	iterateNext = false
+	if (!HumanOrCPU):
+		get_input()
+	else:
+		ai_ray_input()
+	var prevpos = $Head.position
+	var tailpos = $Body.get_child($Body.get_child_count()-1).position
+#	for childx in range($Body.get_child_count() -1, -1, -1):
+	for childx in $Body.get_child_count():
+		var temppos = $Body.get_child(childx).position
+		$Body.get_child(childx).position = prevpos
 		prevpos = temppos
 	if (reqdir == GlobalSnakeVar.NORTH):
-		get_node("Head").position.y -= tilesize
-		get_node("Head").rotation = deg2rad(270)
+		$Head.position.y -= tilesize
+		$Head.rotation = deg2rad(270)
 	if (reqdir == GlobalSnakeVar.EAST):
-		get_node("Head").position.x += tilesize
-		get_node("Head").rotation = 0
+		$Head.position.x += tilesize
+		$Head.rotation = 0
 	if (reqdir == GlobalSnakeVar.SOUTH):
-		get_node("Head").position.y += tilesize
-		get_node("Head").rotation = deg2rad(90)
+		$Head.position.y += tilesize
+		$Head.rotation = deg2rad(90)
 	if (reqdir == GlobalSnakeVar.WEST):
-		get_node("Head").position.x -= tilesize
-		get_node("Head").rotation = deg2rad(180)
-	get_node("Head")
+		$Head.position.x -= tilesize
+		$Head.rotation = deg2rad(180)
 	truedir = reqdir
-	if (reqdir == 0 || reqdir == 2):
-		grow_tail(tailpos)
-		
+#	if (reqdir == 0 || reqdir == 2):
+#		grow_tail(tailpos)
+#
 
 func _front33_entered_area(area):
 	#print("XXXXXXX")
 	pass
 
 func _head_entered_area(area):
-	print(area.name)
+	$Head.raise()
 	if (area.name == "SegmentHitbox"):
+		pass
 		breakpoint 
 	if area.name == "Walls":
 		breakpoint
 	print(area)
 	if (area.get_parent().get_class() == "TileMap"):
 		pass
-	#breakpoint	
-	#get_node("Head").raise()
+	#breakpoint
 	#emit_signal("snake_died", player)
 

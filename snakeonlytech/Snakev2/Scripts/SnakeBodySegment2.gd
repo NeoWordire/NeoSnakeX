@@ -21,5 +21,5 @@ func _ready():
 
 
 func _on_SegmentHitbox_area_entered(area):
-	print("SSSSSSSSss")
+#	print("SSSSSSSSss")
 	pass # Replace with function body.

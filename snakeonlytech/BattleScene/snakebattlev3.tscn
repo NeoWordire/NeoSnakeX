@@ -570,6 +570,4 @@ align = 1
 
 [connection signal="area_shape_entered" from="SnakeBattle/Player" to="SnakeBattle/Player" method="_on_Player_area_shape_entered"]
 [connection signal="body_shape_entered" from="SnakeBattle/Player" to="SnakeBattle/Player" method="_on_Player_body_shape_entered"]
-[connection signal="snake_died" from="SnakeBattle/Player" to="SnakeBattle" method="_on_Player_snake_died"]
 [connection signal="area_shape_entered" from="SnakeBattle/Enemy" to="SnakeBattle/Enemy" method="_on_Enemy_area_shape_entered"]
-[connection signal="snake_died" from="SnakeBattle/Enemy" to="SnakeBattle" method="_on_Enemy_snake_died"]
