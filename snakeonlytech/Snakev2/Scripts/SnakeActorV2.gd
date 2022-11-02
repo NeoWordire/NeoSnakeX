@@ -14,6 +14,7 @@ var truedir
 export (int) var player = 0
 export (Texture) var bodytex
 export (Texture) var headtex
+export (int) var startDir = 1
 var inputqueue = []
 var rays = [Vector2(0,-8),Vector2(8,0),Vector2(0,8),Vector2(-8,0)]
 
@@ -56,10 +57,12 @@ func _ready():
 		if (ray.get_class() == "RayCast2D"):
 			ray.add_exception(get_node("Head/Segment/SegmentHitbox"))
 			ray.add_exception(get_node("Head/NavObj/Front33Area"))
-#	get_node("Head/ForwardBox").enabled = false
-#	get_node("Head/LeftStepRay").add_exception(get_node("Head/Area2D"))
-#	get_node("Head/RightStepRay").add_exception(get_node("Head/Area2D"))
-#
+	get_node("Head").position = get_node("Head").global_position
+	for seg in get_node("Body").get_children():
+		seg.position = seg.global_position
+	position = Vector2(0,0)
+	if (startDir == GlobalSnakeVar.DIRS.WEST):
+		flip_snake()
 	get_node("Head").texture = headtex
 	for segment in get_node("Body").get_children():
 		segment.texture = bodytex
@@ -68,6 +71,12 @@ func _process(delta):
 	#get_input()
 	pass
 	
+func flip_snake():
+	var count = get_node("Body").get_child_count()
+	for seg in ceil(count/2.0):
+		var firstpos = 0
+		
+	pass
 func update_rays(dir):
 	#get_node("Head/CenterStepRay").cast_to = rays[dir]
 	#get_node("Head/LeftStepRay").cast_to = rays[(dir+3)%4]
@@ -87,18 +96,23 @@ func ai_ray_input():
 		#print("right git ")
 	var valid_moves = {}
 	if !rayhit:
-		var 	value = 98
-		for i in get_node("Head/NavObj/Front33Area").get_overlapping_areas():
-			value -= 32
-			print("seen value", value)
+		var value = 300
+#		for i in get_node("Head/NavObj/Front33Area").get_overlapping_areas():
+#			value -= 32
+#			print("seen value", value)
 		valid_moves[truedir] = value
-		
 		#print("center hit ", rayhit.get_parent().name)
+	else :
+		var raypos = get_node("Head/NavObj/CenterStepRay").get_collision_point()
+		var centerdist = get_node("Head").position.distance_to(raypos)
+		print("dist =", get_node("Head").position, raypos)
+		if (centerdist > tilesize):
+			valid_moves[truedir] = centerdist
 	if !rayhitleft:
-		var value = GlobalSnakeVar.g_rng.randi_range(0,100)
+		var value = GlobalSnakeVar.g_rng.randi_range(0,10)
 		valid_moves[(truedir + 3)%4] = value
 	if !rayhitright:
-		var value = GlobalSnakeVar.g_rng.randi_range(0,100)
+		var value = GlobalSnakeVar.g_rng.randi_range(0,10)
 		valid_moves[(truedir + 1)%4] = value
 	
 	var bestrank = -9999
@@ -107,7 +121,7 @@ func ai_ray_input():
 		if valid_moves[key] > bestrank:
 			bestrank = valid_moves[key]
 			bestans = key
-	print(valid_moves,bestans)
+	print(player, ":", valid_moves,bestans)
 	if (bestans == GlobalSnakeVar.NODIR):
 		reqdir = truedir
 		breakpoint
@@ -158,8 +172,8 @@ func _physics_process(delta):
 		get_node("Head").rotation = deg2rad(180)
 	get_node("Head")
 	truedir = reqdir
-#	if (reqdir == 0 || reqdir == 2):
-#		grow_tail(tailpos)
+	if (reqdir == 0 || reqdir == 2):
+		grow_tail(tailpos)
 		
 
 func _front33_entered_area(area):
