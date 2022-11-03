@@ -7,6 +7,8 @@ export (float) var respawntime = 2.0;
 var spawncenter = Vector2.ZERO
 var spawnextents = Vector2.ZERO
 
+signal ate_food(player)
+
 func _ready():
 	spawncenter = $SpawnArea/CollisionShape2D.global_position
 	spawnextents = $SpawnArea/CollisionShape2D.shape.get_extents()
@@ -15,14 +17,11 @@ func _ready():
 	disappear_food()
 	pass
 	
-	
 func respawn():
 	var newpos = spawncenter
-	newpos.x += (GlobalSnakeVar.g_rng.randi_range(-spawnextents.x-16, spawnextents.x-16)/8)*8
-	newpos.y += (GlobalSnakeVar.g_rng.randi_range(-spawnextents.y-16, spawnextents.y-16)/8)*8
+	newpos.x += (GlobalSnakeVar.g_rng.randi_range(-spawnextents.x+16, spawnextents.x-16)/8)*8
+	newpos.y += (GlobalSnakeVar.g_rng.randi_range(-spawnextents.y+16, spawnextents.y-16)/8)*8
 	position = newpos
-	print("timer up")
-	$CollisionShape2D.disabled = false
 	visible = true
 #	if (GlobalSnakeVar.paused):
 #		return
@@ -37,9 +36,9 @@ func respawn():
 #	position = temppos
 	pass
 func disappear_food():
+	position = Vector2(-999,999)
 	$Timer.wait_time = respawntime
 	$Timer.start()
-	$CollisionShape2D.disabled = true
 	visible = false
 
 func ate_food():
@@ -51,6 +50,8 @@ func ate_food():
 
 func _on_Food_area_entered(area):
 	if (area.get_parent().get_parent().name == "Head"):
+		emit_signal("ate_food",area.get_parent().get_parent().get_parent())
 		ate_food()
-		print("ate food",area.get_parent().get_parent().name)
+	else:
+		respawn()
 	pass # Replace with function body.

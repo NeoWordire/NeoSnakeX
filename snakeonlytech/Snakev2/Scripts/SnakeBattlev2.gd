@@ -38,7 +38,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-export (int) var snakeStepsPerSec = 8.0
+export (float) var snakeStepsPerSec = 10.0
+export (int) var modFoodSegments = 1
 
 var time_since_step = 0.0
 func _physics_process(delta):
@@ -50,3 +51,8 @@ func _physics_process(delta):
 				continue
 			snakes.iterateNext = true
 	pass
+
+
+func _on_Food_ate_food(player):
+	player.snakecap += modFoodSegments
+	pass # Replace with function body.

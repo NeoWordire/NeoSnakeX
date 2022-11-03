@@ -7,7 +7,6 @@ var SnakeBodyDeadParticle = load("res://BattleScene/SubSceneObjects/SnakeBodyDea
 var SnakeBodyMainSprite = load("res://BattleScene/SubSceneObjects/SnakeBodyParticle.tscn")
 
 signal snake_died(player)
-signal ate_food()
 
 #class_name Bullet
 var sprites = []
