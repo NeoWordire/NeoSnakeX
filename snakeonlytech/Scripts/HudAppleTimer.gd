@@ -17,7 +17,7 @@ func _ready():
 func _process(delta):
 	var apple = get_parent().get_parent().get_node("Food")
 	
-	var numapples = ceil(apple.respawntimer.time_left/apple.respawntime*5)
+	var numapples = ceil(apple.get_node("Timer").time_left/apple.respawntime*5)
 	for x in range(1,6):
 		if (x > numapples):
 			get_node("apple" + String(x)).visible = true

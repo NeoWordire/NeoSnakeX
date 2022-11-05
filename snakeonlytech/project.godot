@@ -80,7 +80,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Snake.gd"
 } ]
 _global_script_class_icons={
-"Bullet": "",
+"Bullet": "res://Assets/Textures/icon.png",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",

@@ -1,7 +1,11 @@
 extends Node2D
 func get_class(): return "SnakeActor"
 const customAStar = preload("res://Scripts/customAStar.gd")
+const Bullet = preload("res://Snakev2/Bullet.tscn")
 var SnakeBodyMainSprite = load("res://Snakev2/SnakeBodySegmentv2.tscn")
+var SnakeBodyDeadSprite = load("res://Snakev2/SnakeBodyDeadParticle.tscn")
+
+signal snake_died(player)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -11,6 +15,7 @@ const tilesize = 8
 
 var reqdir
 var truedir
+var reqshoot
 export (int) var player = 0
 export (int, "player","ai") var HumanOrCPU
 export (Texture) var bodytex
@@ -18,6 +23,8 @@ export (Texture) var headtex
 export (bool) var flipDir = false
 var inputqueue = []
 var snakecap = 5
+var spawnposarray = []
+var spawnrotarray = []
 
 func get_input():
 	var oldinputmask = 0;
@@ -45,16 +52,19 @@ func get_input():
 			inputqueue.append(GlobalSnakeVar.SOUTH)
 	else:
 		inputqueue.erase(GlobalSnakeVar.SOUTH)
+		
 	if (inputqueue.size()!= 0):
 		if ((truedir + 2)%4 != inputqueue[-1]):
 			reqdir = inputqueue[-1]
-	else:
-		reqdir = truedir
+	#else:
+		#eqdir = truedir
+		#inputqueue = oldinputmask
+	reqshoot = false
+	if Input.is_action_pressed("ui_accept"):
+		reqshoot = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	reqdir = GlobalSnakeVar.EAST
-	truedir = reqdir
 	for ray in get_node("Head/NavObj").get_children():
 		if (ray.get_class() == "RayCast2D"):
 			ray.add_exception(get_node("Head/Segment/SegmentHitbox"))
@@ -65,13 +75,35 @@ func _ready():
 	position = Vector2(0,0)
 	if (flipDir):
 		flip_snake()
+	spawnposarray.append($Head.position)
+	spawnrotarray.append($Head.rotation)
 	$Head.texture = headtex
 	for segment in $Body.get_children():
+		spawnposarray.append(segment.position)
+		spawnrotarray.append(segment.rotation)
 		segment.texture = bodytex
-
-func _process(delta):
-	#get_input()
 	pass
+
+func setupRound():
+	assert(get_parent().BattleState == 0 || get_parent().BattleState == 4)
+	reqdir = GlobalSnakeVar.EAST
+	truedir = reqdir
+	#while snakecap < $Body.get_child_count():
+		#grow_tail(spawnposarray[$Body.get_child_count()-1], 0)
+	while (snakecap > 5): # dynamic
+		#get_shot($Body.get_child(get_child_count()-1))
+		pass
+	$Head.position = spawnposarray[0]
+	$Head.rotation = spawnrotarray[0]
+	for segment in $Body.get_child_count():
+		$Body.get_child(segment).position = spawnposarray[segment+1]
+		$Body.get_child(segment).rotation = spawnrotarray[segment+1]
+	truedir = GlobalSnakeVar.DIRS.EAST
+	if (flipDir):
+		truedir = GlobalSnakeVar.DIRS.WEST
+func _process(delta):
+	if (!HumanOrCPU):
+		get_input()
 	
 func flip_snake():
 	var count = $Body.get_child_count() -1
@@ -109,7 +141,12 @@ func ai_ray_input():
 		valid_moves[truedir] = value
 	elif centdistance > 5*tilesize:
 		valid_moves[truedir] = centdistance*2
-		
+	
+	reqshoot = false
+	if(rays["CenterStepRay"]["hit"] && rays["CenterStepRay"]["hit"].get_parent()&& rays["CenterStepRay"]["hit"].get_parent().get_parent()):
+		if(rays["CenterStepRay"]["hit"].get_parent().get_parent().get_class() == "SnakeSegment"):
+			reqshoot = true
+	
 	if !rays["LeftStepRay"]["hit"]:
 		var value = GlobalSnakeVar.g_rng.randi_range(0,10)
 		valid_moves[(truedir + 3)%4] = value
@@ -164,19 +201,31 @@ func grow_tail(pos,rot):
 	new.position = pos
 	new.rotation = rot
 	new.texture = bodytex
+
 	$Body.add_child(new)
 	new.name = String(get_index())
+
+func shoot_bullet():
+	if (get_parent().ModConditions["ShootDisabled"]):
+		return
+	var bullet = Bullet.instance()
+	bullet.position = $Head.position
+	bullet.rotation = $Head.rotation	
+	add_child(bullet)
+	$shootCoolDown.start(get_parent().ModConditions["ShootCooldown"])
+	pass
 
 var iterateNext = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	#get_input() ###### MAYBE?
-	if !iterateNext:
-		return
-	iterateNext = false
 	if (!HumanOrCPU):
 		get_input()
-	else:
+	if !iterateNext:
+		return
+	
+	
+	iterateNext = false
+	if (HumanOrCPU):
 		ai_ray_input()
 	var prevpos = $Head.position
 	var prevrot = $Head.rotation
@@ -204,9 +253,27 @@ func _physics_process(delta):
 		$Head.rotation = deg2rad(180)
 	$Body.get_child(0).rotation = $Head.rotation
 	truedir = reqdir
+	if reqshoot && $shootCoolDown.is_stopped():
+		shoot_bullet()
 	if snakecap > $Body.get_child_count():
 		grow_tail(tailpos,tailrot)
-#
+
+func got_shot(segment):
+	print("got shot")
+	if(segment.name == "Head"):
+		#PLAY ARMORTINKNOISE
+		pass
+	else:
+		var snakenode = segment.get_parent().get_parent()
+		print("Spawn dead spinner at ", segment.position)
+		var dead = SnakeBodyDeadSprite.instance()
+		dead.position = segment.position
+		dead.texture = snakenode.bodytex
+		add_child(dead)
+		print("Shrink")
+		snakenode.snakecap -= 1
+		var endseg = snakenode.get_node("Body").get_child(snakenode.get_node("Body").get_child_count()-1)
+		endseg.queue_free()
 
 func _front33_entered_area(area):
 	#print("XXXXXXX")
@@ -215,14 +282,23 @@ func _front33_entered_area(area):
 func _head_entered_area(area):
 	$Head.raise()
 	if (area.name == "SegmentHitbox"):
-		pass
-		breakpoint 
+		emit_signal("snake_died", player)
 	if area.name == "Walls":
-		breakpoint
-		pass
+		emit_signal("snake_died", player)
 	print(area) 
-	if (area.get_parent().get_class() == "TileMap"):
-		pass
 	#breakpoint
 	#emit_signal("snake_died", player)
 
+func bullet_area_entered(area, bullet):
+	if area.get_parent().get_parent().get_class() == "SnakeSegment":
+		if(area.get_parent().get_parent().get_parent().get_class() == "SnakeActor"):
+			if(area.get_parent().get_parent().get_parent().player == player):
+				return
+			else:
+				got_shot(area.get_parent().get_parent())
+		if(area.get_parent().get_parent().get_parent().get_parent().get_class() == "SnakeActor"):
+			if(area.get_parent().get_parent().get_parent().get_parent().player == player):
+				return
+			else:
+				got_shot(area.get_parent().get_parent())
+	bullet.queue_free()

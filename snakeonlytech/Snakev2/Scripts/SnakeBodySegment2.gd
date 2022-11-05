@@ -13,8 +13,6 @@ func _ready():
 		#output = get_node("NavObj/Front33Area").connect("area_entered",get_parent(),"_front33_entered_area")
 		pass # Replace with function body.
 
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

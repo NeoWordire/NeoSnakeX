@@ -6,6 +6,7 @@ export (float) var respawntime = 2.0;
 
 var spawncenter = Vector2.ZERO
 var spawnextents = Vector2.ZERO
+var running = false
 
 signal ate_food(player)
 
@@ -37,16 +38,27 @@ func respawn():
 	pass
 func disappear_food():
 	position = Vector2(-999,999)
+	visible = false
+	
+func start_food():
 	$Timer.wait_time = respawntime
 	$Timer.start()
-	visible = false
 
 func ate_food():
 	#print("move food")
 	SoundPlayer.play_sound(SoundPlayer.SFXFOODPICKUP)
 	disappear_food()
+	start_food()
 
-
+func _process(delta):
+	if get_parent().BattleState == 2:
+		if (!running):
+			running = true
+			start_food()
+	else:
+		running = false
+		disappear_food()
+	
 
 func _on_Food_area_entered(area):
 	if (area.get_parent().get_parent().name == "Head"):
