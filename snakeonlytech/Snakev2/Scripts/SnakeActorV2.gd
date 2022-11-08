@@ -13,7 +13,7 @@ signal snake_died(player)
 
 const tilesize = 8
 
-var reqdir
+var reqdir = GlobalSnakeVar.EAST
 var truedir
 var reqshoot
 export (int) var player = 0
@@ -78,29 +78,44 @@ func _ready():
 	spawnposarray.append($Head.position)
 	spawnrotarray.append($Head.rotation)
 	$Head.texture = headtex
-	for segment in $Body.get_children():
-		spawnposarray.append(segment.position)
-		spawnrotarray.append(segment.rotation)
-		segment.texture = bodytex
+	
+	for segment in 5:
+		var newpos = spawnposarray[segment]
+		var newrot = spawnrotarray[segment]
+		if (flipDir):
+			newpos.x += 8
+		else:
+			newpos.x -= 8
+		spawnposarray.append(newpos)
+		spawnrotarray.append(newrot)
 	pass
 
-func setupRound():
-	assert(get_parent().BattleState == 0 || get_parent().BattleState == 4)
-	reqdir = GlobalSnakeVar.EAST
+func respawn():
+	if (flipDir):
+		reqdir = GlobalSnakeVar.DIRS.WEST
+	else:
+		reqdir = GlobalSnakeVar.DIRS.EAST
 	truedir = reqdir
-	#while snakecap < $Body.get_child_count():
-		#grow_tail(spawnposarray[$Body.get_child_count()-1], 0)
-	while (snakecap > 5): # dynamic
-		#get_shot($Body.get_child(get_child_count()-1))
+	for segment in range(snakecap,spawnposarray.size()-1):
+		grow_tail(spawnposarray[segment], 0)
+		snakecap += 1
 		pass
+	assert(snakecap >= 5)	
+	while (snakecap > 5): # dynamic
+		shrink_end()
+	assert(snakecap == 5)
 	$Head.position = spawnposarray[0]
 	$Head.rotation = spawnrotarray[0]
-	for segment in $Body.get_child_count():
-		$Body.get_child(segment).position = spawnposarray[segment+1]
-		$Body.get_child(segment).rotation = spawnrotarray[segment+1]
-	truedir = GlobalSnakeVar.DIRS.EAST
-	if (flipDir):
-		truedir = GlobalSnakeVar.DIRS.WEST
+	#for segment in range(1,spawnposarray.size()):
+	for segment in range(1,snakecap+1):
+		$Body.get_child(segment-1).position = spawnposarray[segment]
+		$Body.get_child(segment-1).rotation = spawnrotarray[segment]
+		$Body.get_child(segment-1).texture = bodytex
+	
+func setupRound():
+	assert(get_parent().currentBattleState == get_parent().BATTLESTATE.STATE_INIT)
+	respawn()
+	
 func _process(delta):
 	if (!HumanOrCPU):
 		get_input()
@@ -258,6 +273,14 @@ func _physics_process(delta):
 	if snakecap > $Body.get_child_count():
 		grow_tail(tailpos,tailrot)
 
+func shrink_end():
+	print("Shrink")
+	snakecap -= 1
+	var endseg = get_node("Body").get_child(get_node("Body").get_child_count()-1)
+	get_node("Body").remove_child(endseg)
+	endseg.queue_free()
+
+
 func got_shot(segment):
 	print("got shot")
 	if(segment.name == "Head"):
@@ -270,10 +293,7 @@ func got_shot(segment):
 		dead.position = segment.position
 		dead.texture = snakenode.bodytex
 		add_child(dead)
-		print("Shrink")
-		snakenode.snakecap -= 1
-		var endseg = snakenode.get_node("Body").get_child(snakenode.get_node("Body").get_child_count()-1)
-		endseg.queue_free()
+		snakenode.shrink_end()
 
 func _front33_entered_area(area):
 	#print("XXXXXXX")
@@ -285,7 +305,6 @@ func _head_entered_area(area):
 		emit_signal("snake_died", player)
 	if area.name == "Walls":
 		emit_signal("snake_died", player)
-	print(area) 
 	#breakpoint
 	#emit_signal("snake_died", player)
 

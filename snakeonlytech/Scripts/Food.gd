@@ -16,6 +16,7 @@ func _ready():
 	$Timer.one_shot = true
 	$Timer.connect("timeout",self,"respawn")
 	disappear_food()
+	GlobalSnakeVar.g_rng.randomize()
 	pass
 	
 func respawn():
@@ -51,7 +52,7 @@ func ate_food():
 	start_food()
 
 func _process(delta):
-	if get_parent().BattleState == 2:
+	if get_parent().currentBattleState == get_parent().BATTLESTATE.STATE_BATTLING:
 		if (!running):
 			running = true
 			start_food()
