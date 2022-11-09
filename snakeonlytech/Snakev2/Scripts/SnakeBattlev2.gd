@@ -29,6 +29,9 @@ export (Dictionary) var EndConditions = {
 
 export (bool) var bestOfThree = true
 var bestOfTracker = [0,0]
+signal state_changed (state)
+
+export (String) var WinScene
 
 
 #battle states
@@ -49,10 +52,13 @@ enum BATTLESTATE {
 	STATE_WIN,
 	STATE_LOSS,
 	}
+func setBattleState(newState):
+	emit_signal("state_changed", newState)
+	currentBattleState = newState
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentBattleState = BATTLESTATE.STATE_INIT
+	setBattleState(BATTLESTATE.STATE_INIT)
 	
 func setupRound():
 	for snakes in get_children():
@@ -68,15 +74,20 @@ func _process(delta):
 	if (currentBattleState == BATTLESTATE.STATE_INIT):
 		print("SETUP SHOW INSTRUCT")
 		setupRound()
-		currentBattleState = BATTLESTATE.STATE_SHOWING_INSTRUCT
+		setBattleState(BATTLESTATE.STATE_SHOWING_INSTRUCT)
 	elif (currentBattleState == BATTLESTATE.STATE_SHOWING_INSTRUCT):
 		if (Input.is_action_just_pressed("ui_accept")):
-			#CLEAR INSTRUCTION
-			currentBattleState = BATTLESTATE.STATE_BATTLING
+			setBattleState(BATTLESTATE.STATE_BATTLING)
 	if (currentBattleState == BATTLESTATE.STATE_POST_ROUND_SCORE):
 		if (Input.is_action_just_pressed("ui_accept")):
-			#CLEAR INSTRUCTION
+			setupRound()
+			setBattleState(BATTLESTATE.STATE_BATTLING)
+	if (currentBattleState == BATTLESTATE.STATE_LOSS):
+		if (Input.is_action_just_pressed("ui_accept")):
 			currentBattleState = BATTLESTATE.STATE_INIT
+	if (currentBattleState == BATTLESTATE.STATE_WIN):
+		if (Input.is_action_just_pressed("ui_accept")):
+			get_tree().change_scene(WinScene)
 	pass
 
 var time_since_step = 0.0
@@ -100,35 +111,45 @@ func _on_snake_died(player):
 	print("Player: ", player," died")
 	if (EndConditions["DEATHPERM"]):
 		whodied = player
-		end_condition("died")
+		if (player == 0):
+			end_condition("You Crashed, \nThey earned the win.\n")
+		else:
+			end_condition("They Crashed, \nYou earned a win.\n")
 	else:
 		print("TODO RESPAWN?")
 
+var lastReason = ""
 func end_condition(reason):
+	lastReason = ""
+	print("start end", bestOfTracker)
 	if (whodied != -1):
-		print(reason, "round end, ", whodied, " has died")
 		bestOfTracker[(whodied+1)%2] += 1
 		whodied = -1
+		lastReason = reason
 	elif WinConditions["APPLES"] == 1:
 		pass
 	elif WinConditions["SEGMENTS"] == 1:
 		if get_node("Snake/Body").get_child_count() == get_node("Enemy/Body").get_child_count():
-			print(reason, "round end, tie on segcount, rematch")
+			lastReason = lastReason + "tie on snake Size,\nNo one gets the win credit.\n"
 		elif get_node("Snake/Body").get_child_count() > get_node("Enemy/Body").get_child_count():
-			print(reason, "round end, winner seg")
+			lastReason = lastReason + "You got the bigger snake\n You earned the win.\n"
 			bestOfTracker[0] += 1
 		else:
-			print(reason, "round end, Loss seg")
+			lastReason = lastReason + "Enemy had the bigger snake\n They earned the win.\n"
 			bestOfTracker[1] += 1
+	print("end end", bestOfTracker)
 	if bestOfThree:
 		if bestOfTracker[0] == 2:
 			print("print best of 3, player won")
+			setBattleState(BATTLESTATE.STATE_WIN)
 		elif bestOfTracker[1] == 2:
 			print("print best of 3, enemy won")
 			print("gameover, try again")
+			setBattleState(BATTLESTATE.STATE_LOSS)
+			bestOfTracker = [0,0]
 		else:
 			print("print score ",  bestOfTracker, " then CONINTUE")
-			currentBattleState = BATTLESTATE.STATE_POST_ROUND_SCORE
+			setBattleState(BATTLESTATE.STATE_POST_ROUND_SCORE)
 	else:
 		if bestOfTracker[0] == 0:
 			pass

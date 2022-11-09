@@ -157,6 +157,7 @@ offset = Vector2( 21, 7 )
 
 [node name="Snake" parent="SnakeBattle" instance=ExtResource( 1 )]
 position = Vector2( 24, 88 )
+HumanOrCPU = 1
 bodytex = ExtResource( 4 )
 headtex = ExtResource( 3 )
 
@@ -226,7 +227,7 @@ margin_top = 8.0
 margin_right = 204.0
 margin_bottom = 90.0
 rect_clip_content = false
-text = "BATTLE #1
+text = "BATTLE #1 START
 LEO VS <FRIENDNAME>
 Best OF THREE (First to 2 Wins)
 
@@ -255,14 +256,14 @@ margin_bottom = 20.0
 rect_clip_content = false
 text = "Press Fire Button TO START"
 
-[node name="MIDROUND" type="Control" parent="SnakeBattle/TextInfo"]
+[node name="ROUNDSCORE" type="Control" parent="SnakeBattle/TextInfo"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/TextInfo/MIDROUND"]
+[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/TextInfo/ROUNDSCORE"]
 margin_left = 14.0
 margin_top = 1.0
 margin_right = 226.0
@@ -271,7 +272,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/MIDROUND/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/ROUNDSCORE/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 204.0
@@ -289,7 +290,7 @@ MODIFIERS:
 	FOOD GIVES 3 SEGMENTS"
 scroll_active = false
 
-[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/TextInfo/MIDROUND"]
+[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/TextInfo/ROUNDSCORE"]
 margin_left = 63.0
 margin_top = 99.0
 margin_right = 192.0
@@ -298,7 +299,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/MIDROUND/PanelContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/ROUNDSCORE/PanelContainer2"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 121.0
@@ -321,22 +322,47 @@ margin_right = 160.0
 margin_bottom = 67.0
 rect_clip_content = false
 text = "YOU WON!!!!!
-TODO LOAD NEXT SCENE"
+FIre to LOAD NEXT SCENE"
 
-[node name="LOSESCREEN" type="PanelContainer" parent="SnakeBattle/TextInfo"]
-visible = false
+[node name="LOSESCREEN" type="Control" parent="SnakeBattle/TextInfo"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( -344, 48 )
+
+[node name="MAIN" type="PanelContainer" parent="SnakeBattle/TextInfo/LOSESCREEN"]
 margin_left = 33.0
 margin_top = 18.0
 margin_right = 201.0
 margin_bottom = 93.0
 theme = ExtResource( 13 )
 
-[node name="REASON" type="RichTextLabel" parent="SnakeBattle/TextInfo/LOSESCREEN"]
+[node name="REASON" type="RichTextLabel" parent="SnakeBattle/TextInfo/LOSESCREEN/MAIN"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 160.0
 margin_bottom = 67.0
 rect_clip_content = false
+text = "REPLACED WITH 
+gAMEOVE 
+LOST REASION"
+
+[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/TextInfo/LOSESCREEN"]
+margin_left = 48.0
+margin_top = 99.0
+margin_right = 200.0
+margin_bottom = 120.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 13 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/LOSESCREEN/PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 144.0
+margin_bottom = 13.0
+rect_clip_content = false
+text = "Press Fire Button to try again"
+scroll_active = false
 
 [node name="FPSDebug" type="Label" parent="."]
 visible = false
@@ -347,6 +373,7 @@ script = ExtResource( 7 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="state_changed" from="SnakeBattle" to="SnakeBattle/TextInfo" method="_on_SnakeBattle_state_changed"]
 [connection signal="snake_died" from="SnakeBattle/Snake" to="SnakeBattle" method="_on_snake_died"]
 [connection signal="snake_died" from="SnakeBattle/Enemy" to="SnakeBattle" method="_on_snake_died"]
 [connection signal="ate_food" from="SnakeBattle/Food" to="SnakeBattle" method="_on_Food_ate_food"]

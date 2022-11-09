@@ -113,7 +113,7 @@ func respawn():
 		$Body.get_child(segment-1).texture = bodytex
 	
 func setupRound():
-	assert(get_parent().currentBattleState == get_parent().BATTLESTATE.STATE_INIT)
+	#assert(get_parent().currentBattleState == get_parent().BATTLESTATE.STATE_INIT)
 	respawn()
 	
 func _process(delta):
@@ -268,7 +268,7 @@ func _physics_process(delta):
 		$Head.rotation = deg2rad(180)
 	$Body.get_child(0).rotation = $Head.rotation
 	truedir = reqdir
-	if reqshoot && $shootCoolDown.is_stopped():
+	if reqshoot && $shootCoolDown.time_left == 0.0:
 		shoot_bullet()
 	if snakecap > $Body.get_child_count():
 		grow_tail(tailpos,tailrot)

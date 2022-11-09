@@ -202,6 +202,13 @@ script/source = "extends Sprite
 offset = Vector2( 0, 8 )
 transform = Transform2D( 1, 0, 0, 1, 0, 8 )
 script = ExtResource( 10 )
+ModConditions = {
+"BulletMps": 12,
+"FoodSegmentsGain": 1,
+"ShootCooldown": -1.0,
+"ShootDisabled": false,
+"SnakeMps": 8
+}
 
 [node name="Player" parent="SnakeBattle" instance=ExtResource( 15 )]
 position = Vector2( 49, 39 )

@@ -18,6 +18,8 @@ func _ready():
 
 func _physics_process(delta): 
 	position += Vector2(localMps,0).rotated(rotation)*delta*8
+	if get_parent().get_parent().currentBattleState != get_parent().get_parent().BATTLESTATE.STATE_BATTLING && get_parent().get_parent().currentBattleState != get_parent().get_parent().BATTLESTATE.STATE_PAUSED:
+		queue_free()
 	pass
 	
 func _process(_delta):

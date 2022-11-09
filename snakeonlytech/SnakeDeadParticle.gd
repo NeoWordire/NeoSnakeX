@@ -20,10 +20,8 @@ func _process(delta):
 	position.y += velocity.y * delta
 	velocity.y += 150 * delta
 	rotation += delta * PI
-	#modulate.a -= GlobalSnakeVar.g_snake_moves_per_second*delta
-	if (GlobalSnakeVar.g_snake_moves_per_second):
-		if (life > 1.0):
-			get_parent().remove_child(self)
-			queue_free()
-			pass
+	#modulate.a -= GlobalSnakeVar.g_snake_moves_per_second*delta):
+	if (life > 2.0):
+		get_parent().remove_child(self)
+		queue_free()
 	pass
