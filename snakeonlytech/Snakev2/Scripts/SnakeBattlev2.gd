@@ -27,7 +27,8 @@ export (Dictionary) var EndConditions = {
 	"DEATHPERM" : 1,
 }
 
-export (bool) var bestOfThree = true
+#export (bool) var bestOfThree = true
+var bestOfThree = true
 var bestOfTracker = [0,0]
 signal state_changed (state)
 
@@ -117,7 +118,10 @@ func _on_snake_died(player):
 		else:
 			end_condition("They Crashed, \nYou earned a win.\n")
 	else:
-		print("TODO RESPAWN?")
+		for snakes in get_children():
+			if snakes.get_class() == "SnakeActor":
+				if (snakes.player == player):
+					snakes.respawnMinus(3)
 
 var lastReason = ""
 func end_condition(reason):

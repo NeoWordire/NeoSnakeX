@@ -90,31 +90,51 @@ func _ready():
 		spawnrotarray.append(newrot)
 	pass
 
+func respawnToStartSize():
+	snakecap = $Body.get_child_count()
+	for segment in range(snakecap,spawnposarray.size()-1):
+		grow_tail(spawnposarray[segment], 0)
+		snakecap += 1
+		pass
+	assert(snakecap >= 5)
+	while (snakecap > 5): # dynamic
+		shrink_end()
+		snakecap -= 1
+	assert(snakecap == 5)
+	respawn()
+
+func respawnMinus(shrinksize):
+	var sub = shrinksize
+	while (sub >= 0):
+		if snakecap <= 2:
+			break
+		shrink_end()
+		snakecap -= 1
+		sub -= 1
+	respawn()
+		
+
 func respawn():
 	if (flipDir):
 		reqdir = GlobalSnakeVar.DIRS.WEST
 	else:
 		reqdir = GlobalSnakeVar.DIRS.EAST
 	truedir = reqdir
-	for segment in range(snakecap,spawnposarray.size()-1):
-		grow_tail(spawnposarray[segment], 0)
-		snakecap += 1
-		pass
-	assert(snakecap >= 5)	
-	while (snakecap > 5): # dynamic
-		shrink_end()
-	assert(snakecap == 5)
 	$Head.position = spawnposarray[0]
 	$Head.rotation = spawnrotarray[0]
 	#for segment in range(1,spawnposarray.size()):
-	for segment in range(1,snakecap+1):
+	for segment in range(1,$Body.get_child_count()+1):
+		if (segment >= spawnposarray.size()):
+			shrink_end()
+			snakecap -= 1
+			continue
 		$Body.get_child(segment-1).position = spawnposarray[segment]
 		$Body.get_child(segment-1).rotation = spawnrotarray[segment]
 		$Body.get_child(segment-1).texture = bodytex
 	
 func setupRound():
 	#assert(get_parent().currentBattleState == get_parent().BATTLESTATE.STATE_INIT)
-	respawn()
+	respawnToStartSize()
 	
 func _process(delta):
 	if (!HumanOrCPU):
@@ -238,8 +258,7 @@ func _physics_process(delta):
 		get_input()
 	if !iterateNext:
 		return
-	
-	
+
 	iterateNext = false
 	if (HumanOrCPU):
 		ai_ray_input()
@@ -276,7 +295,6 @@ func _physics_process(delta):
 
 func shrink_end():
 	print("Shrink")
-	snakecap -= 1
 	var endseg = get_node("Body").get_child(get_node("Body").get_child_count()-1)
 	get_node("Body").remove_child(endseg)
 	endseg.queue_free()
@@ -284,17 +302,22 @@ func shrink_end():
 
 func got_shot(segment):
 	print("got shot")
+	var snakenode = segment.get_parent().get_parent()
 	if(segment.name == "Head"):
 		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
+	elif (snakenode.get_node("Body").get_child_count() <= 1):
+		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
+		if (get_parent().EndConditions["ENEMYDESTROYED"]):
+			emit_signal("snake_died", player)
 	else:
 		SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
-		var snakenode = segment.get_parent().get_parent()
 		print("Spawn dead spinner at ", segment.position)
 		var dead = SnakeBodyDeadSprite.instance()
 		dead.position = segment.position
 		dead.texture = snakenode.bodytex
 		add_child(dead)
 		snakenode.shrink_end()
+		snakecap -= 1
 
 func _front33_entered_area(area):
 	#print("XXXXXXX")

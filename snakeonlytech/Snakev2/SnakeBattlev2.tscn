@@ -42,6 +42,7 @@ ModConditions = {
 "ShootDisabled": false,
 "SnakeMps": 8
 }
+WinScene = "res://DevLevelSelect.tscn"
 
 [node name="BGM" type="AudioStreamPlayer" parent="SnakeBattle"]
 pause_mode = 2
