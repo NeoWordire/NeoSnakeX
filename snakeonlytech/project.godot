@@ -99,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="snakealone"
-run/main_scene="res://Snakev2/SnakeBattlev2.tscn"
+run/main_scene="res://DevLevelSelect.tscn"
 config/icon="res://icon.png"
 
 [autoload]

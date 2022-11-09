@@ -78,6 +78,7 @@ func _ready():
 	spawnposarray.append($Head.position)
 	spawnrotarray.append($Head.rotation)
 	$Head.texture = headtex
+	$Head.modulate = GlobalSnakeVar.g_colorPicked[player]
 	
 	for segment in 5:
 		var newpos = spawnposarray[segment]
@@ -131,6 +132,7 @@ func respawn():
 		$Body.get_child(segment-1).position = spawnposarray[segment]
 		$Body.get_child(segment-1).rotation = spawnrotarray[segment]
 		$Body.get_child(segment-1).texture = bodytex
+		$Body.get_child(segment-1).modulate = GlobalSnakeVar.g_colorPicked[player]
 	
 func setupRound():
 	#assert(get_parent().currentBattleState == get_parent().BATTLESTATE.STATE_INIT)
@@ -236,6 +238,7 @@ func grow_tail(pos,rot):
 	new.position = pos
 	new.rotation = rot
 	new.texture = bodytex
+	new.modulate = GlobalSnakeVar.g_colorPicked[player]
 
 	$Body.add_child(new)
 	new.name = String(get_index())
@@ -315,6 +318,7 @@ func got_shot(segment):
 		var dead = SnakeBodyDeadSprite.instance()
 		dead.position = segment.position
 		dead.texture = snakenode.bodytex
+		dead.modulate = GlobalSnakeVar.g_colorPicked[snakenode.player]
 		add_child(dead)
 		snakenode.snakecap -= 1
 		snakenode.shrink_end()

@@ -1,5 +1,4 @@
 extends LineEdit
-
 export (String) var nextScene
 
 # Declare member variables here. Examples:

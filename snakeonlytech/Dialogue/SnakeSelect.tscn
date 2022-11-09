@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Textures/enemy_head.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=4]
+[ext_resource path="res://Scripts/NameColorPick.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=6]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+NextScene = "res://Dialogue/VNPART1.tscn"
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+margin_left = 5.0
+margin_top = 19.0
+margin_right = 315.0
+margin_bottom = 455.0
+rect_scale = Vector2( 0.75, 0.399 )
+rect_clip_content = true
+size_flags_horizontal = 9
+theme = ExtResource( 4 )
+
+[node name="ColorPicker" type="ColorPicker" parent="Control/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 302.0
+margin_bottom = 428.0
+edit_alpha = false
+presets_enabled = false
+
+[node name="Snake" type="Control" parent="Control"]
+margin_left = 88.0
+margin_top = 8.0
+margin_right = 128.0
+margin_bottom = 48.0
+
+[node name="Head" type="Sprite" parent="Control/Snake"]
+position = Vector2( 68, 4 )
+texture = ExtResource( 3 )
+
+[node name="Body1" type="Sprite" parent="Control/Snake"]
+position = Vector2( 60, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body2" type="Sprite" parent="Control/Snake"]
+position = Vector2( 52, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body3" type="Sprite" parent="Control/Snake"]
+position = Vector2( 44, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body4" type="Sprite" parent="Control/Snake"]
+position = Vector2( 36, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body5" type="Sprite" parent="Control/Snake"]
+position = Vector2( 28, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body6" type="Sprite" parent="Control/Snake"]
+position = Vector2( 20, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body7" type="Sprite" parent="Control/Snake"]
+position = Vector2( 12, 4 )
+texture = ExtResource( 6 )
+
+[node name="Body8" type="Sprite" parent="Control/Snake"]
+position = Vector2( 4, 4 )
+texture = ExtResource( 6 )

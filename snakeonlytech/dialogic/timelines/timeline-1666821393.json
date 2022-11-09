@@ -612,7 +612,7 @@
 			"transition_duration": 1
 		},
 		{
-			"change_scene": "res://BattleScene/battle1.tscn",
+			"change_scene": "res://Snakev2/SnakeBattlev2.tscn",
 			"event_id": "dialogic_041"
 		}
 	],

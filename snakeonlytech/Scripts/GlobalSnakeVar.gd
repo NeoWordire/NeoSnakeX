@@ -20,6 +20,8 @@ var snakes = []
 
 var g_rng = RandomNumberGenerator.new()
 
+var g_colorPicked = [Color(1,1,1),Color(1,1,1)]
+
 var foodpoly
 
 enum {NORTH, EAST, SOUTH, WEST, NODIR}
