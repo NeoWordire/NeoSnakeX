@@ -223,6 +223,7 @@ func grow_tail(pos,rot):
 func shoot_bullet():
 	if (get_parent().ModConditions["ShootDisabled"]):
 		return
+	SoundPlayer.play_sound(SoundPlayer.SFXSHOOT)
 	var bullet = Bullet.instance()
 	bullet.position = $Head.position
 	bullet.rotation = $Head.rotation	
@@ -284,9 +285,9 @@ func shrink_end():
 func got_shot(segment):
 	print("got shot")
 	if(segment.name == "Head"):
-		#PLAY ARMORTINKNOISE
-		pass
+		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
 	else:
+		SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
 		var snakenode = segment.get_parent().get_parent()
 		print("Spawn dead spinner at ", segment.position)
 		var dead = SnakeBodyDeadSprite.instance()

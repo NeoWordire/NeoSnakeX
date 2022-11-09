@@ -108,6 +108,7 @@ func _on_Food_ate_food(player):
 
 var whodied = -1
 func _on_snake_died(player):
+	SoundPlayer.play_sound(SoundPlayer.SFXSNAKEDEFEATED)
 	print("Player: ", player," died")
 	if (EndConditions["DEATHPERM"]):
 		whodied = player
