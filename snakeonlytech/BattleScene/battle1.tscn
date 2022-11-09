@@ -450,9 +450,6 @@ visible = false
 margin_right = 240.0
 margin_bottom = 160.0
 script = ExtResource( 21 )
-Options = [ NodePath("CenterContainer/VBoxContainer/Resume"), NodePath("CenterContainer/VBoxContainer/MusicToggle") ]
-Arrow = NodePath("CenterContainer/Arrow")
-BGM = NodePath("../../SnakeBattle/BGM")
 
 [node name="ColorRect" type="ColorRect" parent="PauseLayer/PauseMenu"]
 anchor_right = 1.0

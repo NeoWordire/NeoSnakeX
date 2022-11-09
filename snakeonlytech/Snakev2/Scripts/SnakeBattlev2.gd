@@ -68,24 +68,31 @@ func setupRound():
 			pass
 	pass # Replace with function body.
 
-
+var NextStateCooldown = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#print(currentBattleState)
+	NextStateCooldown -= delta
+	if (NextStateCooldown >= 0.0):
+		return
 	if (currentBattleState == BATTLESTATE.STATE_INIT):
 		print("SETUP SHOW INSTRUCT")
 		setupRound()
 		setBattleState(BATTLESTATE.STATE_SHOWING_INSTRUCT)
+		NextStateCooldown = 0.3
 	elif (currentBattleState == BATTLESTATE.STATE_SHOWING_INSTRUCT):
 		if (Input.is_action_just_pressed("ui_accept")):
 			setBattleState(BATTLESTATE.STATE_BATTLING)
+			NextStateCooldown = 0.3
 	if (currentBattleState == BATTLESTATE.STATE_POST_ROUND_SCORE):
 		if (Input.is_action_just_pressed("ui_accept")):
 			setupRound()
 			setBattleState(BATTLESTATE.STATE_BATTLING)
+			NextStateCooldown = 0.3
 	if (currentBattleState == BATTLESTATE.STATE_LOSS):
 		if (Input.is_action_just_pressed("ui_accept")):
 			currentBattleState = BATTLESTATE.STATE_INIT
+			NextStateCooldown = 0.3
 	if (currentBattleState == BATTLESTATE.STATE_WIN):
 		if (Input.is_action_just_pressed("ui_accept")):
 			get_tree().change_scene(WinScene)

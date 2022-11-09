@@ -316,8 +316,8 @@ func got_shot(segment):
 		dead.position = segment.position
 		dead.texture = snakenode.bodytex
 		add_child(dead)
+		snakenode.snakecap -= 1
 		snakenode.shrink_end()
-		snakecap -= 1
 
 func _front33_entered_area(area):
 	#print("XXXXXXX")
