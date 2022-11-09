@@ -1,30 +1,125 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/NameSelect.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/NamePrompt.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Textures/enemy_head.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=4]
+[ext_resource path="res://Scripts/NameColorPick.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=6]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="LineEdit" type="LineEdit" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 64.0
-margin_top = 24.0
-margin_right = 193.0
-margin_bottom = 61.0
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+margin_left = 56.0
+margin_top = 8.0
+margin_right = 179.0
+margin_bottom = 70.0
+theme = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 115.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer"]
+margin_right = 107.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 2 )
+text = "Type Your Name"
+align = 1
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer2/VBoxContainer"]
+margin_top = 20.0
+margin_right = 107.0
+margin_bottom = 46.0
 custom_fonts/font = ExtResource( 2 )
 context_menu_enabled = false
 deselect_on_focus_loss_enabled = false
+placeholder_text = "Leo"
 script = ExtResource( 1 )
 nextScene = "res://Dialogue/SnakeSelect.tscn"
 
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 66.0
-margin_top = 24.0
-margin_right = 191.0
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 5 )
+NextScene = "res://Dialogue/VNPART1.tscn"
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+margin_left = 8.0
+margin_top = 80.0
+margin_right = 232.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 19, 19 )
+rect_clip_content = true
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 216.0
+margin_bottom = 66.0
+
+[node name="Snake" type="Control" parent="Control/PanelContainer/VBoxContainer"]
+margin_right = 208.0
+margin_bottom = 10.0
+grow_horizontal = 2
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Head" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 134, 6 )
+texture = ExtResource( 3 )
+
+[node name="Body1" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 126, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body2" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 118, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body3" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 110, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body4" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 102, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body5" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 94, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body6" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 86, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body7" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 78, 6 )
+texture = ExtResource( 6 )
+
+[node name="Body8" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
+position = Vector2( 70, 6 )
+texture = ExtResource( 6 )
+
+[node name="COLOR SELECT" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 208.0
+margin_bottom = 30.0
 custom_fonts/font = ExtResource( 2 )
-text = "Enter Your Name"
+text = "COLOR SELECT"
 align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/PanelContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 208.0
+margin_bottom = 38.0
+
+[node name="HSlider" type="HSlider" parent="Control/PanelContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 208.0
+margin_bottom = 58.0
+value = 16.0

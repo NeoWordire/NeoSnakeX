@@ -8,6 +8,8 @@ export (NodePath) var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Sprite.texture = get_node(player).headtex
+	$Sprite.modulate = GlobalSnakeVar.g_colorPicked[get_node(player).player]
 	pass # Replace with function body.
 
 

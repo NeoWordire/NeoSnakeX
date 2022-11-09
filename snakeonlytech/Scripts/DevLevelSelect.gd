@@ -7,7 +7,6 @@ extends Control
 var selected = 0
 var levels = [
 	"res://Dialogue/NameSelect.tscn",
-	"res://Dialogue/SnakeSelect.tscn",
 	"res://Dialogue/VNPART1.tscn",
 	"res://Snakev2/SnakeBattlev2.tscn",
 ]

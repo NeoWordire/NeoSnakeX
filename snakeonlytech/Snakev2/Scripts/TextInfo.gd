@@ -17,7 +17,7 @@ func _on_SnakeBattle_state_changed(state):
 	if (state == get_parent().BATTLESTATE.STATE_POST_ROUND_SCORE):
 		if get_parent().bestOfThree:
 			$ROUNDSCORE/PanelContainer/RichTextLabel.text = get_parent().lastReason
-			$ROUNDSCORE/PanelContainer/RichTextLabel.text += "\nThe best of three score:\n"
+			$ROUNDSCORE/PanelContainer/RichTextLabel.text += "\nCurrent best of three score:\n"
 			$ROUNDSCORE/PanelContainer/RichTextLabel.text += "You   Them\n"
 			$ROUNDSCORE/PanelContainer/RichTextLabel.text += " " + String(get_parent().bestOfTracker[0]) + "     " + String(get_parent().bestOfTracker[1])
 			#$ROUNDSCORE/PanelContainer/RichTextLabel.text += String(get_parent().bestOfTracker)

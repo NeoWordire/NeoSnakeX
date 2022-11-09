@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Textures/enemy_head.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=4]
 [ext_resource path="res://Scripts/NameColorPick.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=6]
 
@@ -14,22 +13,29 @@ script = ExtResource( 5 )
 NextScene = "res://Dialogue/VNPART1.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
-margin_left = 5.0
-margin_top = 19.0
-margin_right = 315.0
-margin_bottom = 455.0
-rect_scale = Vector2( 0.75, 0.399 )
-rect_clip_content = true
-size_flags_horizontal = 9
-theme = ExtResource( 4 )
-
-[node name="ColorPicker" type="ColorPicker" parent="Control/PanelContainer"]
 margin_left = 8.0
-margin_top = 8.0
-margin_right = 302.0
-margin_bottom = 428.0
-edit_alpha = false
-presets_enabled = false
+margin_top = 40.0
+margin_right = 232.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 19, 19 )
+rect_clip_content = true
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 217.0
+margin_bottom = 49.0
+
+[node name="HSlider" type="HSlider" parent="Control/PanelContainer/VBoxContainer"]
+margin_right = 210.0
+margin_bottom = 16.0
+
+[node name="HSlider2" type="HSlider" parent="Control/PanelContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 210.0
+margin_bottom = 36.0
 
 [node name="Snake" type="Control" parent="Control"]
 margin_left = 88.0

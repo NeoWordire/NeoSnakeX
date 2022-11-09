@@ -100,7 +100,6 @@ text = "X123"
 [node name="Sprite" type="Sprite" parent="SnakeBattle/HUD/Player"]
 position = Vector2( 11, 7 )
 rotation = -3.14159
-texture = ExtResource( 3 )
 
 [node name="Enemy" type="Control" parent="SnakeBattle/HUD"]
 margin_left = 195.0

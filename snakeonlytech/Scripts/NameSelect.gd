@@ -19,8 +19,10 @@ func getyourname():
 
 func _process(delta):
 	if (Input.is_action_just_pressed("ui_accept")):
-		if(self.text != ""):
-			GlobalSnakeVar.g_yourname = self.text
+		if(!text || text == ""):
+			GlobalSnakeVar.g_yourname = "Leo"
+		else:
+			GlobalSnakeVar.g_yourname = text
 			get_tree().change_scene(nextScene)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
