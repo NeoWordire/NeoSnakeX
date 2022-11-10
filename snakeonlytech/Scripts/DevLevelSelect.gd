@@ -9,6 +9,7 @@ var levels = [
 	"res://Dialogue/NameSelect.tscn",
 	"res://Dialogue/VNPART1.tscn",
 	"res://Snakev2/SnakeBattlev2.tscn",
+	"res://Snakev2/SnakeBattleBossv2.tscn",
 ]
 
 var levelpanels = []

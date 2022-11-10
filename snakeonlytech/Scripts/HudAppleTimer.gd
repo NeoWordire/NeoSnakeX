@@ -4,7 +4,7 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+export (NodePath) var SnakeBattle
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var apple = get_parent().get_parent().get_node("Food")
+	var apple = get_node(SnakeBattle).get_node("Food")
 	
 	var numapples = ceil(apple.get_node("Timer").time_left/apple.respawntime*5)
 	for x in range(1,6):

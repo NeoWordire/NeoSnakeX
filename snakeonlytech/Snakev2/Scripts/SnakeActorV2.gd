@@ -165,7 +165,8 @@ func ai_ray_input():
 		if (ray.get_class() != "RayCast2D"):
 			continue
 		#ray.force_raycast_update()
-		rays[ray.name] = {"hit":ray.get_collider(), "pos":ray.get_collision_point()}
+		rays[ray.name] = {"hit":ray.get_collider(),
+				"pos":ray.get_collision_point()-get_parent().position}
 
 	var valid_moves = {}
 	var centdistance = $Head.position.distance_to(rays["CenterStepRay"]["pos"])
@@ -183,6 +184,7 @@ func ai_ray_input():
 	if(rays["CenterStepRay"]["hit"] && rays["CenterStepRay"]["hit"].get_parent()&& rays["CenterStepRay"]["hit"].get_parent().get_parent()):
 		if(rays["CenterStepRay"]["hit"].get_parent().get_parent().get_class() == "SnakeSegment"):
 			reqshoot = true
+		print("head",$Head.position,"hit",rays["CenterStepRay"]["pos"])
 	
 	if !rays["LeftStepRay"]["hit"]:
 		var value = GlobalSnakeVar.g_rng.randi_range(0,10)

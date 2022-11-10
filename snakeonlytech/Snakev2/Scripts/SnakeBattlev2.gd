@@ -14,6 +14,7 @@ export (Dictionary) var ModConditions = {
 	"ShootDisabled" : false,
 	"ShootCooldown" : 1.0,
 	"FoodSegmentsGain" : 1,
+	"CameraFollow" : false,
 }
 
 export (Dictionary) var WinConditions = {
@@ -96,7 +97,11 @@ func _process(delta):
 	if (currentBattleState == BATTLESTATE.STATE_WIN):
 		if (Input.is_action_just_pressed("ui_accept")):
 			get_tree().change_scene(WinScene)
-	pass
+		pass
+	if (currentBattleState == BATTLESTATE.STATE_BATTLING && ModConditions["CameraFollow"]):
+		var xtodo = $Snake/Head.position.x
+		if(xtodo > 240/2.0 && xtodo < 360 - 120):
+			position.x = -1*$Snake/Head.position.x + 240/2.0
 
 var time_since_step = 0.0
 func _physics_process(delta):
