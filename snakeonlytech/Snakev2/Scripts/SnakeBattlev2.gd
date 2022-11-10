@@ -102,6 +102,8 @@ func _process(delta):
 		var xtodo = $Snake/Head.position.x
 		if(xtodo > 240/2.0 && xtodo < 360 - 120):
 			position.x = -1*$Snake/Head.position.x + 240/2.0
+		elif (xtodo <= 240/2.0):
+			position.x = 0
 
 var time_since_step = 0.0
 func _physics_process(delta):
@@ -133,7 +135,14 @@ func _on_snake_died(player):
 		for snakes in get_children():
 			if snakes.get_class() == "SnakeActor":
 				if (snakes.player == player):
-					snakes.respawnMinus(3)
+					if snakes.snakecap >= 2:
+						snakes.respawnMinus(3)
+					else:
+						whodied = player
+						if player == 1:
+							end_condition("Enemy Snake Defeated.\nYou earned a win.")
+						else:
+							end_condition("Your Snake Defeated.\nThey earned the win.")
 
 var lastReason = ""
 func end_condition(reason):
@@ -154,6 +163,9 @@ func end_condition(reason):
 		else:
 			lastReason = lastReason + "Enemy had the bigger snake\n They earned the win.\n"
 			bestOfTracker[1] += 1
+	elif !ModConditions["DEATHPERM"]:
+		lastReason = lastReason
+		bestOfTracker[whodied] += 1
 	print("end end", bestOfTracker)
 	if bestOfThree:
 		if bestOfTracker[0] == 2:

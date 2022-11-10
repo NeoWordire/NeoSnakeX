@@ -25,7 +25,7 @@ func _on_SnakeBattle_state_changed(state):
 		$ROUNDSCORE.visible = true	
 	if (state == get_node(SnakeBattle).BATTLESTATE.STATE_WIN):
 		$WINSCREEN.visible = true
-	if (state == get_parent().BATTLESTATE.STATE_LOSS):
+	if (state == get_node(SnakeBattle).BATTLESTATE.STATE_LOSS):
 		$LOSESCREEN/MAIN/REASON.text = "GAMEOVER \n"
 		$LOSESCREEN/MAIN/REASON.text += get_node(SnakeBattle).lastReason
 		$LOSESCREEN/MAIN/REASON.text += "\nThe Final score:\n"

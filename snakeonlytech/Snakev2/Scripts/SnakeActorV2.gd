@@ -313,7 +313,7 @@ func got_shot(segment):
 	elif (snakenode.get_node("Body").get_child_count() <= 1):
 		SoundPlayer.play_sound(SoundPlayer.SFXHURT)
 		if (get_parent().EndConditions["ENEMYDESTROYED"]):
-			emit_signal("snake_died", player)
+			emit_signal("snake_died", snakenode.player)
 	else:
 		SoundPlayer.play_sound(SoundPlayer.SFXHURT2)
 		print("Spawn dead spinner at ", segment.position)
