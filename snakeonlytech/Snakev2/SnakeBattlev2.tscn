@@ -53,118 +53,6 @@ stream = ExtResource( 17 )
 volume_db = -5.0
 autoplay = true
 
-[node name="HUD" type="Control" parent="SnakeBattle"]
-margin_top = 144.0
-margin_right = 240.0
-margin_bottom = 160.0
-
-[node name="Polygon2D" type="Polygon2D" parent="SnakeBattle/HUD"]
-scale = Vector2( 1.00193, 1 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 16, 240, 16, 240, 0 )
-
-[node name="CountdownTimer" type="Label" parent="SnakeBattle/HUD"]
-margin_left = 116.0
-margin_top = 3.0
-margin_right = 124.0
-margin_bottom = 10.0
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "30"
-align = 1
-valign = 2
-script = ExtResource( 15 )
-
-[node name="Timer" type="Timer" parent="SnakeBattle/HUD/CountdownTimer"]
-
-[node name="Player" type="Control" parent="SnakeBattle/HUD"]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 14 )
-player = NodePath("../../Snake")
-
-[node name="Polygon2D2" type="Polygon2D" parent="SnakeBattle/HUD/Player"]
-position = Vector2( 2, 2 )
-polygon = PoolVector2Array( 0, 0, 40, 0, 40, 10, 0, 10 )
-
-[node name="Score" type="Label" parent="SnakeBattle/HUD/Player"]
-margin_left = 18.0
-margin_top = 3.00002
-margin_right = 46.0
-margin_bottom = 17.0
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 12 )
-text = "X123"
-
-[node name="Sprite" type="Sprite" parent="SnakeBattle/HUD/Player"]
-position = Vector2( 11, 7 )
-rotation = -3.14159
-
-[node name="Enemy" type="Control" parent="SnakeBattle/HUD"]
-margin_left = 195.0
-margin_right = 235.0
-margin_bottom = 40.0
-script = ExtResource( 14 )
-player = NodePath("../../Enemy")
-
-[node name="Polygon2D2" type="Polygon2D" parent="SnakeBattle/HUD/Enemy"]
-position = Vector2( -3, 2 )
-polygon = PoolVector2Array( 0, 0, 40, 0, 40, 10, 0, 10 )
-
-[node name="Score" type="Label" parent="SnakeBattle/HUD/Enemy"]
-margin_left = 14.0
-margin_top = 3.0
-margin_right = 42.0
-margin_bottom = 17.0
-theme = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 12 )
-text = "X123"
-
-[node name="Sprite" type="Sprite" parent="SnakeBattle/HUD/Enemy"]
-position = Vector2( 5, 7 )
-rotation = -3.14159
-texture = ExtResource( 6 )
-
-[node name="Applehud" type="Control" parent="SnakeBattle/HUD"]
-margin_left = 10.0
-margin_top = 1.0
-margin_right = 50.0
-margin_bottom = 41.0
-script = ExtResource( 10 )
-
-[node name="Polygon2D" type="Polygon2D" parent="SnakeBattle/HUD/Applehud"]
-position = Vector2( 54, 3 )
-polygon = PoolVector2Array( 0, 0, 26, 0, 26, 6, 0, 6 )
-
-[node name="apple1" type="Sprite" parent="SnakeBattle/HUD/Applehud"]
-position = Vector2( 36, -1 )
-texture = ExtResource( 11 )
-offset = Vector2( 21, 7 )
-
-[node name="apple2" type="Sprite" parent="SnakeBattle/HUD/Applehud"]
-position = Vector2( 41, -1 )
-texture = ExtResource( 11 )
-offset = Vector2( 21, 7 )
-
-[node name="apple3" type="Sprite" parent="SnakeBattle/HUD/Applehud"]
-position = Vector2( 46, -1 )
-texture = ExtResource( 11 )
-offset = Vector2( 21, 7 )
-
-[node name="apple4" type="Sprite" parent="SnakeBattle/HUD/Applehud"]
-position = Vector2( 51, -1 )
-texture = ExtResource( 11 )
-offset = Vector2( 21, 7 )
-
-[node name="apple5" type="Sprite" parent="SnakeBattle/HUD/Applehud"]
-position = Vector2( 56, -1 )
-texture = ExtResource( 11 )
-offset = Vector2( 21, 7 )
-
 [node name="Snake" parent="SnakeBattle" instance=ExtResource( 1 )]
 position = Vector2( 24, 88 )
 bodytex = ExtResource( 5 )
@@ -209,19 +97,134 @@ shape = SubResource( 1 )
 position = Vector2( 120, 140 )
 shape = SubResource( 1 )
 
-[node name="TextInfo" type="Control" parent="SnakeBattle"]
+[node name="HUD" type="Control" parent="."]
+margin_top = 144.0
+margin_right = 240.0
+margin_bottom = 160.0
+
+[node name="Polygon2D" type="Polygon2D" parent="HUD"]
+scale = Vector2( 1.00193, 1 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 0, 16, 240, 16, 240, 0 )
+
+[node name="CountdownTimer" type="Label" parent="HUD"]
+margin_left = 116.0
+margin_top = 3.0
+margin_right = 124.0
+margin_bottom = 10.0
+theme = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "30"
+align = 1
+valign = 2
+script = ExtResource( 15 )
+SnakeBattle = NodePath("../../SnakeBattle")
+
+[node name="Timer" type="Timer" parent="HUD/CountdownTimer"]
+
+[node name="Player" type="Control" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 14 )
+player = NodePath("../../SnakeBattle/Snake")
+
+[node name="Polygon2D2" type="Polygon2D" parent="HUD/Player"]
+position = Vector2( 2, 2 )
+polygon = PoolVector2Array( 0, 0, 40, 0, 40, 10, 0, 10 )
+
+[node name="Score" type="Label" parent="HUD/Player"]
+margin_left = 18.0
+margin_top = 3.00002
+margin_right = 46.0
+margin_bottom = 17.0
+theme = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "X123"
+
+[node name="Sprite" type="Sprite" parent="HUD/Player"]
+position = Vector2( 11, 7 )
+rotation = -3.14159
+
+[node name="Enemy" type="Control" parent="HUD"]
+margin_left = 195.0
+margin_right = 235.0
+margin_bottom = 40.0
+script = ExtResource( 14 )
+player = NodePath("../../SnakeBattle/Enemy")
+
+[node name="Polygon2D2" type="Polygon2D" parent="HUD/Enemy"]
+position = Vector2( -3, 2 )
+polygon = PoolVector2Array( 0, 0, 40, 0, 40, 10, 0, 10 )
+
+[node name="Score" type="Label" parent="HUD/Enemy"]
+margin_left = 14.0
+margin_top = 3.0
+margin_right = 42.0
+margin_bottom = 17.0
+theme = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "X123"
+
+[node name="Sprite" type="Sprite" parent="HUD/Enemy"]
+position = Vector2( 5, 7 )
+rotation = -3.14159
+texture = ExtResource( 6 )
+
+[node name="Applehud" type="Control" parent="HUD"]
+margin_left = 10.0
+margin_top = 1.0
+margin_right = 50.0
+margin_bottom = 41.0
+script = ExtResource( 10 )
+SnakeBattle = NodePath("../../SnakeBattle")
+
+[node name="Polygon2D" type="Polygon2D" parent="HUD/Applehud"]
+position = Vector2( 54, 3 )
+polygon = PoolVector2Array( 0, 0, 26, 0, 26, 6, 0, 6 )
+
+[node name="apple1" type="Sprite" parent="HUD/Applehud"]
+position = Vector2( 36, -1 )
+texture = ExtResource( 11 )
+offset = Vector2( 21, 7 )
+
+[node name="apple2" type="Sprite" parent="HUD/Applehud"]
+position = Vector2( 41, -1 )
+texture = ExtResource( 11 )
+offset = Vector2( 21, 7 )
+
+[node name="apple3" type="Sprite" parent="HUD/Applehud"]
+position = Vector2( 46, -1 )
+texture = ExtResource( 11 )
+offset = Vector2( 21, 7 )
+
+[node name="apple4" type="Sprite" parent="HUD/Applehud"]
+position = Vector2( 51, -1 )
+texture = ExtResource( 11 )
+offset = Vector2( 21, 7 )
+
+[node name="apple5" type="Sprite" parent="HUD/Applehud"]
+position = Vector2( 56, -1 )
+texture = ExtResource( 11 )
+offset = Vector2( 21, 7 )
+
+[node name="TextInfo" type="Control" parent="."]
 margin_top = 16.0
 margin_right = 40.0
 margin_bottom = 56.0
 script = ExtResource( 16 )
+SnakeBattle = NodePath("../SnakeBattle")
 
-[node name="PRESTART" type="Control" parent="SnakeBattle/TextInfo"]
+[node name="PRESTART" type="Control" parent="TextInfo"]
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/TextInfo/PRESTART"]
+[node name="PanelContainer" type="PanelContainer" parent="TextInfo/PRESTART"]
 margin_left = 14.0
 margin_top = 1.0
 margin_right = 226.0
@@ -230,7 +233,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/PRESTART/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextInfo/PRESTART/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 204.0
@@ -248,7 +251,7 @@ MODIFIERS:
 	FOOD GIVES 3 SEGMENTS"
 scroll_active = false
 
-[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/TextInfo/PRESTART"]
+[node name="PanelContainer2" type="PanelContainer" parent="TextInfo/PRESTART"]
 margin_left = 63.0
 margin_top = 99.0
 margin_right = 192.0
@@ -257,7 +260,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/PRESTART/PanelContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextInfo/PRESTART/PanelContainer2"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 121.0
@@ -265,14 +268,14 @@ margin_bottom = 20.0
 rect_clip_content = false
 text = "Press Fire Button TO START"
 
-[node name="ROUNDSCORE" type="Control" parent="SnakeBattle/TextInfo"]
+[node name="ROUNDSCORE" type="Control" parent="TextInfo"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="SnakeBattle/TextInfo/ROUNDSCORE"]
+[node name="PanelContainer" type="PanelContainer" parent="TextInfo/ROUNDSCORE"]
 margin_left = 14.0
 margin_top = 1.0
 margin_right = 226.0
@@ -281,7 +284,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/ROUNDSCORE/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextInfo/ROUNDSCORE/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 204.0
@@ -299,7 +302,7 @@ MODIFIERS:
 	FOOD GIVES 3 SEGMENTS"
 scroll_active = false
 
-[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/TextInfo/ROUNDSCORE"]
+[node name="PanelContainer2" type="PanelContainer" parent="TextInfo/ROUNDSCORE"]
 margin_left = 63.0
 margin_top = 99.0
 margin_right = 192.0
@@ -308,7 +311,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/ROUNDSCORE/PanelContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextInfo/ROUNDSCORE/PanelContainer2"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 121.0
@@ -316,7 +319,7 @@ margin_bottom = 20.0
 rect_clip_content = false
 text = "Press Fire Button TO START"
 
-[node name="WINSCREEN" type="PanelContainer" parent="SnakeBattle/TextInfo"]
+[node name="WINSCREEN" type="PanelContainer" parent="TextInfo"]
 visible = false
 margin_left = 33.0
 margin_top = 18.0
@@ -324,7 +327,7 @@ margin_right = 201.0
 margin_bottom = 93.0
 theme = ExtResource( 13 )
 
-[node name="REASON" type="RichTextLabel" parent="SnakeBattle/TextInfo/WINSCREEN"]
+[node name="REASON" type="RichTextLabel" parent="TextInfo/WINSCREEN"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 160.0
@@ -333,19 +336,19 @@ rect_clip_content = false
 text = "YOU WON!!!!!
 FIre to LOAD NEXT SCENE"
 
-[node name="LOSESCREEN" type="Control" parent="SnakeBattle/TextInfo"]
+[node name="LOSESCREEN" type="Control" parent="TextInfo"]
 margin_right = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( -344, 48 )
 
-[node name="MAIN" type="PanelContainer" parent="SnakeBattle/TextInfo/LOSESCREEN"]
+[node name="MAIN" type="PanelContainer" parent="TextInfo/LOSESCREEN"]
 margin_left = 33.0
 margin_top = 18.0
 margin_right = 201.0
 margin_bottom = 93.0
 theme = ExtResource( 13 )
 
-[node name="REASON" type="RichTextLabel" parent="SnakeBattle/TextInfo/LOSESCREEN/MAIN"]
+[node name="REASON" type="RichTextLabel" parent="TextInfo/LOSESCREEN/MAIN"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 160.0
@@ -355,7 +358,7 @@ text = "REPLACED WITH
 gAMEOVE 
 LOST REASION"
 
-[node name="PanelContainer2" type="PanelContainer" parent="SnakeBattle/TextInfo/LOSESCREEN"]
+[node name="PanelContainer2" type="PanelContainer" parent="TextInfo/LOSESCREEN"]
 margin_left = 48.0
 margin_top = 99.0
 margin_right = 200.0
@@ -364,7 +367,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 13 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SnakeBattle/TextInfo/LOSESCREEN/PanelContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextInfo/LOSESCREEN/PanelContainer2"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 144.0
@@ -438,7 +441,7 @@ margin_bottom = 15.0
 text = "Resume"
 align = 1
 
-[connection signal="state_changed" from="SnakeBattle" to="SnakeBattle/TextInfo" method="_on_SnakeBattle_state_changed"]
+[connection signal="state_changed" from="SnakeBattle" to="TextInfo" method="_on_SnakeBattle_state_changed"]
 [connection signal="snake_died" from="SnakeBattle/Snake" to="SnakeBattle" method="_on_snake_died"]
 [connection signal="snake_died" from="SnakeBattle/Enemy" to="SnakeBattle" method="_on_snake_died"]
 [connection signal="ate_food" from="SnakeBattle/Food" to="SnakeBattle" method="_on_Food_ate_food"]
