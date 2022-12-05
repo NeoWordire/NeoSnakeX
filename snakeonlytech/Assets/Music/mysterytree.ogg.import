@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mysterytree.ogg-2e660baf2c0241ed619f0ff42b3b6f63.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/mysterytree.ogg"
+dest_files=[ "res://.import/mysterytree.ogg-2e660baf2c0241ed619f0ff42b3b6f63.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

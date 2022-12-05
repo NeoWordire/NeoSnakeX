@@ -141,6 +141,15 @@
 			"set_theme": "theme-1666857522.cfg"
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 0.2,
+			"file": "res://Assets/Music/pianothing WIP.ogg",
+			"volume": -0.3
+		},
+		{
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
@@ -207,6 +216,15 @@
 			"wait_seconds": 0.5
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "res://Assets/Music/mysterytree.ogg",
+			"volume": 0
+		},
+		{
 			"background": "res://Assets/Textures/BGs/star room tree.png",
 			"event_id": "dialogic_021",
 			"fade_duration": 3
@@ -239,7 +257,7 @@
 			"character": "character-1670241268.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "This is the final room. \nI'm sorry, [yourname]. \nIt's not your fault. \nYou weren't meant to be here. No one is meant to be here.\nBut you are. \nThe naivety of adolescence filled these halls.\nA building meant to mark the beauty of a moment that can only exist for a precious time.\nYou're the last visitor.\n..."
+			"text": "This is the final room. \nI'm sorry, [yourname]. \nIt's not your fault. \nYou weren't meant to be here. No one is meant to be here.\nBut you are. \nThe naivety of adolescence filled these halls.\nA building meant to mark the beauty of a moment that can only exist for a short time.\nYou're the last visitor.\n..."
 		},
 		{
 			"event_id": "dialogic_023",

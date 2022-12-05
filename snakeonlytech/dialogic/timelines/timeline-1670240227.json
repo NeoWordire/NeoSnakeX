@@ -11,6 +11,15 @@
 			"wait_seconds": 0.5
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 0.2,
+			"file": "res://Assets/Music/robot-shopping.ogg",
+			"volume": 0
+		},
+		{
 			"background": "res://Assets/Textures/BGs/arena.png",
 			"event_id": "dialogic_021"
 		},
@@ -131,6 +140,15 @@
 			"wait_seconds": 0.3
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "",
+			"volume": 0
+		},
+		{
 			"event_id": "dialogic_024",
 			"set_theme": "theme-1670240575.cfg"
 		},
@@ -212,6 +230,15 @@
 		{
 			"event_id": "dialogic_024",
 			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "res://Assets/Music/mysterytree.ogg",
+			"volume": 0
 		},
 		{
 			"character": "",

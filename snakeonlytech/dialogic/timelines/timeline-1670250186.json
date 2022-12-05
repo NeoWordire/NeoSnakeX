@@ -61,6 +61,15 @@
 			"wait_seconds": 1
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "res://Assets/Music/pianothing WIP.ogg",
+			"volume": 0
+		},
+		{
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
@@ -72,6 +81,15 @@
 			"wait_seconds": 0.1
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "res://Assets/Music/nightloop.ogg",
+			"volume": 0
+		},
+		{
 			"background": "res://Assets/Textures/BGs/sky.png",
 			"event_id": "dialogic_021",
 			"fade_duration": 5
@@ -80,7 +98,92 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Under the protection of the sprout’s shadow, my gaze moved heavenward. \nPerhaps it will grow into the tree of knowledge of good and evil.\nPerhaps it will grow into the tree of life.\nPerhaps they are one and the same.\n\nThe sky above. [pause=1]The land below. \nWhere, o where, will our desires guide us hereinafter.\n– End\n"
+			"text": "Under the protection of the sprout’s shadow, my gaze moved heavenward. \nPerhaps it will grow into the tree of knowledge of good and evil.\nPerhaps it will grow into the tree of life.\nPerhaps they are one and the same.\n\nThe sky above. [pause=1]The land below. \nWhere, o where, will our desires guide us hereinafter.\n– End"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"background": "res://Assets/Textures/BGs/black.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/1.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/2.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/3.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/4.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/5.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/6.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/7.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 20
 		}
 	],
 	"metadata": {
