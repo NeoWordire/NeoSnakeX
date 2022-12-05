@@ -30,6 +30,15 @@
 			"z_index": 0
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "res://Assets/Music/robot-shopping.ogg",
+			"volume": 0
+		},
+		{
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
@@ -244,6 +253,15 @@
 			},
 			"type": 1,
 			"z_index": 0
+		},
+		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "",
+			"volume": 0
 		},
 		{
 			"background": "res://Assets/Textures/BGs/black.png",

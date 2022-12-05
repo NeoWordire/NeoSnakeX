@@ -205,6 +205,15 @@
 			"z_index": 0
 		},
 		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 0.2,
+			"file": "res://Assets/Music/weirdchamp-deluxe.ogg",
+			"volume": 0
+		},
+		{
 			"character": "character-1667087099.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
