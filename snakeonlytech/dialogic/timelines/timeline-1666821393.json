@@ -77,7 +77,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Well, [yourname], here we are! \nWould you look at this crowd!?\nI thought Battle Snake was more of a retro thing but looks like there were more fans than I thought!\nC'mon, let's try to squeeze through this crowd and make our way in, [yourname]!"
+			"text": "Well, [yourname], here we are! \nWould you look at this crowd!?\nI thought Battle Snake was more of a retro thing but looks like there were more fans than I thought!\nSociety hasn't moved on yet, after all!\nC'mon, let's try to squeeze through this crowd and make our way in, [yourname]!"
 		},
 		{
 			"animation": "4-fade_out.gd",
@@ -140,7 +140,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Woah...\nThis building certainly is extravagant, don't you think?\nI heard that the CEO of Carrot Group himself is the architect!\nRumor has it he designed it like a sprout to symbolize the growth of all the competitors reaching for the top!\nA bit artsy-fartsy, [pause=0.5]if you ask me!"
+			"text": "Woah...\nThis building certainly is extravagant, don't you think?\nI heard that the CEO of Carrot Group himself is the architect!\nRumor has it he designed it like a sprout to symbolize the potential of youth, growing the future with each step forward.\nA bit artsy-fartsy, [pause=0.5]if you ask me!"
 		},
 		{
 			"animation": "4-fade_out.gd",

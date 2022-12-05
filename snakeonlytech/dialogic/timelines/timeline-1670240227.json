@@ -138,7 +138,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "I hadn't been able to hear them for a while. \nThe things my friend said to me. \nThe things the kind mechanic that reminded me of my sister cheerfully tried to convey.\nNone of their words reached me. \nEven so, I understood perfectly.\n...\nIt was cute seeing Apple flustered around Cory.\nSeeing her smile like this for the first time since she lost her father made me feel a sense or relief \ndespite the tightening in my chest not letting me forget that I wished I could have made her smile like this.\nAs I saw them talk, Cory's  befuddled expression slowly morphing into a genuine one,\nthe distance between me and the world seemed to grow. "
+			"text": "I hadn't been able to hear them for a while. \nThe things my friend said to me. \nThe things the kind mechanic that reminded me of my sister cheerfully tried to convey.\nNone of their words reached me. \nEven so, I understood perfectly.\n...\nIt was cute seeing Apple flustered around Cory.\nSeeing her smile like this for the first time since she lost her father made me feel a sense of relief \ndespite the tightening in my chest not letting me forget that I wished I could have made her smile like this.\nAs I saw them talk, Cory's befuddled expression slowly morphing into a genuine one,\nthe distance between me and the world seemed to grow. "
 		},
 		{
 			"event_id": "dialogic_023",
@@ -217,7 +217,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "It had always been this way.\nThe words, the noise.\nIt reached me, [pause=0.5][br]it didn't reach me.\nIt reached me, [pause=0.5][br]it didn't reach me.\nIt reached me, [pause=0.5][br]it didn't reach me.\nI could understand. [pause=0.5][br]I always understood her. [pause=0.5][br]And yet I never understood her.\n...\nShe smiled at me."
+			"text": "It had always been this way.\nThe words, the noise.\nThey reached me, [pause=0.5][br]they didn't reach me.\nIt reached me, [pause=0.5][br]it didn't reach me.\nI could understand. [pause=0.5][br]I always understood her. [pause=0.5][br]And yet I never understood her.\n...\nShe smiled at me."
 		},
 		{
 			"event_id": "dialogic_023",

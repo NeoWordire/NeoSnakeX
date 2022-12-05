@@ -268,7 +268,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "I'm Apple and this is [yourname]! [pause=0.5]We just won our preliminary battles!\nWe're here to get our Battle Snakes checked out before we move onto the main event!"
+			"text": "I'm Apple and this is [yourname]! [pause=0.5]We just won our preliminary battles!\nWe're here to get our Battle Snakes checked out before we move onto the main event!\nI think [yourname]'s snake needs special attention! I did as well as expected after all! Hehe!"
 		},
 		{
 			"animation": "4-fade_out.gd",
@@ -472,7 +472,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "That should be no problem for me! [pause=0.5]I'll definitely win the entire competition!"
+			"text": "That should be no problem for me! [pause=0.5]One of us will definitely make it to the end."
 		},
 		{
 			"animation": "4-fade_out.gd",
@@ -569,7 +569,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "*whispers* (Doesn't she look basically our age...?)"
+			"text": "*whispers* (Youth? Doesn't she look basically our age...?)"
 		},
 		{
 			"animation": "4-fade_out.gd",
@@ -615,7 +615,7 @@
 			"character": "character-1667087099.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Either way, I checked out your Snakes and everything seems in order! Here you go!"
+			"text": "Either way, I checked out your snakes and everything seems in order! Here you go!"
 		},
 		{
 			"animation": "4-fade_out.gd",
