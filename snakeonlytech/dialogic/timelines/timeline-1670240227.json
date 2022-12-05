@@ -1,0 +1,335 @@
+{
+	"events": [
+		{
+			"background": "res://Assets/Textures/BGs/black.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"background": "res://Assets/Textures/BGs/arena.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 2
+		},
+		{
+			"background": "res://Assets/Textures/BGs/shop.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1.5
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1667087099.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1667087099.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "********\n**** *** ****** **** * **** *****\n****  ** * ******** ** * ****"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1667087099.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.3
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "**** \n**** * **** ** [yourname] ****\n***** *** ** * ****"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.3
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I hadn't been able to hear them for a while. \nThe things my friend said to me. \nThe things the kind mechanic that reminded me of my sister cheerfully tried to convey.\nNone of their words reached me. \nEven so, I understood perfectly.\n...\nIt was cute seeing Apple flustered around Cory.\nSeeing her smile like this for the first time since she lost her father made me feel a sense or relief \ndespite the tightening in my chest not letting me forget that I wished I could have made her smile like this.\nAs I saw them talk, Cory's  befuddled expression slowly morphing into a genuine one,\nthe distance between me and the world seemed to grow. "
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.3
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[yourname] **** ** *** ****\n**** ** *** ***** * *** ***"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/outside.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.3
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "It had always been this way.\nThe words, the noise.\nIt reached me, [pause=0.5][br]it didn't reach me.\nIt reached me, [pause=0.5][br]it didn't reach me.\nIt reached me, [pause=0.5][br]it didn't reach me.\nI could understand. [pause=0.5][br]I always understood her. [pause=0.5][br]And yet I never understood her.\n...\nShe smiled at me."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"background": "res://Assets/Textures/BGs/sky.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1666857522.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Don't worry about my heart.\""
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I hadn't been worried."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1666857522.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"You're not alone.\""
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I hadn't felt lonely."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1666857522.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Let's go. Another battle awaits.\""
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I set foot in the arena."
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		},
+		{
+			"change_scene": "",
+			"event_id": "dialogic_041"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1670240227.json",
+		"name": "Scene 4"
+	}
+}

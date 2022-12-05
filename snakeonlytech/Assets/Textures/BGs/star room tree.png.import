@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shop_girl_blink2.png-79b53b6a725f3e071b8128c937e6207b.stex"
+path="res://.import/star room tree.png-63f66a116b54c758bb5ff755303d62e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Shop Girl/shop_girl_blink2.png"
-dest_files=[ "res://.import/shop_girl_blink2.png-79b53b6a725f3e071b8128c937e6207b.stex" ]
+source_file="res://Assets/Textures/BGs/star room tree.png"
+dest_files=[ "res://.import/star room tree.png-63f66a116b54c758bb5ff755303d62e5.stex" ]
 
 [params]
 

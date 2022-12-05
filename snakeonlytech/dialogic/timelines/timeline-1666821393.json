@@ -206,7 +206,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Ah!\nLooks like registration is opening!\nLet's go, {$yourname}! Let's become Snake Battlers!!!\nThe registration desk is right there, {$yourname}!"
+			"text": "Ah!\nLooks like registration is opening!\nLet's go, [yourname]! Let's become Snake Battlers!!!\nThe registration desk is right there, {$yourname}!"
 		},
 		{
 			"animation": "4-fade_out.gd",
@@ -238,7 +238,7 @@
 			"character": "character-1666860059.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Welcome to Snake Tower! \nTwo competitors registered.\nHave fun Apple and {$yourname} [pause=0.5]and good luck!"
+			"text": "Welcome to Snake Tower! \nTwo competitors registered.\nHave fun Apple and [yourname] [pause=0.5]and good luck!"
 		},
 		{
 			"background": "res://Assets/Textures/BGs/arena.png",
@@ -548,7 +548,7 @@
 			"character": "character-1666820942.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "{$yourname}!\nLet's run!"
+			"text": "[yourname]!\nLet's run!"
 		},
 		{
 			"animation": "4-fade_out.gd",

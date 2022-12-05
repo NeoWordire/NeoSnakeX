@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/girl_blink1.png-3c00b22f324422becfa346644381aaa8.stex"
+path="res://.import/black.png-9da2ce38bc6008aea1f64f9724a0c06f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Girl Sprites/girl_blink1.png"
-dest_files=[ "res://.import/girl_blink1.png-3c00b22f324422becfa346644381aaa8.stex" ]
+source_file="res://Assets/Textures/BGs/black.png"
+dest_files=[ "res://.import/black.png-9da2ce38bc6008aea1f64f9724a0c06f.stex" ]
 
 [params]
 

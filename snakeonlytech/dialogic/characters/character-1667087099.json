@@ -1,0 +1,21 @@
+{
+	"color": "#ffcfca42",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1667087099.json",
+	"mirror_portraits": false,
+	"name": "Sally",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -80,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Dialogue/Characters/Sally.tscn"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

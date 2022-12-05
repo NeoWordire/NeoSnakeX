@@ -1,0 +1,307 @@
+{
+	"events": [
+		{
+			"background": "res://Assets/Textures/BGs/black.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 0
+		},
+		{
+			"background": "res://Assets/Textures/BGs/arena.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Easy-peasy!\nThis tourney is gonna be no problem, [yourname]. \nWell, at least for me~\n!! AH!! There he is!\nThis time he won't get away."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps.wav",
+			"volume": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps2.wav",
+			"volume": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps.wav",
+			"volume": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps2.wav",
+			"volume": 0
+		},
+		{
+			"background": "res://Assets/Textures/BGs/lobby.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 1
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps.wav",
+			"volume": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps2.wav",
+			"volume": 0.1
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps.wav",
+			"volume": -0.1
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps2.wav",
+			"volume": 0.05
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps.wav",
+			"volume": -0.02
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2,
+			"waiting_skippable": false
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://Assets/SFX/sfx_footsteps2.wav",
+			"volume": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.2
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666856136.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666856136.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Not again..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666856136.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"background": "res://Assets/Textures/BGs/black.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1666857522.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "As the boy turned his head towards the irksome sounds directed at him,\nhe had already guessed who it would be standing before him.\nThe girl was unlike the others. She had found him before. \nThis bothered the boy, but not enough to change course.\n\"Do you have any idea how rude it is to bump into someone and not say sorry?\"\nWasn't she making way too much of a fuss over something so little?\n\"...and besides, how come we can't find you in the leaderboards even though you are a participant?\"\nWhy was she asking all these meaningless questions?\n\"By the way, my name's Apple and this is [yourname]!\"\nWhy did she think the boy cared about them.\n\"Oh, so your name is Cory? [pause=0.5][br] Well, despite the circumstances it's nice to meet you, Cory.\"\nHuh? Had the boy been talking to them? He hadn't noticed.\nThe girl smiled. Despite her angered expression moments ago, she seemed to quickly develop a fondness for the boy. \nIs this behavior within normal human parameters?[br][br] the boy wondered to himself.\nHe turned towards the other figure. The one the energetic girl had introduced as [yourname].\nTry as the boy might, he couldn't see anything out of the ordinary with the figure next to the girl. \nYet, his subconscious understood that things were not as they should have been.\n[br]A noisy hall[pause=0.5] filled with naive adolescence. \n[br]The sapling[pause=0.5] for which the world existed.\n[br]Was this [pause=0.5]the future he had envisioned?\n...\n..\n."
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1666820942.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ah! Seems like the next battle is starting! Break a leg, [yourname]!\nAnd you too, Cory. Even though you didn't even tell us where your battle takes place!"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		},
+		{
+			"change_scene": "",
+			"event_id": "dialogic_041"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1670114970.json",
+		"name": "Scene3"
+	}
+}

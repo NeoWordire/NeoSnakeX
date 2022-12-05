@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/girl_blink3.png-e69f06e11d7ffa067f68843eb570edd8.stex"
+path="res://.import/ohno.png-c9ef821328c57a03bc2f1ac6fbb11fd9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Girl Sprites/girl_blink3.png"
-dest_files=[ "res://.import/girl_blink3.png-e69f06e11d7ffa067f68843eb570edd8.stex" ]
+source_file="res://Assets/Textures/BGs/ohno.png"
+dest_files=[ "res://.import/ohno.png-c9ef821328c57a03bc2f1ac6fbb11fd9.stex" ]
 
 [params]
 

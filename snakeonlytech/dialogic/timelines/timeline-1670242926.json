@@ -1,0 +1,288 @@
+{
+	"events": [
+		{
+			"background": "res://Assets/Textures/BGs/black.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"background": "res://Assets/Textures/BGs/ohno.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I understood the scene in front of me.\nAfter Apple lost, a group of representatives from the Carrot Group escorted her out of the main hall.\nI could see tears forming in her eyes as she glanced towards me and Cory while walking off the battleground.\nThere was no time to exchange words. \nNo time to embrace.\nDespite arriving together, we had been separated.\nI had to do the final part by myself."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 1,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I'm sorry, [yourname].\nThis won't come as a shock to you, in fact I know you knew from the start,\nbut the final battle will be with me.\nCome with me."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.3
+		},
+		{
+			"background": "res://Assets/Textures/BGs/arena.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 2
+		},
+		{
+			"background": "res://Assets/Textures/BGs/lobby.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 2
+		},
+		{
+			"background": "res://Assets/Textures/BGs/star room.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 2
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "The strange hallway appeared as if we were entering a different world alltogether.\nThere was solid ground beneath my feet, but it felt as if I was floating in a night's sky. \nI wasn't sure if it was just an optical illusion; a mirror contraption of some kind,\nor if we really had entered a new realm.\n\"Where are we?\" I asked as we were stepping through the hallway.\n\"In the same place we've been before.\" Cory answered, no doubt sensing the confusion in my voice.\n\"This is just another part of the tower.\"\n..."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1666857522.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I didn't feel exhausted, despite walking for many hours. \nCory had assured me our destination was close, but somewhere inside me I wished I could stay walking with him through this serene environment.\nCompared to my stressful life, this place felt like a safe blanket. [pause=0.5][br]I missed Apple, but there was never a chance for both of us to be here.\nAt the end, I couldn't hear her words but I still understood them. [br]That's what was important.\nI didn't have many friends growing up.\nMy parents were big shots in the automobile industry, or so I've been told. [pause=0.5][br]I was never really able to understand what exactly they were doing when I was young.\nLater I realized that the definition for \"automobile industry\" was seriously stretched in their case.\nI met Apple at one of the factories my parents owned.\nStanding between metal parts I knew immediately that we were going to be friends.\nWhen you grow up as the son of a weapon's manufacturer mogule, you don't really get to enjoy the same benefits as other children your age. \nUnlike many other manufacturers, my father refused to supply what he considered the \"enemy\" with the same weapons as the countries he considered \"us\".\nAnd thus, he was the target of the \"enemy\" faction. \nAnd thus, we were the target of the \"enemy\" faction.\nAs the war went on, I had to be homeschooled in a safe environment. There weren't many children in the same situation as me, my father made sure to not employ anyone with children.\nBut there was one. \nApple was my friend. She studied with me, she played with me, she watched anime with me. \nWe were inseparable, so much so my father arranged for her family to live in the same location I hid out in.\nAnd so we spent our life together. \nAnd so we spent our end together.\nWhen we became adults, we decided to become soldiers. \nOur parents were moved to tears. In their eyes, we were walking a blessed path for our country.\nWe didn't know anything else.\nDuring training, I met the first boys my age. Having been mostly around my mother and Apple for the formative years of my life, I quickly realized I wouldn't fit in.\nEven when deploying to the battlefield, I still felt out of place among the male members of our squadron. \nBut at least Apple had been there. We had each other.\n...\n..\n."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "We're here."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.2,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.5
+		},
+		{
+			"background": "res://Assets/Textures/BGs/star room tree.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 3
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 3.5
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "A large tree towered before us. \nI chuckled to myself.\n\"A tree inside a building that looks like a sapling. That's pretty good.\""
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This is the final room. \nI'm sorry, [yourname]. \nIt's not your fault. \nYou weren't meant to be here. No one is meant to be here.\nBut you are. \nThe naivety of adolescence filled these halls.\nA building meant to mark the beauty of a moment that can only exist for a precious time.\nYou're the last visitor.\n..."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1670240575.cfg"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "He looked at me with eyes that contained the fear of everyone that walked these corridors."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.1
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"character": "character-1670241268.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Let's go to the end."
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		},
+		{
+			"change_scene": "",
+			"event_id": "dialogic_041"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1670242926.json",
+		"name": "Scene 5"
+	}
+}
