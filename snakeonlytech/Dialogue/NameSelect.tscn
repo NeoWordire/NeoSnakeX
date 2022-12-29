@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/NameSelect.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/NamePrompt.tres" type="DynamicFont" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Fonts/Textbox.tres" type="Theme" id=4]
 [ext_resource path="res://Scripts/NameColorPick.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Textures/enemy_box.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/snakebase.png" type="Texture" id=7]
 
 [node name="Node2D" type="Node2D"]
 
@@ -61,7 +62,7 @@ theme = ExtResource( 4 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 216.0
-margin_bottom = 66.0
+margin_bottom = 86.0
 
 [node name="Snake" type="Control" parent="Control/PanelContainer/VBoxContainer"]
 margin_right = 208.0
@@ -75,15 +76,15 @@ texture = ExtResource( 3 )
 
 [node name="Body1" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
 position = Vector2( 126, 6 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Body2" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
 position = Vector2( 118, 6 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Body3" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
 position = Vector2( 110, 6 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Body4" type="Sprite" parent="Control/PanelContainer/VBoxContainer/Snake"]
 position = Vector2( 102, 6 )
@@ -122,4 +123,10 @@ margin_bottom = 38.0
 margin_top = 42.0
 margin_right = 208.0
 margin_bottom = 58.0
+value = 16.0
+
+[node name="HSlider2" type="HSlider" parent="Control/PanelContainer/VBoxContainer"]
+margin_top = 62.0
+margin_right = 208.0
+margin_bottom = 78.0
 value = 16.0

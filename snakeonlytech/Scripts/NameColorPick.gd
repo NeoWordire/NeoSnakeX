@@ -25,7 +25,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var color = Color.from_hsv(100.0 - $PanelContainer/VBoxContainer/HSlider.value/100.0, 1, 1, 1)
+	var color = Color.from_hsv(1.0 - $PanelContainer/VBoxContainer/HSlider.value/100.0,
+			1,
+			1.0 - $PanelContainer/VBoxContainer/HSlider2.value/100.0,
+			 1)
 
 	for segment in $PanelContainer/VBoxContainer/Snake.get_children():
 		segment.modulate = color
